@@ -18,11 +18,16 @@ namespace BattlePirates_Group2 {
 
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            this.Hide();
-            //this.DesktopLocation = 
-            ServerForm server = new ServerForm(this);
-            server.Show();
+        private void buttonClick(object sender, EventArgs e) {
+            if(sender.Equals(createButton)) {
+                this.Hide();
+                //this.DesktopLocation = 
+                ServerForm server = new ServerForm(this);
+                server.Show();
+            } else if(sender.Equals(connectButton)) {
+
+            }
+            
             
         }
     }

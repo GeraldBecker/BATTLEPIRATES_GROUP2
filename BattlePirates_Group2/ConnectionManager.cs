@@ -11,12 +11,18 @@ namespace BattlePirates_Group2 {
     class ConnectionManager {
         private IPAddress IP;
         private int PORT;
-
+        private TcpClient CLIENT;
+        private TcpListener LISTENER;
 
         public ConnectionManager() {
-            //IP = IPAddress.Parse("192.168.1.108");
+            //Create a default port
             PORT = 1116;
 
+            
+
+        }
+
+        public bool initiateServer() {
             string hostName = Dns.GetHostName();
             Console.WriteLine("Host name: " + hostName.ToString());
             IPHostEntry ipEntries = Dns.GetHostEntry(hostName);
@@ -28,12 +34,26 @@ namespace BattlePirates_Group2 {
                 Console.WriteLine("IP Address {0}: {1} : {2}", i, ipAddresses[i].ToString(), ipAddresses[i].AddressFamily);
                 Console.WriteLine(ipAddresses[i].AddressFamily);
                 if(ipAddresses[i].AddressFamily.ToString() == ProtocolFamily.InterNetwork.ToString()) {
-                    Console.WriteLine("FOUND HIM");
                     IP = ipAddresses[i];
-                    break;
+                    return true;
                 }
             }
+            return false;
+        }
 
+        public bool startServer() {
+            LISTENER = new TcpListener(IP, PORT);
+            LISTENER.Start();
+            return true;
+        }
+
+        public void stopServer() {
+            LISTENER.Stop();
+        }
+
+        public TcpClient getClient() {
+            //LISTENER.AcceptTcpClientAsync();
+            return LISTENER.AcceptTcpClient();
         }
 
         public string getIPString() {
