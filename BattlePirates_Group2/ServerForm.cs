@@ -12,6 +12,7 @@ namespace BattlePirates_Group2 {
     public partial class ServerForm : Form {
         private MainForm screen;
         private bool userQuit;
+        private ConnectionManager connection;
 
         public ServerForm(MainForm screen) {
             
@@ -23,7 +24,7 @@ namespace BattlePirates_Group2 {
 
             InitializeComponent();
 
-
+            
             connectionPanel.Visible = false;
 
         }
@@ -36,7 +37,9 @@ namespace BattlePirates_Group2 {
 
                 statusLabel.Text = "ATTEMPTING TO CREATE CONNECTION";
 
-                new ConnectionManager();
+                connection = new ConnectionManager();
+
+                ipAddress.Text = connection.getIPString();
 
             } else if(sender.Equals(backButton) || sender.Equals(backButton2)) {
                 screen.Show();
