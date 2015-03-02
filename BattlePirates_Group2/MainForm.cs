@@ -9,13 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BattlePirates_Group2 {
-    public partial class Form1 : Form {
-        public Form1() {
+    public partial class MainForm : Form {
+        public MainForm() {
             InitializeComponent();
         }
 
         private void label1_Click(object sender, EventArgs e) {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.Hide();
+            //this.DesktopLocation = 
+            ServerForm server = new ServerForm(this);
+            server.Show();
+            
         }
     }
 }
