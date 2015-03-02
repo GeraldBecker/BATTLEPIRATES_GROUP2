@@ -30,7 +30,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.backButton2 = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.ipAddress = new System.Windows.Forms.Label();
             this.connectionPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +79,7 @@
             // connectionPanel
             // 
             this.connectionPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.connectionPanel.Controls.Add(this.label3);
+            this.connectionPanel.Controls.Add(this.ipAddress);
             this.connectionPanel.Controls.Add(this.statusLabel);
             this.connectionPanel.Controls.Add(this.backButton2);
             this.connectionPanel.Controls.Add(this.label2);
@@ -129,19 +129,19 @@
             this.statusLabel.Text = "WAITING FOR OPPONENT";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // ipAddress
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Garamond", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(183)))), ((int)(((byte)(61)))));
-            this.label3.Location = new System.Drawing.Point(223, 199);
-            this.label3.MaximumSize = new System.Drawing.Size(160, 30);
-            this.label3.MinimumSize = new System.Drawing.Size(160, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(160, 30);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "###.###.#.###";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ipAddress.AutoSize = true;
+            this.ipAddress.Font = new System.Drawing.Font("Garamond", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(183)))), ((int)(((byte)(61)))));
+            this.ipAddress.Location = new System.Drawing.Point(223, 199);
+            this.ipAddress.MaximumSize = new System.Drawing.Size(160, 30);
+            this.ipAddress.MinimumSize = new System.Drawing.Size(160, 30);
+            this.ipAddress.Name = "ipAddress";
+            this.ipAddress.Size = new System.Drawing.Size(160, 30);
+            this.ipAddress.TabIndex = 6;
+            this.ipAddress.Text = "###.###.#.###";
+            this.ipAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ServerForm
             // 
@@ -172,7 +172,7 @@
         private System.Windows.Forms.Panel connectionPanel;
         private System.Windows.Forms.Button backButton2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label ipAddress;
         private System.Windows.Forms.Label statusLabel;
     }
 }
