@@ -33,6 +33,11 @@ namespace BattlePirates_Group2 {
                 connectionPanel.Visible = true;
                 backButton.Visible = false;
                 createGameButton.Visible = false;
+
+                statusLabel.Text = "ATTEMPTING TO CREATE CONNECTION";
+
+                new ConnectionManager();
+
             } else if(sender.Equals(backButton) || sender.Equals(backButton2)) {
                 screen.Show();
                 userQuit = false;
