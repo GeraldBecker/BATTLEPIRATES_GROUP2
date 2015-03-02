@@ -27,7 +27,26 @@ namespace BattlePirates_Group2
 
         public bool Sunk
         {
+            get
+            {
+                return sunk;
+            }
+            set
+            {
+                sunk = value;
+            }
+        }
 
+        public bool Activated
+        {
+            get
+            {
+                return activated;
+            }
+            set
+            {
+                activated = value;
+            }
         }
     }
 }
