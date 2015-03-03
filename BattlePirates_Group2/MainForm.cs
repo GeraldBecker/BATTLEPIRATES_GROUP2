@@ -25,7 +25,10 @@ namespace BattlePirates_Group2 {
                 ServerForm server = new ServerForm(this);
                 server.Show();
             } else if(sender.Equals(connectButton)) {
-
+                this.Hide();
+                //this.DesktopLocation = 
+                ClientForm client = new ClientForm(this);
+                client.Show();
             }
             
             
