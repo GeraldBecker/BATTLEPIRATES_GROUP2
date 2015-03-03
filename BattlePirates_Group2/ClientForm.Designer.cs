@@ -28,6 +28,7 @@
             this.ipAddressConnect = new System.Windows.Forms.TextBox();
             this.connectGameButton = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.backButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -93,12 +94,28 @@
             this.progressBar2.Size = new System.Drawing.Size(380, 41);
             this.progressBar2.TabIndex = 10;
             // 
+            // backButton
+            // 
+            this.backButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.backButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(20)))), ((int)(((byte)(243)))));
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backButton.ForeColor = System.Drawing.Color.White;
+            this.backButton.Location = new System.Drawing.Point(333, 442);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(131, 54);
+            this.backButton.TabIndex = 11;
+            this.backButton.Text = "BACK";
+            this.backButton.UseVisualStyleBackColor = false;
+            this.backButton.Click += new System.EventHandler(this.buttonClick);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.progressBar2);
             this.Controls.Add(this.connectGameButton);
             this.Controls.Add(this.ipAddressConnect);
@@ -107,6 +124,7 @@
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "ClientForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,5 +137,6 @@
         private System.Windows.Forms.TextBox ipAddressConnect;
         private System.Windows.Forms.Button connectGameButton;
         private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Button backButton;
     }
 }

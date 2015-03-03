@@ -26,6 +26,7 @@ namespace BattlePirates_Group2 {
 
             
             connectionPanel.Visible = false;
+            connection = new ConnectionManager();
 
         }
 
@@ -46,7 +47,9 @@ namespace BattlePirates_Group2 {
                 screen.Show();
                 userQuit = false;
                 this.Close();
-            } 
+            } else if(sender.Equals(pressButton)) {
+                startServer();
+            }
 
             
         }
@@ -60,7 +63,7 @@ namespace BattlePirates_Group2 {
 
             statusLabel.Text = "ATTEMPTING TO CREATE CONNECTION...";
 
-            connection = new ConnectionManager();
+            
             progressBar1.Value = 10;
             if(connection.initiateServer()) {
                 ipAddress.Text = connection.getIPString();
@@ -83,7 +86,13 @@ namespace BattlePirates_Group2 {
             }
 
             //This line of code is giving errors.
-            //connection.getClient();
+            /*connection.getClient();
+            statusLabel.Text = "CONNECTION SUCCESSFUL";
+            progressBar1.Value = 100;*/
+        }
+
+        public void startServer() {
+            connection.getClient();
             statusLabel.Text = "CONNECTION SUCCESSFUL";
             progressBar1.Value = 100;
         }
