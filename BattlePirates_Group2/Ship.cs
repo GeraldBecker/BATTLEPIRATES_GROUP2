@@ -47,7 +47,7 @@ namespace BattlePirates_Group2
         }
 
 
-        public _type ShipType
+        public _types ShipType
         {
             get
             {

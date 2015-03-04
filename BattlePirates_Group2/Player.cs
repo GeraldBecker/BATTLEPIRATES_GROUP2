@@ -35,9 +35,9 @@ namespace BattlePirates_Group2
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="ship"></param>
-        public void placeShip(PlayerBoard pb, Ship ship)
+        public void placeShip(PlayerBoard pb, Ship ship, int row, int col)
         {
-            pb.set(ship);
+            pb.set(ship, row, col);
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace BattlePirates_Group2
         /// </summary>
         /// <param name="pb"></param>
         /// <param name="ship"></param>
-        public void moveShip(PlayerBoard pb, Ship ship)
+        public void moveShip(PlayerBoard pb, Ship ship, int row, int col)
         {
-            pb.unSet(ship);
+            pb.unSet(row, col);
         }
 
         /// <summary>
