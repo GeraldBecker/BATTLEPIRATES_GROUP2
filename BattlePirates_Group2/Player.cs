@@ -56,7 +56,7 @@ namespace BattlePirates_Group2
         /// <param name="pb"></param>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        public void shoot(PlayerBoard pb, int row, char col)
+        public void shoot(PlayerBoard pb, int row, int col)
         {
             pb.hit(row, col);
         }

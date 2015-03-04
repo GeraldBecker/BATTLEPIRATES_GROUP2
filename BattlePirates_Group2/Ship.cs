@@ -13,46 +13,63 @@ namespace BattlePirates_Group2
     /// </summary>
     class Ship
     {
-        // how many health units left
-        // determined by size of _location
-        //private int _health;
+        // Size of ship for testing if location size is correct
+        private int _size;
+
+        // Types of ships
+        // MW (Man o'War = 5 squares), GA (Galleon = 4), BR (Briq = 3), BA (Bargue = 2)
+        private enum _types {MW, GA, BR, BA};
+
+        // The type of ship
+        private _types _shipType;
 
         //private bool _sunk;// if the ship is sunk
         private bool _activated;// if placed on board
 
         // Holds the grid location of a vertical ship
-        private SortedDictionary<int, char> _vertLocation;
+        // <int row, int col>
+        private SortedDictionary<int, int> _vertLocation;
 
         // Holds the grid location of a horizontal ship
-        private SortedDictionary<char, int> _horLocation;
+        // <int col, int row>
+        private SortedDictionary<int, int> _horLocation;
 
         // The orientation of the ship
         // value set from the PlayerBoard object
         private bool _horizontal;
 
         /// <summary>
-        /// constructor initializes the _sunk and _activated
-        /// data
+        /// constructor initializes _activated
         /// </summary>
         public Ship()
         {
-            //_sunk = false;
             _activated = false;
         }
 
-        // properties for health
-        /*
-        public int Health
+
+        public _type ShipType
         {
             get
             {
-                return _health;
+                return _shipType;
             }
             set
             {
-                _health = value;
+                _shipType = value;
             }
-        }*/
+        }
+        // properties for _size
+        public int Size
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                _size = value;
+            }
+        }
 
         /// <summary>
         /// Returns if the ship is sunk
@@ -98,14 +115,14 @@ namespace BattlePirates_Group2
         }
 
         // sets the location for a vertical ship
-        public void setVertLocation(SortedDictionary<int, char> location)
+        public void setVertLocation(SortedDictionary<int, int> location)
         {
             _vertLocation = location;
             IsHorizontal = false;
         }
 
         // sets the location for a horizontal ship
-        public void setHorLocation(SortedDictionary<char, int> location)
+        public void setHorLocation(SortedDictionary<int, int> location)
         {
             _horLocation = location;
             IsHorizontal = true;
