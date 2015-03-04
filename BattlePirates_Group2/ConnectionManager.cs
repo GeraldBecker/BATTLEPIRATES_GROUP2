@@ -16,8 +16,7 @@ namespace BattlePirates_Group2 {
 
         public ConnectionManager() {
             //Create a default port
-            PORT = 1116;
-
+            PORT = 1116; 
             
 
         }
@@ -41,14 +40,33 @@ namespace BattlePirates_Group2 {
             return false;
         }
 
+        
+
         public bool startServer() {
             LISTENER = new TcpListener(IP, PORT);
             LISTENER.Start();
             return true;
         }
 
+        public bool initiateClient(string ip) {
+            IP = IPAddress.Parse(ip);
+            CLIENT = new TcpClient();
+            return true;
+        }
+
+        public bool clientConnect() {
+            try {
+                CLIENT.Connect(IP, PORT);
+                return true;
+            } catch {
+                return false;
+            }
+            
+        }
+
         public void stopServer() {
-            LISTENER.Stop();
+            if(LISTENER != null)
+                LISTENER.Stop();
         }
 
         public TcpClient getClient() {

@@ -31,6 +31,7 @@
             this.statusLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pressButton = new System.Windows.Forms.Button();
             this.connectionPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +80,7 @@
             // connectionPanel
             // 
             this.connectionPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.connectionPanel.Controls.Add(this.pressButton);
             this.connectionPanel.Controls.Add(this.ipAddress);
             this.connectionPanel.Controls.Add(this.statusLabel);
             this.connectionPanel.Controls.Add(this.label2);
@@ -134,6 +136,21 @@
             this.progressBar1.Size = new System.Drawing.Size(100, 23);
             this.progressBar1.TabIndex = 4;
             // 
+            // pressButton
+            // 
+            this.pressButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pressButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(20)))), ((int)(((byte)(243)))));
+            this.pressButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pressButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pressButton.ForeColor = System.Drawing.Color.White;
+            this.pressButton.Location = new System.Drawing.Point(517, 49);
+            this.pressButton.Name = "pressButton";
+            this.pressButton.Size = new System.Drawing.Size(67, 49);
+            this.pressButton.TabIndex = 5;
+            this.pressButton.Text = "PRESS";
+            this.pressButton.UseVisualStyleBackColor = false;
+            this.pressButton.Click += new System.EventHandler(this.button_click);
+            // 
             // ServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,5 +183,6 @@
         private System.Windows.Forms.Label ipAddress;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button pressButton;
     }
 }
