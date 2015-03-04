@@ -41,7 +41,7 @@ namespace BattlePirates_Group2
 
         public void unSet(int row, int col)
         {
-            _grid[row, col] = SquareState.Empty
+            _grid[row, col] = SquareState.Empty;
         }
 
         public void hit(int row, int col)
