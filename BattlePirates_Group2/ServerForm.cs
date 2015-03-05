@@ -17,14 +17,11 @@ namespace BattlePirates_Group2 {
         public ServerForm(MainForm screen) {
             
             this.screen = screen;
-
             this.DesktopLocation = screen.Location;
-
             userQuit = true;
 
             InitializeComponent();
 
-            
             connectionPanel.Visible = false;
             connection = new ConnectionManager();
 
@@ -32,72 +29,80 @@ namespace BattlePirates_Group2 {
 
         private void button_click(object sender, EventArgs e) {
             if(sender.Equals(createGameButton)) {
-                /*connectionPanel.Visible = true;
-                backButton.Visible = false;
-                createGameButton.Visible = false;
-
-                statusLabel.Text = "ATTEMPTING TO CREATE CONNECTION";
-
-                connection = new ConnectionManager();
-
-                //ipAddress.Text = connection.getIPString();*/
-                serverConnect();
+                //Set up the server configuration.
+                serverSetup();
             } else if(sender.Equals(backButton)) {
                 connection.stopServer();
                 screen.Show();
                 userQuit = false;
                 this.Close();
             } else if(sender.Equals(pressButton)) {
+                //Start the server connection once it has been configured.
                 startServer();
+            } else if(sender.Equals(button1)) {
+                new tempoClass(screen, connection, true).Show();
+                userQuit = false;
+                this.Close();
             }
 
             
         }
 
-
-        private void serverConnect() {
+        /// <summary>
+        /// 
+        /// </summary>
+        private void serverSetup() {
             progressBar1.Maximum = 100;
             connectionPanel.Visible = true;
-            //createGameButton.Visible = false;
             createGameButton.Text = "TRY AGAIN";
 
-            statusLabel.Text = "ATTEMPTING TO CREATE CONNECTION...";
+            setStatus("ATTEMPTING TO CREATE CONNECTION...");
 
-            
+            //update the status bar
             progressBar1.Value = 10;
+
+            //Gets the hosts IP Address.
             if(connection.initiateServer()) {
                 ipAddress.Text = connection.getIPString();
-                statusLabel.Text = "STARTING CONNECTION";
+                setStatus("STARTING CONNECTION");
+                //update the status bar
                 progressBar1.Value = 25;
             } else {
-                statusLabel.Text = "FAILED TO CREATE SERVER.";
+                setStatus("FAILED TO CREATE SERVER.");
                 return;
             }
-
+            
+            //Starts the server connection and waits for a client to connect.
+            //Note: ***This currently causes the screen to freeze until a connection is made***
             if(connection.startServer()) {
                 createGameButton.Visible = false;
-                statusLabel.Text = "WAITING FOR OPPONENT TO CONNECT...";
-                setLabel("WAITING FOR OPPONENT TO CONNECT...");
-                Console.WriteLine("Started server");
+                setStatus("WAITING FOR OPPONENT TO CONNECT...");
                 progressBar1.Value = 50;
             } else {
-                statusLabel.Text = "FAILED TO START SERVER.";
+                setStatus("FAILED TO START SERVER.");
                 return;
             }
 
-            //This line of code is giving errors.
-            /*connection.getClient();
-            statusLabel.Text = "CONNECTION SUCCESSFUL";
-            progressBar1.Value = 100;*/
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void startServer() {
-            connection.getClient();
-            statusLabel.Text = "CONNECTION SUCCESSFUL";
+
+            connection.waitForClient();
+            setStatus("CONNECTION SUCCESSFUL");
             progressBar1.Value = 100;
+
+            //Start the ship placement screen.
+            new tempoClass(screen, connection, true).Show();
+
+            //Get rid of the connection form.
+            userQuit = false;
+            this.Close();
         }
 
-        private void setLabel(string msg) {
+        private void setStatus(string msg) {
             statusLabel.Text = msg;
         }
 

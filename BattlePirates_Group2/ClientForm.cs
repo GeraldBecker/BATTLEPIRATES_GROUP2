@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace BattlePirates_Group2 {
         private ConnectionManager connection;
         private MainForm screen;
         private bool userQuit;
+        
 
         public ClientForm(MainForm screen) {
             this.screen = screen;
@@ -39,29 +41,43 @@ namespace BattlePirates_Group2 {
             connectGameButton.Visible = false;
             //connectGameButton.Text = "TRY AGAIN";
 
-            statusLabel.Text = "ATTEMPTING TO CREATE CONNECTION...";
+            setStatus("ATTEMPTING TO CREATE CONNECTION...");
 
             
             progressBar2.Value = 10;
 
+            //Sets the IP Address of the host to connect to.
             if(connection.initiateClient(ipAddressConnect.Text)) {
-                
                 progressBar2.Value = 25;
-                statusLabel.Text = "STARTING CONNECTION";
+                setStatus("STARTING CONNECTION");
             } else {
-                statusLabel.Text = "FAILED";
+                progressBar2.Value = 100;
+                setStatus("FAILED");
                 return;
             }
 
             if(connection.clientConnect()) {
-                statusLabel.Text = "CONNECTION SUCCESSFUL";
                 progressBar2.Value = 100;
+                setStatus("CONNECTION SUCCESSFUL");
+                
             } else {
-                statusLabel.Text = "CONNECTION FAILED";
+                progressBar2.Value = 100;
+                setStatus("CONNECTION FAILED");
                 return;
             }
 
             
+            //Start the ship placement screen.
+            new tempoClass(screen, connection, false).Show();
+
+            //Get rid of the connection form.
+            userQuit = false;
+            this.Close();
+        }
+
+
+        private void setStatus(string msg) {
+            statusLabel.Text = msg;
         }
 
         private void ClientForm_FormClosing(object sender, FormClosingEventArgs e) {
