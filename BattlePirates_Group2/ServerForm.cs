@@ -40,7 +40,7 @@ namespace BattlePirates_Group2 {
                 //Start the server connection once it has been configured.
                 startServer();
             } else if(sender.Equals(button1)) {
-                new tempoClass(screen, connection, true).Show();
+                new shipPlaceForm(screen, connection, true).Show();
                 userQuit = false;
                 this.Close();
             }
@@ -95,7 +95,7 @@ namespace BattlePirates_Group2 {
             progressBar1.Value = 100;
 
             //Start the ship placement screen.
-            new tempoClass(screen, connection, true).Show();
+            new shipPlaceForm(screen, connection, true).Show();
 
             //Get rid of the connection form.
             userQuit = false;

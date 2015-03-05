@@ -68,7 +68,7 @@ namespace BattlePirates_Group2 {
 
             
             //Start the ship placement screen.
-            new tempoClass(screen, connection, false).Show();
+            new shipPlaceForm(screen, connection, false).Show();
 
             //Get rid of the connection form.
             userQuit = false;

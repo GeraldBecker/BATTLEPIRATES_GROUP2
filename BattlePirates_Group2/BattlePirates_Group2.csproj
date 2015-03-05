@@ -68,6 +68,12 @@
     <Compile Include="ServerForm.Designer.cs">
       <DependentUpon>ServerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="shipPlaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shipPlaceForm.Designer.cs">
+      <DependentUpon>shipPlaceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="tempoClass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </Compile>
     <EmbeddedResource Include="ServerForm.resx">
       <DependentUpon>ServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shipPlaceForm.resx">
+      <DependentUpon>shipPlaceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tempoClass.resx">
       <DependentUpon>tempoClass.cs</DependentUpon>
