@@ -38,6 +38,7 @@ namespace BattlePirates_Group2
         public void placeShip(PlayerBoard pb, Ship ship, int row, int col)
         {
             pb.set(ship, row, col);
+            // do something with ship
         }
 
         /// <summary>
@@ -48,6 +49,7 @@ namespace BattlePirates_Group2
         public void moveShip(PlayerBoard pb, Ship ship, int row, int col)
         {
             pb.unSet(row, col);
+            //do something with ship
         }
 
         /// <summary>
