@@ -18,10 +18,10 @@ namespace BattlePirates_Group2
 
         // Types of ships
         // MW (Man o'War = 5 squares), GA (Galleon = 4), BR (Briq = 3), BA (Bargue = 2)
-        private enum _types {MW, GA, BR, BA};
+        public enum _types {MW, GA, BR, BA};
 
         // The type of ship
-        private _types _shipType;
+        public _types _shipType;
 
         //private bool _sunk;// if the ship is sunk
         private bool _activated;// if placed on board
