@@ -33,11 +33,11 @@ namespace BattlePirates_Group2 {
 
 
         public void initiateShipPlacement() {
-            ships[0].setLocation(new Point[] { new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5), new Point(1, 6) });
-            ships[1].setLocation(new Point[] { new Point(3, 2), new Point(3, 3), new Point(3, 4), new Point(3, 5), new Point(3, 6) });
-            ships[2].setLocation(new Point[] { new Point(9, 0), new Point(9, 1), new Point(9, 2), new Point(9, 3), new Point(9, 4) });
-            ships[3].setLocation(new Point[] { new Point(5, 1), new Point(5, 2), new Point(5, 3), new Point(5, 4), new Point(5, 5) });
-            ships[4].setLocation(new Point[] { new Point(8, 2), new Point(8, 3), new Point(8, 4), new Point(8, 5), new Point(8, 6) });
+            ships[0].setLocation(new Point[] { new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5), new Point(1, 6) }, false);
+            ships[1].setLocation(new Point[] { new Point(3, 2), new Point(3, 3), new Point(3, 4), new Point(3, 5), new Point(3, 6) }, false);
+            ships[2].setLocation(new Point[] { new Point(9, 0), new Point(9, 1), new Point(9, 2), new Point(9, 3), new Point(9, 4) }, false);
+            ships[3].setLocation(new Point[] { new Point(5, 1), new Point(5, 2), new Point(5, 3), new Point(5, 4), new Point(5, 5) }, false);
+            ships[4].setLocation(new Point[] { new Point(8, 2), new Point(8, 3), new Point(8, 4), new Point(8, 5), new Point(8, 6) }, false);
         }
 
         public LocationState[,] getBoardForDrawing() {

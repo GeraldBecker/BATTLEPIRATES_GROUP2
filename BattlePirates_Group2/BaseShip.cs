@@ -11,6 +11,7 @@ namespace BattlePirates_Group2 {
         protected int totalSize;
         protected int health;
         protected Point[] location;
+        protected bool isVert;
 
 
         public BaseShip(int size) {
@@ -19,10 +20,29 @@ namespace BattlePirates_Group2 {
         }
 
 
-        public bool setLocation(Point[] newLocation) {
+        public bool setLocation(Point[] newLocation, bool isVert) {
             //TODO   Run through loop to check if it is over other ships.
             location = newLocation;
+            this.isVert = isVert;
             return true;
+        }
+
+        public bool isVertical() {
+            return isVert;
+        }
+
+        public Point[] getLocation() {
+            return location;
+        }
+
+
+        public bool containsPoint(Point p) {
+            for(int i = 0; i < location.Length; i++) {
+                if(location[i] == p) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool checkForHit(Point p) {

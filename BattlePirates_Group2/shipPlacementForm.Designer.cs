@@ -35,6 +35,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "shipPlacementForm";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.shipPlacementForm_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.shipPlacementForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.shipPlacementForm_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.shipPlacementForm_MouseUp);
             this.ResumeLayout(false);
 
         }
