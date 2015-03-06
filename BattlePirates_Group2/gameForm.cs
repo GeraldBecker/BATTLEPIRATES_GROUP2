@@ -20,9 +20,9 @@ namespace BattlePirates_Group2 {
         private MainForm owner;
         private int[,] board; //not a jagered array
         private bool isTurn;
-        private bool whosTurn;
+        private bool whoStarts;
 
-        public gameForm(MainForm owner, ConnectionManager connection, bool whosturn) {
+        public gameForm(MainForm owner, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
             this.owner = owner;
             this.DesktopLocation = owner.Location;
@@ -42,8 +42,8 @@ namespace BattlePirates_Group2 {
             }
             */
 
-            isTurn = whosturn;
-            this.whosTurn = whosturn;
+            isTurn = whoStarts;
+            this.whoStarts = whoStarts;
 
             _grid = new SquareState[10, 10];
             for(int i = 0; i < 10; ++i) {
@@ -121,7 +121,7 @@ namespace BattlePirates_Group2 {
 
         private void button1_Click(object sender, EventArgs e) {
             if(isTurn) {
-                if(whosTurn) {
+                if(whoStarts) {
                     _grid = new SquareState[10, 10];
                     for(int i = 0; i < 10; ++i) {
                         for(int j = 0; j < 10; ++j) {

@@ -22,8 +22,21 @@ namespace BattlePirates_Group2 {
         private bool tempOrientVert;
         private int shipToMove;
 
-        public shipPlacementForm() {
+        private ConnectionManager connection;
+        private MainForm screen;
+        private bool whoStarts;
+        private bool userQuit;
+
+        public shipPlacementForm(MainForm screen, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
+
+            this.screen = screen;
+            this.connection = connection;
+            this.whoStarts = whoStarts;
+            this.DesktopLocation = screen.Location;
+
+            userQuit = true;
+
 
             //5 square size
             myShips[0] = new ManowarShip();
@@ -176,6 +189,22 @@ namespace BattlePirates_Group2 {
 
         private void startGame_click(object sender, EventArgs e) {
             
+            
+
+            GameBoard board = new GameBoard();
+            board.initiateShipPlacement(myShips);
+
+            new daGame(screen, connection, whoStarts, myShips).Show();
+
+            //Get rid of the connection form.
+            userQuit = false;
+            this.Close();
+        }
+
+        private void shipPlacementForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if(userQuit) {
+                Application.Exit();
+            }
         }
 
         

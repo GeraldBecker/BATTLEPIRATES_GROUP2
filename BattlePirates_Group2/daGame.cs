@@ -12,7 +12,7 @@ namespace BattlePirates_Group2 {
     public partial class daGame : Form {
 
         private ConnectionManager connection;
-        private MainForm owner;
+        private MainForm screen;
         private bool myTurn;
         private bool host;
 
@@ -21,19 +21,21 @@ namespace BattlePirates_Group2 {
 
         private const int SPACER = 300;
 
-        public daGame(MainForm owner, ConnectionManager connection, bool whosTurn) {
+        internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, BaseShip[] userShips) {
             InitializeComponent();
             this.connection = connection;
-            this.owner = owner;
-            this.DesktopLocation = owner.Location;
+            this.screen = screen;
+            this.DesktopLocation = screen.Location;
 
 
             myTurn = host = whosTurn;
 
-            
             mine = new GameBoard();
-            opponent = new GameBoard();
+            mine.initiateShipPlacement(userShips);
+            //mine = new GameBoard();
 
+            opponent = new GameBoard();
+            
             
         }
 
@@ -66,11 +68,11 @@ namespace BattlePirates_Group2 {
         }
 
         private void daGame_Paint(object sender, PaintEventArgs e) {
-            LocationState[,] _grid = mine.getBoardForDrawing();
+            LocationState[,] _grid = opponent.getBoardForDrawing();
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
-                    if(mine.hasShip(new Point(r, c)))
-                        e.Graphics.FillRectangle(new SolidBrush(Color.OrangeRed), c * 25, r * 25, 20, 20);
+                    if(opponent.hasShip(new Point(r, c)))
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25, r * 25, 20, 20);
                     else if(_grid[r, c] == LocationState.EMPTY)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Aqua), c * 25, r * 25, 20, 20);
                     else if(_grid[r, c] == LocationState.HIT)
@@ -88,7 +90,7 @@ namespace BattlePirates_Group2 {
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
                     if(mine.hasShip(new Point(r, c)))
-                        e.Graphics.FillRectangle(new SolidBrush(Color.OrangeRed), c * 25 + SPACER, r * 25, 20, 20);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
                     else if(_grid2[r, c] == LocationState.EMPTY)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Aqua), c * 25 + SPACER, r * 25, 20, 20);
                     else if(_grid2[r, c] == LocationState.HIT)

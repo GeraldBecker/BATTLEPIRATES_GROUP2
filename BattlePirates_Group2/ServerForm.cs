@@ -97,7 +97,8 @@ namespace BattlePirates_Group2 {
             //Start the ship placement screen.
             //new shipPlaceForm(screen, connection, true).Show();
             //new gameForm(screen, connection, true).Show();
-            new daGame(screen, connection, true).Show();
+            //new daGame(screen, connection, true).Show();
+            new shipPlacementForm(screen, connection, true).Show();
 
             //Get rid of the connection form.
             userQuit = false;

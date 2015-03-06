@@ -50,6 +50,7 @@
             this.Name = "shipPlacementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "shipPlacementForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.shipPlacementForm_FormClosing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.shipPlacementForm_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.shipPlacementForm_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.shipPlacementForm_MouseDown);
