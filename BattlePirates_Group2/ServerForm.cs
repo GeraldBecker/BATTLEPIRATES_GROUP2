@@ -95,7 +95,9 @@ namespace BattlePirates_Group2 {
             progressBar1.Value = 100;
 
             //Start the ship placement screen.
-            new shipPlaceForm(screen, connection, true).Show();
+            //new shipPlaceForm(screen, connection, true).Show();
+            //new gameForm(screen, connection, true).Show();
+            new daGame(screen, connection, true).Show();
 
             //Get rid of the connection form.
             userQuit = false;

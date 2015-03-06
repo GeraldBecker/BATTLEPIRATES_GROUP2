@@ -15,6 +15,8 @@ namespace BattlePirates_Group2 {
         private TcpListener SERVER;
         private NetworkStream NETWORKSTREAM;
 
+        public enum SquareState { Empty, Miss, Hit, MW, GA, BR, BA };
+
         public ConnectionManager() {
             //Create a default port
             PORT = 1116; 
@@ -173,6 +175,8 @@ namespace BattlePirates_Group2 {
             return true;
         }
 
+        
+
         /// <summary>
         /// 
         /// </summary>
@@ -190,7 +194,35 @@ namespace BattlePirates_Group2 {
             return data;
         }
 
+        public bool sendData2(gameForm.SquareState[,] grid) {
+            try {
+                string dataString = "";
+                for(int y = 0; y < 10; y++)
+                    for(int x = 0; x < 10; x++)
+                        dataString += grid[y, x];
 
+                byte[] bytes = new byte[255];
+                bytes = new ASCIIEncoding().GetBytes(dataString);
+                NETWORKSTREAM.Write(bytes, 0, bytes.Length);
+            } catch(Exception ex) {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public gameForm.SquareState[,] getData2() {
+
+            byte[] bytes = new byte[255];
+            NETWORKSTREAM.Read(bytes, 0, bytes.Length);
+            string dataString = new ASCIIEncoding().GetString(bytes);
+            char[] charOfTemp = dataString.ToCharArray();
+            gameForm.SquareState[,] data = new gameForm.SquareState[10, 10];
+            for(int y = 0; y < 10; y++)
+                for(int x = 0; x < 10; x++)
+                    data[y, x] = gameForm.SquareState.BR;//Int32.Parse("" + charOfTemp[(y * 3) + x]);
+            return data;
+        }
         //The below code is for reference purposes only from MSDN.
         /*
         public void writeIt() {
