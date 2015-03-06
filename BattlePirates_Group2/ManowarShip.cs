@@ -8,7 +8,6 @@ namespace BattlePirates_Group2 {
     class ManowarShip : BaseShip {
         const int SHIPSIZE = 5;
 
-
         public ManowarShip() : base(SHIPSIZE) {
             
         }

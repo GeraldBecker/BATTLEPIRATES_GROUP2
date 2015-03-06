@@ -44,8 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarqueShip.cs" />
     <Compile Include="BaseShip.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="BrigShip.cs" />
     <Compile Include="ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +59,7 @@
     <Compile Include="daGame.Designer.cs">
       <DependentUpon>daGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Galleon.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="gameForm.cs">
       <SubType>Form</SubType>
