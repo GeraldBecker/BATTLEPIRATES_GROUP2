@@ -140,9 +140,12 @@ namespace BattlePirates_Group2 {
                         tempShapePoints[i].Y = (e.X + (i * BLOCKWIDTH)) / BLOCKWIDTH;
                     }
                 }
-                
 
-                this.Refresh();
+                if (ClientRectangle.Contains(PointToClient(Control.MousePosition)))
+                {
+                    this.Refresh();
+                }
+                
             }
             
             
