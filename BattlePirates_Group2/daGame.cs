@@ -136,7 +136,7 @@ namespace BattlePirates_Group2 {
 
 
 
-            LocationState[,] _grid2 = opponent.getBoardForDrawing();
+            LocationState[,] _grid2 = mine.getBoardForDrawing();
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
                     if(mine.hasShip(new Point(r, c)))
@@ -155,12 +155,28 @@ namespace BattlePirates_Group2 {
 
         private void daGame_MouseDown(object sender, MouseEventArgs e) {
             if(myTurn) {
-                TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
-                connection.sendGamePoint(msg1);
-                Console.WriteLine("Sent location: " + e.Location);
-                myTurn = false;
-                CheckTurn();
+                // check to see if hit
+                if ((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10)
+                {
+                    int c = e.X / BLOCKWIDTH;
+                    int r = e.Y / BLOCKWIDTH;
 
+                    Point shot = new Point(r, c);
+                    LocationState shotResult;
+                    shotResult = opponent.strikeCoordinates(shot);
+
+                    if (shotResult != LocationState.CLICKED)
+                    {
+                        TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
+                        connection.sendGamePoint(msg1);
+                        Console.WriteLine("Sent location: " + e.Location);
+                        // update opponent grid in this GameBoard instance
+                        _grid[r, c] = shotResult;
+                        myTurn = false;
+                        this.Refresh();
+                        CheckTurn();
+                    }
+                }
 
                 /*TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
                 connection.sendGamePoint(msg1);

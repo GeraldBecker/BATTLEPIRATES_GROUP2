@@ -10,7 +10,7 @@ namespace BattlePirates_Group2 {
         MISS,
         HIT,
         EMPTY,
-        SUNK,
+        //SUNK,
         CLICKED
     }
 }
