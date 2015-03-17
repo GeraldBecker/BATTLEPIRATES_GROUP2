@@ -59,15 +59,23 @@ namespace BattlePirates_Group2 {
 
 
         public LocationState strikeCoordinates(Point p) {
-            if(grid[p.X, p.Y] != LocationState.EMPTY) {
+            /*if(grid[p.X, p.Y] != LocationState.EMPTY) {
                 return LocationState.CLICKED;
+            }*/
+            if (grid[p.X, p.Y] == LocationState.EMPTY)
+            {
+                for (int i = 0; i < ships.Length; i++)
+                {
+                    if (ships[i].checkForHit(p))
+                    {
+                        grid[p.X, p.Y] = LocationState.HIT;
+                        return LocationState.HIT;
+                    }
+                }
+                grid[p.X, p.Y] = LocationState.MISS;
+                return LocationState.MISS;
             }
-            for(int i = 0; i < ships.Length; i++) {
-                if(ships[i].checkForShip(p)) {
-                    return LocationState.HIT;
-                } 
-            }
-            return LocationState.MISS;
+            return LocationState.CLICKED;
         }
 
         public BaseShip[] getShips()

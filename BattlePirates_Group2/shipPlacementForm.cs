@@ -9,24 +9,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BattlePirates_Group2 {
+    /// <summary>
+    /// Form for placing ships prior to game start
+    /// </summary>
     public partial class shipPlacementForm : Form {
-        private const int BLOCKWIDTH = 25;
-        private bool dragging;
+        private const int BLOCKWIDTH = 25;// grid block size
+        private bool dragging;// if mouse down and ready to drag a ship
 
-        
+        // Array of ships
         private BaseShip[] myShips = new BaseShip[6];
 
-
-        private bool containsTrue;
-        private Point[] tempShapePoints;
-        private bool tempOrientVert;
-        private int shipToMove;
+        private bool containsTrue;// if mouse down point contains a ship
+        private Point[] tempShapePoints;// the dragging ship locations
+        private bool tempOrientVert;// the dragging ship vertical orientation
+        private int shipToMove;// the ship being moved
 
         private ConnectionManager connection;
         private MainForm screen;
-        private bool whoStarts;
-        private bool userQuit;
+        private bool whoStarts;// if this player starts to play game first
+        private bool userQuit;// if user quit shipPlacementForm
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="screen"></param>
+        /// <param name="connection"></param>
+        /// <param name="whoStarts"></param>
         public shipPlacementForm(MainForm screen, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
 
@@ -37,7 +45,7 @@ namespace BattlePirates_Group2 {
 
             userQuit = true;
 
-
+            // Initial locations of ships for dragging into grid (lower right side of form)
             //5 square size
             myShips[0] = new ManowarShip();
             myShips[0].setLocation(new Point[] { new Point(5, 13), new Point(6, 13), new Point(7, 13), new Point(8, 13), new Point(9, 13) }, true);
@@ -67,6 +75,11 @@ namespace BattlePirates_Group2 {
             startGameButton.TabStop = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void shipPlacementForm_Paint(object sender, PaintEventArgs e) {
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
@@ -107,7 +120,7 @@ namespace BattlePirates_Group2 {
 
             //Loop through the array of ships to find a ship that is at the point.
             for(int n = 0; n < myShips.Length; n++) {
-                if(myShips[n].containsPoint(new Point(r, c))) {
+                if(myShips[n].checkForShip(new Point(r, c))) {
                     Console.WriteLine("YOU HIT A SHIP");
 
                     containsTrue = true;
