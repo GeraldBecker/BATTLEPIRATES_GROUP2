@@ -192,7 +192,15 @@ namespace BattlePirates_Group2 {
 
         private void startGame_click(object sender, EventArgs e) {
             
-            
+            // Check if ships on game board
+            for (int n = 0; n < myShips.Length; n++)
+            {
+                if (myShips[n].outsideGrid())
+                {
+                    Console.WriteLine("Ship: " + n);
+                    return;
+                }
+            }
 
             GameBoard board = new GameBoard();
             board.initiateShipPlacement(myShips);

@@ -45,6 +45,24 @@ namespace BattlePirates_Group2 {
             return false;
         }
 
+        public bool outsideGrid()
+        {
+            for (int i = 0; i < location.Length; i++)
+            {
+                Console.WriteLine("location[" + i + "].X: " + location[i].X);
+                Console.WriteLine("location[" + i + "].Y: " + location[i].Y);
+                if (location[i].X < 0 || location[i].X > 9)
+                {
+                    return true;
+                }
+                else if (location[i].Y < 0 || location[i].Y > 9)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public bool checkForHit(Point p) {
             for(int i = 0; i < location.Length; i++) {
                 if(location[i] == p) {
