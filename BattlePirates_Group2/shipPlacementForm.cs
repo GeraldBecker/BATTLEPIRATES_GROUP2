@@ -191,12 +191,10 @@ namespace BattlePirates_Group2 {
         }
 
         private void startGame_click(object sender, EventArgs e) {
-            
+
             // Check if ships on game board
-            for (int n = 0; n < myShips.Length; n++)
-            {
-                if (myShips[n].outsideGrid())
-                {
+            for (int n = 0; n < myShips.Length; n++) {
+                if (myShips[n].outsideGrid()) {
                     Console.WriteLine("Ship: " + n);
                     return;
                 }
@@ -208,8 +206,6 @@ namespace BattlePirates_Group2 {
             GameBoard enemyBoard;
 
             //This is the new code to get the other board
-
-
 
             if(whoStarts) {
                 //Task.Factory.StartNew(() => {
@@ -238,24 +234,14 @@ namespace BattlePirates_Group2 {
                 //});
             }
 
-
-
-
-
-
-
             Console.WriteLine("PASSED ALL METHODS");
 
-
-
-
             new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
-
-
 
             //new daGame(screen, connection, whoStarts, myShips).Show();
 
             //Get rid of the connection form.
+
             userQuit = false;
             this.Close();
         }
