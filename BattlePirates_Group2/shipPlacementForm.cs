@@ -153,7 +153,8 @@ namespace BattlePirates_Group2 {
 
         private void shipPlacementForm_MouseUp(object sender, MouseEventArgs e) {
             dragging = false;
-            if(containsTrue) {
+            if (containsTrue && ClientRectangle.Contains(PointToClient(Control.MousePosition)))
+            {
                 myShips[shipToMove].setLocation(tempShapePoints, tempOrientVert);
             }
             
