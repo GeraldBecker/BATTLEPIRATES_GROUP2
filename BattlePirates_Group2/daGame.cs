@@ -39,13 +39,13 @@ namespace BattlePirates_Group2 {
             
         }
 
-        private void taskGetData() {
+        /*private void taskGetData() {
             Task.Factory.StartNew(() => {
                 Console.WriteLine("TRYING TO GET THE BOARD");
                 opponent = connection.getData2();
                 Console.WriteLine("GOT THE BOARD");
             });
-        }
+        }*/
 
         /*private void checkTurn() {
             if(!this.InvokeRequired) {
