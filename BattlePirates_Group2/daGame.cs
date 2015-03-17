@@ -63,7 +63,7 @@ namespace BattlePirates_Group2 {
 
         private void daGame_MouseUp(object sender, MouseEventArgs e)
         {
-            if((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10)
+            /*if((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10)
             {
                 int r = e.X / BLOCKWIDTH;
                 int c = e.Y / BLOCKWIDTH;
@@ -87,7 +87,7 @@ namespace BattlePirates_Group2 {
                 }
                 
                 this.Refresh();
-            }
+            }*/
 
         }
 
@@ -131,7 +131,7 @@ namespace BattlePirates_Group2 {
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25, r * 25, 20, 20);
                     
                 }
-                Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
+                //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
             }
 
 
@@ -149,11 +149,69 @@ namespace BattlePirates_Group2 {
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25 + SPACER, r * 25, 20, 20);
 
                 }
-                Console.WriteLine();
+                //Console.WriteLine();
             }
         }
 
+        private void daGame_MouseDown(object sender, MouseEventArgs e) {
+            if(myTurn) {
+                TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
+                connection.sendGamePoint(msg1);
+                Console.WriteLine("Sent location: " + e.Location);
+                myTurn = false;
+                CheckTurn();
 
+
+                /*TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
+                connection.sendGamePoint(msg1);
+                Console.WriteLine("Sent location: " + e.Location);
+
+                TransmitMessage msg = connection.getGamePoint();
+                Point p = (Point)SerializationHelper.Deserialize(msg);
+                Console.WriteLine("Received location: " + p);*/
+
+
+            } else {
+                /*TransmitMessage msg = connection.getGamePoint();
+                Point p = (Point)SerializationHelper.Deserialize(msg);
+                Console.WriteLine("Received location: " + p);
+
+                myTurn = true;*/
+            }
+        }
+
+        private void CheckTurn() {
+            if(!this.InvokeRequired) {
+                if(myTurn) {
+                    waitPanel.Hide();
+                    //SetEnabled(true);
+                } else {
+                    waitPanel.Show();
+                    //SetEnabled(false);
+                    GetDataFromOthers();
+                }
+                //ReSetBoard();
+            } else
+                this.Invoke((MethodInvoker)delegate {
+                    CheckTurn();
+                });
+        }
+
+        private void GetDataFromOthers() {
+            Task.Factory.StartNew(() => {
+                Console.WriteLine("TRYING TO GET A POINT");
+                TransmitMessage msg = connection.getGamePoint();
+                Point p = (Point)SerializationHelper.Deserialize(msg);
+                Console.WriteLine("Received location: " + p);
+                myTurn = true;
+
+                CheckTurn();
+            });
+        }
+
+        private void daGame_Load(object sender, EventArgs e) {
+            CheckTurn();
+        }
 
     }
 }
