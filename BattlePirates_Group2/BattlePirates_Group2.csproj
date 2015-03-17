@@ -44,6 +44,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarqueShip.cs" />
+    <Compile Include="BaseShip.cs" />
+    <Compile Include="BrigShip.cs" />
+    <Compile Include="ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientForm.Designer.cs">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="daGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="daGame.Designer.cs">
+      <DependentUpon>daGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Galleon.cs" />
+    <Compile Include="GameBoard.cs" />
+    <Compile Include="gameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gameForm.Designer.cs">
+      <DependentUpon>gameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocationState.cs" />
+    <Compile Include="ManowarShip.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerBoard.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="MainForm.cs">
@@ -60,6 +87,33 @@
     <Compile Include="ServerForm.Designer.cs">
       <DependentUpon>ServerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="shipPlaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shipPlaceForm.Designer.cs">
+      <DependentUpon>shipPlaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="shipPlacementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shipPlacementForm.Designer.cs">
+      <DependentUpon>shipPlacementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tempoClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tempoClass.Designer.cs">
+      <DependentUpon>tempoClass.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ClientForm.resx">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="daGame.resx">
+      <DependentUpon>daGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gameForm.resx">
+      <DependentUpon>gameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +128,15 @@
     </Compile>
     <EmbeddedResource Include="ServerForm.resx">
       <DependentUpon>ServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shipPlaceForm.resx">
+      <DependentUpon>shipPlaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shipPlacementForm.resx">
+      <DependentUpon>shipPlacementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tempoClass.resx">
+      <DependentUpon>tempoClass.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
