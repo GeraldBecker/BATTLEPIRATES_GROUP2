@@ -36,6 +36,7 @@
             this.Text = "daGame";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.daGame_FormClosing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.daGame_Paint);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.daGame_MouseUp);
             this.ResumeLayout(false);
 
         }

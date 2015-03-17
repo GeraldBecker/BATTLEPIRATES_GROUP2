@@ -63,9 +63,23 @@ namespace BattlePirates_Group2 {
             return false;
         }
 
-        public bool checkForHit(Point p) {
+        public bool checkForShip(Point p) {
             for(int i = 0; i < location.Length; i++) {
                 if(location[i] == p) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool checkForHit(Point p)
+        {
+            for (int i = 0; i < location.Length; i++)
+            {
+                if (location[i] == p)
+                {
+                    Console.WriteLine("hit point: " + p.X + " Y: " + p.Y);
+                    location[i] = new Point(-1, -1);
                     health--;
                     return true;
                 }

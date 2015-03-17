@@ -49,7 +49,7 @@ namespace BattlePirates_Group2 {
         //temp class
         public bool hasShip(Point p){
             for(int i = 0; i < ships.Length; i++) {
-                if(ships[i].checkForHit(p)) {
+                if(ships[i].checkForShip(p)) {
                     return true;
                 } 
             }
@@ -62,13 +62,16 @@ namespace BattlePirates_Group2 {
                 return LocationState.CLICKED;
             }
             for(int i = 0; i < ships.Length; i++) {
-                if(ships[i].checkForHit(p)) {
+                if(ships[i].checkForShip(p)) {
                     return LocationState.HIT;
                 } 
             }
             return LocationState.MISS;
         }
 
-
+        public BaseShip[] getShips()
+        {
+            return ships;
+        }
     }
 }

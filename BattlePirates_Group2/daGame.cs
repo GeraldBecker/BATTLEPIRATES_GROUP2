@@ -11,6 +11,7 @@ using System.Windows.Forms;
 namespace BattlePirates_Group2 {
     public partial class daGame : Form {
 
+        private const int BLOCKWIDTH = 25;
         private ConnectionManager connection;
         private MainForm screen;
         private bool myTurn;
@@ -18,6 +19,9 @@ namespace BattlePirates_Group2 {
 
         private GameBoard mine;
         private GameBoard opponent;
+
+        private BaseShip[] opponentShips;
+        LocationState[,] _grid;
 
         private const int SPACER = 300;
 
@@ -35,8 +39,41 @@ namespace BattlePirates_Group2 {
             //mine = new GameBoard();
 
             opponent = new GameBoard();
-            
-            
+            // TO-Delete just for testing game logic
+            opponent.initiateShipPlacement(userShips);
+
+            opponentShips = opponent.getShips();
+        }
+
+
+        private void daGame_MouseUp(object sender, MouseEventArgs e)
+        {
+            if((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10)
+            {
+                int r = e.X / BLOCKWIDTH;
+                int c = e.Y / BLOCKWIDTH;
+
+                Point shot = new Point(c, r);
+
+                for (int i = 0; i < opponentShips.Length; i++)
+                {
+                    if (opponentShips[i].checkForHit(shot))
+                    {
+                        
+                        _grid[c, r] = LocationState.HIT;
+                        Console.WriteLine("hit: " + c + ":" + r);
+                        break;
+                    }
+                    else
+                    {
+                        _grid[c, r] = LocationState.MISS;
+                        Console.WriteLine("Miss: " + c + ":" + r);
+                    }
+                }
+                
+                this.Refresh();
+            }
+
         }
 
         /*private void taskGetData() {
@@ -66,7 +103,7 @@ namespace BattlePirates_Group2 {
         }
 
         private void daGame_Paint(object sender, PaintEventArgs e) {
-            LocationState[,] _grid = opponent.getBoardForDrawing();
+            _grid = opponent.getBoardForDrawing();
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
                     if(opponent.hasShip(new Point(r, c)))
@@ -79,7 +116,7 @@ namespace BattlePirates_Group2 {
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25, r * 25, 20, 20);
                     
                 }
-                Console.WriteLine();
+                Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
             }
 
 
