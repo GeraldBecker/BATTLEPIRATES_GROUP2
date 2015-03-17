@@ -24,7 +24,7 @@ namespace BattlePirates_Group2 {
 
             connectionPanel.Visible = false;
             connection = new ConnectionManager();
-
+            button1.Visible = false;
         }
 
         private void button_click(object sender, EventArgs e) {

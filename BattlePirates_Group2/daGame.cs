@@ -39,17 +39,15 @@ namespace BattlePirates_Group2 {
             
         }
 
-        /*private void taskGetData() {
+        private void taskGetData() {
             Task.Factory.StartNew(() => {
                 Console.WriteLine("TRYING TO GET THE BOARD");
-                _grid = connection.getData2();
+                opponent = connection.getData2();
                 Console.WriteLine("GOT THE BOARD");
-                isTurn = true;
-                checkTurn();
             });
         }
 
-        private void checkTurn() {
+        /*private void checkTurn() {
             if(!this.InvokeRequired) {
                 if(isTurn) {
                 } else {

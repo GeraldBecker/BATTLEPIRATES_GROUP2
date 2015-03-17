@@ -209,6 +209,7 @@ namespace BattlePirates_Group2 {
                 return false;
             }
             return true;
+            
         }
 
         public gameForm.SquareState[,] getData2() {
