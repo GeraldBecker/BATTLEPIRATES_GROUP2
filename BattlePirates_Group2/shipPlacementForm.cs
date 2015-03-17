@@ -202,10 +202,58 @@ namespace BattlePirates_Group2 {
                 }
             }
 
-            GameBoard board = new GameBoard();
-            board.initiateShipPlacement(myShips);
+            GameBoard myboard = new GameBoard();
+            myboard.initiateShipPlacement(myShips);
 
-            new daGame(screen, connection, whoStarts, myShips).Show();
+            GameBoard enemyBoard;
+
+            //This is the new code to get the other board
+
+
+
+            if(whoStarts) {
+                //Task.Factory.StartNew(() => {
+                //Get client board
+                Console.WriteLine("SERVER TRYING TO GET THE BOARD");
+                TransmitMessage msg = connection.getGameBoard();
+                enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg);
+                Console.WriteLine("SERVER GOT THE BOARD");
+
+                //Send server board
+                TransmitMessage msg1 = SerializationHelper.Serialize(myboard);
+                connection.sendGameBoard(msg1);
+                //});
+            } else {
+                //Send client board
+                TransmitMessage msg = SerializationHelper.Serialize(myboard);
+
+                connection.sendGameBoard(msg);
+
+                //Get server Board
+                //Task.Factory.StartNew(() => {
+                Console.WriteLine("TRYING TO GET THE BOARD");
+                TransmitMessage msg1 = connection.getGameBoard();
+                enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg1);
+                Console.WriteLine("GOT THE BOARD");
+                //});
+            }
+
+
+
+
+
+
+
+            Console.WriteLine("PASSED ALL METHODS");
+
+
+
+
+            new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
+
+
+
+            //new daGame(screen, connection, whoStarts, myShips).Show();
 
             //Get rid of the connection form.
             userQuit = false;

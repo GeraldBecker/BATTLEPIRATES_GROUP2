@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BattlePirates_Group2 {
@@ -151,6 +152,53 @@ namespace BattlePirates_Group2 {
         public string getIPString() {
             return IP.ToString();
         }
+
+
+        public void sendGameBoard(TransmitMessage msg) {
+            int length = msg.Data.Length;
+            Console.WriteLine("Sending length: " + length);
+            try {
+                byte[] dataLength = BitConverter.GetBytes((Int32)length);
+                NETWORKSTREAM.Write(dataLength, 0, 4);
+                NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
+                //The below line of code delays the thread to allow the sending of the entire stream before the next form is loaded. 
+                //Fix this issue if possible. 
+                Thread.Sleep(10000);
+            } catch(Exception ex) {
+                Console.WriteLine("We failed");
+                Console.WriteLine(ex.StackTrace);
+
+            }
+        }
+
+        public TransmitMessage getGameBoard() {
+            byte[] dataLength = new byte[4];
+            NETWORKSTREAM.Read(dataLength, 0, 4);
+            int dataLen = BitConverter.ToInt32(dataLength, 0);
+            Console.WriteLine("Receiving length: " + dataLen);
+            TransmitMessage msg = new TransmitMessage();
+            msg.Data = new byte[dataLen];
+            Console.WriteLine();
+            try {
+                NETWORKSTREAM.Read(msg.Data, 0, dataLen);
+            } catch(System.ArgumentNullException ex) {
+                Console.WriteLine("arg null exception");
+            } catch(System.ArgumentOutOfRangeException ex) {
+                Console.WriteLine("arg out of range");
+            } catch(System.IO.IOException) {
+                Console.WriteLine("io excp");
+            } catch(System.ObjectDisposedException) {
+                Console.WriteLine("object disposed");
+            }
+
+
+
+            return msg;
+        }
+
+
+
+
 
 
         /// <summary>

@@ -59,13 +59,14 @@
     <Compile Include="daGame.Designer.cs">
       <DependentUpon>daGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="SerializationHelper.cs" />
     <Compile Include="Galleon.cs" />
     <Compile Include="GameBoard.cs" />
-    <Compile Include="gameForm.cs">
+    <Compile Include="obsolete-gameForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="gameForm.Designer.cs">
-      <DependentUpon>gameForm.cs</DependentUpon>
+    <Compile Include="obsolete-gameForm.Designer.cs">
+      <DependentUpon>obsolete-gameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LocationState.cs" />
     <Compile Include="ManowarShip.cs" />
@@ -87,11 +88,11 @@
     <Compile Include="ServerForm.Designer.cs">
       <DependentUpon>ServerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="shipPlaceForm.cs">
+    <Compile Include="obsolete-shipPlaceForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="shipPlaceForm.Designer.cs">
-      <DependentUpon>shipPlaceForm.cs</DependentUpon>
+    <Compile Include="obsolete-shipPlaceForm.Designer.cs">
+      <DependentUpon>obsolete-shipPlaceForm.cs</DependentUpon>
     </Compile>
     <Compile Include="shipPlacementForm.cs">
       <SubType>Form</SubType>
@@ -105,14 +106,15 @@
     <Compile Include="tempoClass.Designer.cs">
       <DependentUpon>tempoClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransmitMessage.cs" />
     <EmbeddedResource Include="ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="daGame.resx">
       <DependentUpon>daGame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="gameForm.resx">
-      <DependentUpon>gameForm.cs</DependentUpon>
+    <EmbeddedResource Include="obsolete-gameForm.resx">
+      <DependentUpon>obsolete-gameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -129,8 +131,8 @@
     <EmbeddedResource Include="ServerForm.resx">
       <DependentUpon>ServerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="shipPlaceForm.resx">
-      <DependentUpon>shipPlaceForm.cs</DependentUpon>
+    <EmbeddedResource Include="obsolete-shipPlaceForm.resx">
+      <DependentUpon>obsolete-shipPlaceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="shipPlacementForm.resx">
       <DependentUpon>shipPlacementForm.cs</DependentUpon>

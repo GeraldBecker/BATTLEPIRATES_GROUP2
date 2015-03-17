@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BattlePirates_Group2 {
+    [Serializable]
     class GameBoard {
 
         private BaseShip[] ships;

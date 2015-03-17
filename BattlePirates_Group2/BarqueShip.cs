@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BattlePirates_Group2 {
+    [Serializable]
     class BarqueShip : BaseShip {
         const int SHIPSIZE = 2;
 

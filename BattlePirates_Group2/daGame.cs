@@ -45,6 +45,21 @@ namespace BattlePirates_Group2 {
             opponentShips = opponent.getShips();
         }
 
+        internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, GameBoard mine, GameBoard opponent) {
+            InitializeComponent();
+            this.connection = connection;
+            this.screen = screen;
+            this.DesktopLocation = screen.Location;
+
+
+            myTurn = host = whosTurn;
+
+            this.mine = mine;
+            this.opponent = opponent;
+
+
+        }
+
 
         private void daGame_MouseUp(object sender, MouseEventArgs e)
         {
