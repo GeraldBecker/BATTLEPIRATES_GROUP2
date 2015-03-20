@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace BattlePirates_Group2 {
     
+    /// <summary>
+    /// Connection manager class
+    /// Handles all connections between the 2 player machines
+    /// </summary>
     public class ConnectionManager {
         private IPAddress IP;
         private int PORT;
@@ -17,8 +21,14 @@ namespace BattlePirates_Group2 {
         private TcpListener SERVER;
         private NetworkStream NETWORKSTREAM;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public enum SquareState { Empty, Miss, Hit, MW, GA, BR, BA };
 
+        /// <summary>
+        /// Constructor - setting port 1116
+        /// </summary>
         public ConnectionManager() {
             //Create a default port
             PORT = 1116; 
@@ -149,11 +159,20 @@ namespace BattlePirates_Group2 {
         }
 
         
-
+        /// <summary>
+        /// Getter for the IP
+        /// </summary>
+        /// <returns>
+        /// IP as a string
+        /// </returns>
         public string getIPString() {
             return IP.ToString();
         }
 
+        /// <summary>
+        /// Sends the strike coordinates to opponent
+        /// </summary>
+        /// <param name="msg"></param>
         public void sendGamePoint(TransmitMessage msg) {
             int length = msg.Data.Length;
             Console.WriteLine("Sending length: " + length);
@@ -171,9 +190,13 @@ namespace BattlePirates_Group2 {
             }
         }
 
+        /// <summary>
+        /// Receives the strike coordinates from opponent
+        /// </summary>
+        /// <returns></returns>
         public TransmitMessage getGamePoint() {
             byte[] dataLength = new byte[4];
-            NETWORKSTREAM.Read(dataLength, 0, 4);
+            NETWORKSTREAM.Read(dataLength, 0, 4);// if other player quits throws exception
             int dataLen = BitConverter.ToInt32(dataLength, 0);
             Console.WriteLine("Receiving length: " + dataLen);
             TransmitMessage msg = new TransmitMessage();
@@ -196,6 +219,10 @@ namespace BattlePirates_Group2 {
             return msg;
         }
 
+        /// <summary>
+        /// Sends the gameboard after ship placement to initialize game
+        /// </summary>
+        /// <param name="msg"></param>
         public void sendGameBoard(TransmitMessage msg) {
             int length = msg.Data.Length;
             Console.WriteLine("Sending length: " + length);
@@ -213,6 +240,10 @@ namespace BattlePirates_Group2 {
             }
         }
 
+        /// <summary>
+        /// Receives the game board from opponent after ship placement to initialize game
+        /// </summary>
+        /// <returns></returns>
         public TransmitMessage getGameBoard() {
             byte[] dataLength = new byte[4];
             NETWORKSTREAM.Read(dataLength, 0, 4);
@@ -244,7 +275,7 @@ namespace BattlePirates_Group2 {
 
 
         /// <summary>
-        /// 
+        /// Sends the gameboard data
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -268,7 +299,7 @@ namespace BattlePirates_Group2 {
         
 
         /// <summary>
-        /// 
+        /// Receives the gameboard data
         /// </summary>
         /// <returns></returns>
         public int[,] getData() {
@@ -284,6 +315,11 @@ namespace BattlePirates_Group2 {
             return data;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
         public bool sendData2(gameForm.SquareState[,] grid) {
             try {
                 string dataString = "";

@@ -76,7 +76,7 @@ namespace BattlePirates_Group2 {
         }
 
         /// <summary>
-        /// 
+        /// Paints the grid to place ships and the ships for placing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -99,17 +99,20 @@ namespace BattlePirates_Group2 {
                 }
             }
 
-
+            // the temporary mouse dragged ship
             if(tempShapePoints != null && dragging) {
                 for(int i = 0; i < tempShapePoints.Length; i++) {
                     e.Graphics.FillRectangle(new SolidBrush(Color.Red), tempShapePoints[i].Y * BLOCKWIDTH, tempShapePoints[i].X * BLOCKWIDTH, BLOCKWIDTH - 5, BLOCKWIDTH - 5);
                 }
             }
         }
-
-
-        
-
+      
+        /// <summary>
+        /// Mouse Down event.  Checks to see if mousedown on a ship to drag.
+        /// Enables a temporary ship object to be dragged
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void shipPlacementForm_MouseDown(object sender, MouseEventArgs e) {
             
             Console.WriteLine("Mouse Down Location: " + e.X + " " + e.Y);
@@ -135,12 +138,17 @@ namespace BattlePirates_Group2 {
             dragging = true;
         }
 
+        /// <summary>
+        /// Mouse move event.  Drags the temporary ship object.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void shipPlacementForm_MouseMove(object sender, MouseEventArgs e) {
             if(dragging && containsTrue) {
                 Console.WriteLine("Mouse UP Location: " + e.Y / BLOCKWIDTH + " " + e.X / BLOCKWIDTH);
                 
 
-
+                // checks the orientation and sets the points accordingly
                 if(tempOrientVert) {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
                         tempShapePoints[i].X = (e.Y + (i * BLOCKWIDTH)) / BLOCKWIDTH;
@@ -153,7 +161,7 @@ namespace BattlePirates_Group2 {
                         tempShapePoints[i].Y = (e.X + (i * BLOCKWIDTH)) / BLOCKWIDTH;
                     }
                 }
-
+                // Form bounds checking
                 if (ClientRectangle.Contains(PointToClient(Control.MousePosition)))
                 {
                     this.Refresh();
@@ -164,6 +172,12 @@ namespace BattlePirates_Group2 {
             
         }
 
+        /// <summary>
+        /// Sets the temporary ship object with the actual ship object in the location
+        /// dragged to.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void shipPlacementForm_MouseUp(object sender, MouseEventArgs e) {
             dragging = false;
             if(containsTrue && ClientRectangle.Contains(PointToClient(Control.MousePosition))) {
@@ -175,8 +189,14 @@ namespace BattlePirates_Group2 {
             this.Refresh();
         }
 
+        /// <summary>
+        /// KeyDown event.  Allows for rotation of the temporary ship object
+        /// being dragged by the space bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void shipPlacementForm_KeyDown(object sender, KeyEventArgs e) {
-
+            // Spacebar toggles orientation of temporary dragged ship
             if(e.KeyCode == Keys.Space && dragging) {
                 Console.WriteLine("HAHHA rotate");
 
@@ -203,6 +223,12 @@ namespace BattlePirates_Group2 {
             
         }
 
+        /// <summary>
+        /// Click of the start button event
+        /// checks if the ships are all placed on grid.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void startGame_click(object sender, EventArgs e) {
             
             // Check if ships on game board
@@ -273,6 +299,11 @@ namespace BattlePirates_Group2 {
             this.Close();
         }
 
+        /// <summary>
+        /// Form closing event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void shipPlacementForm_FormClosing(object sender, FormClosingEventArgs e) {
             if(userQuit) {
                 Application.Exit();

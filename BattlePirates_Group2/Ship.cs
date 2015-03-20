@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 
 namespace BattlePirates_Group2
 {
@@ -46,7 +46,9 @@ namespace BattlePirates_Group2
             _activated = false;
         }
 
-
+        /// <summary>
+        /// Properties of _shipType
+        /// </summary>
         public _types ShipType
         {
             get
@@ -58,6 +60,7 @@ namespace BattlePirates_Group2
                 _shipType = value;
             }
         }
+
         // properties for _size
         public int Size
         {

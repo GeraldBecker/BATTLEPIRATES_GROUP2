@@ -62,7 +62,6 @@
             this.Load += new System.EventHandler(this.daGame_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.daGame_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.daGame_MouseDown);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.daGame_MouseUp);
             this.waitPanel.ResumeLayout(false);
             this.waitPanel.PerformLayout();
             this.ResumeLayout(false);
