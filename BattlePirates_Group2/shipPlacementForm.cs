@@ -180,7 +180,19 @@ namespace BattlePirates_Group2 {
         /// <param name="e"></param>
         private void shipPlacementForm_MouseUp(object sender, MouseEventArgs e) {
             dragging = false;
-            if(containsTrue && ClientRectangle.Contains(PointToClient(Control.MousePosition))) {
+            // Collison detection of ship placement
+            for (int i = 0; i < tempShapePoints.Length; ++i)
+            {
+                for (int j = 0; j < myShips.Length; ++j)
+                {
+                    if (myShips[j].checkForShip(tempShapePoints[i]))
+                    {
+                        return;
+                    }
+                }
+            }
+            if (containsTrue && ClientRectangle.Contains(PointToClient(Control.MousePosition)))
+            {
                 myShips[shipToMove].setLocation(tempShapePoints, tempOrientVert);
             }
             
