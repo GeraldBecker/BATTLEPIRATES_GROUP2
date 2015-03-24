@@ -235,16 +235,6 @@ namespace BattlePirates_Group2 {
                 //Send server board
                 TransmitMessage msg1 = SerializationHelper.Serialize(myboard);
                 connection.sendGameBoard(msg1);
-
-                //Receive confirmation first
-                /*TransmitMessage msg2 = connection.getTransmission();
-                bool success = (bool)SerializationHelper.Deserialize(msg2);
-
-                if(success){
-                    Console.WriteLine("Sending of the board was successfully completed.");
-                } else {
-                    Console.WriteLine("Sending of the board failed.");
-                }*/
                 //});
             } else {
                 //Send client board
@@ -259,10 +249,6 @@ namespace BattlePirates_Group2 {
                 enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg1);
                 Console.WriteLine("GOT THE BOARD");
                 //});
-
-                //Send confirmation message
-                //TransmitMessage msg2 = SerializationHelper.Serialize(true);
-                //connection.sendTransmission(msg2);
             }
 
 
