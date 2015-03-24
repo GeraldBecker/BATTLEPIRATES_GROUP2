@@ -16,15 +16,25 @@ namespace BattlePirates_Group2 {
         private MainForm screen;
         private bool myTurn;
         private bool host;
+        private bool win = false;
 
         private GameBoard mine;
         private GameBoard opponent;
 
         private BaseShip[] opponentShips;
+        private BaseShip[] userShips;
         LocationState[,] _grid;
+        LocationState[,] _grid2;
 
         private const int SPACER = 300;
 
+        /// <summary>
+        /// Currently depricated
+        /// </summary>
+        /// <param name="screen"></param>
+        /// <param name="connection"></param>
+        /// <param name="whosTurn"></param>
+        /// <param name="userShips"></param>
         internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, BaseShip[] userShips) {
             InitializeComponent();
             this.connection = connection;
@@ -36,6 +46,7 @@ namespace BattlePirates_Group2 {
 
             mine = new GameBoard();
             mine.initiateShipPlacement(userShips);
+            this.userShips = userShips;
             //mine = new GameBoard();
 
             opponent = new GameBoard();
@@ -45,6 +56,16 @@ namespace BattlePirates_Group2 {
             opponentShips = opponent.getShips();
         }
 
+        /// <summary>
+        /// Constructor for the GameEngine
+        /// Initializes Mine and Opponents game boards after connection
+        /// passed and received each others game boards
+        /// </summary>
+        /// <param name="screen"></param>
+        /// <param name="connection"></param>
+        /// <param name="whosTurn"></param>
+        /// <param name="mine"></param>
+        /// <param name="opponent"></param>
         internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, GameBoard mine, GameBoard opponent) {
             InitializeComponent();
             this.connection = connection;
@@ -57,37 +78,6 @@ namespace BattlePirates_Group2 {
             this.mine = mine;
             this.opponent = opponent;
 
-
-        }
-
-
-        private void daGame_MouseUp(object sender, MouseEventArgs e)
-        {
-            /*if((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10)
-            {
-                int r = e.X / BLOCKWIDTH;
-                int c = e.Y / BLOCKWIDTH;
-
-                Point shot = new Point(c, r);
-
-                for (int i = 0; i < opponentShips.Length; i++)
-                {
-                    if (opponentShips[i].checkForHit(shot))
-                    {
-                        
-                        _grid[c, r] = LocationState.HIT;
-                        Console.WriteLine("hit: " + c + ":" + r);
-                        break;
-                    }
-                    else
-                    {
-                        _grid[c, r] = LocationState.MISS;
-                        Console.WriteLine("Miss: " + c + ":" + r);
-                    }
-                }
-                
-                this.Refresh();
-            }*/
 
         }
 
@@ -117,8 +107,13 @@ namespace BattlePirates_Group2 {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Paints the board with updated status by changing the square colors
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void daGame_Paint(object sender, PaintEventArgs e) {
-            _grid = opponent.getBoardForDrawing();
+            _grid = opponent.getBoardForDrawing();// Opponent's board update
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
                     if(opponent.hasShip(new Point(r, c)))
@@ -129,14 +124,14 @@ namespace BattlePirates_Group2 {
                         e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25, r * 25, 20, 20);
                     else if(_grid[r, c] == LocationState.MISS)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25, r * 25, 20, 20);
-                    
+
                 }
                 //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
             }
 
 
-
-            LocationState[,] _grid2 = mine.getBoardForDrawing();
+            // Mine board update
+            _grid2 = mine.getBoardForDrawing();
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
                     if(mine.hasShip(new Point(r, c)))
@@ -153,11 +148,15 @@ namespace BattlePirates_Group2 {
             }
         }
 
+        /// <summary>
+        /// Mouse Down event - player strike of ship
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void daGame_MouseDown(object sender, MouseEventArgs e) {
             if(myTurn) {
                 // check to see if hit
-                if ((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10)
-                {
+                if((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10) {
                     int c = e.X / BLOCKWIDTH;
                     int r = e.Y / BLOCKWIDTH;
 
@@ -165,15 +164,43 @@ namespace BattlePirates_Group2 {
                     LocationState shotResult;
                     shotResult = opponent.strikeCoordinates(shot);
 
-                    if (shotResult != LocationState.CLICKED)
+                    if(shotResult != LocationState.CLICKED)// check if square has been previously selected
                     {
+                        // check if a hit
+                        if(shotResult == LocationState.HIT) {
+                            BaseShip[] oppShips = opponent.getShips();
+                            for(int k = 0; k < oppShips.Length; ++k) {
+                                if(!oppShips[k].isSunk()) {
+                                    win = false;
+                                    break;
+                                } else {
+                                    win = true;
+                                }
+                            }
+                            if(win == true) {
+                                myTurn = false;
+                                labelWin.ForeColor = Color.Red;
+                                labelWin.Text = "You Win!!!";
+                                labelWin.Visible = true;
+                            }
+                        } else {
+                            myTurn = false;
+                        }
+                        /*
+                        myTurn = false;
+                        win = true;
+                        if (win == true)
+                        {
+                            labelWin.Text = "You Win!!!";
+                            labelWin.Visible = true;
+                        }
+                        */
+                        // Send to opponent
                         TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
                         connection.sendGamePoint(msg1);
                         Console.WriteLine("Sent location: " + e.Location);
                         // update opponent grid in this GameBoard instance
                         _grid[r, c] = shotResult;
-                        myTurn = false;
-                        this.Refresh();
                         CheckTurn();
                     }
                 }
@@ -196,15 +223,20 @@ namespace BattlePirates_Group2 {
             }
         }
 
+        /// <summary>
+        /// Checks and updates turn information to both players
+        /// </summary>
         private void CheckTurn() {
             if(!this.InvokeRequired) {
-                if(myTurn) {
+                if(myTurn) {// Mine's turn
                     waitPanel.Hide();
                     //SetEnabled(true);
+                    this.Refresh();
                 } else {
                     waitPanel.Show();
                     //SetEnabled(false);
                     GetDataFromOthers();
+                    this.Refresh();
                 }
                 //ReSetBoard();
             } else
@@ -213,21 +245,68 @@ namespace BattlePirates_Group2 {
                 });
         }
 
+        /// <summary>
+        /// Receiving strike point data
+        /// </summary>
         private void GetDataFromOthers() {
             Task.Factory.StartNew(() => {
                 Console.WriteLine("TRYING TO GET A POINT");
                 TransmitMessage msg = connection.getGamePoint();
                 Point p = (Point)SerializationHelper.Deserialize(msg);
                 Console.WriteLine("Received location: " + p);
-                myTurn = true;
 
+                // check and update mine gameBoard
+                LocationState shotResult;
+                int c = p.X / BLOCKWIDTH;
+                int r = p.Y / BLOCKWIDTH;
+                shotResult = mine.strikeCoordinates(new Point(r, c));
+                _grid2[r, c] = shotResult;
+                Console.WriteLine("GetData shotResult: " + shotResult);
+                if(shotResult == LocationState.HIT) {
+                    BaseShip[] mineShips = mine.getShips();
+                    for(int i = 0; i < mineShips.Length; ++i) {
+                        if(!mineShips[i].isSunk()) {
+                            win = false;
+                            break;
+                        } else {
+                            win = true;
+                        }
+                    }
+                    if(win == true) {
+                        myTurn = false;
+                        labelUpdate();
+                        //labelWin.Text = "You Lose!!";
+                        //labelWin.Visible = true;
+                    }
+                } else {
+                    Console.WriteLine("LocationState.Hit");
+                    myTurn = true;
+                }
                 CheckTurn();
             });
         }
 
+        /// <summary>
+        /// Checks for initial player's turn on GameEngine load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void daGame_Load(object sender, EventArgs e) {
             CheckTurn();
         }
 
+        /// <summary>
+        /// http://stackoverflow.com/questions/13411194/getting-error-system-invalidoperationexception-was-unhandled
+        /// </summary>
+        private void labelUpdate() {
+            MethodInvoker mi = delegate {
+                labelWin.ForeColor = Color.Red;
+                labelWin.Text = "You Lose!!";
+                labelWin.Visible = true;
+            };
+            if(InvokeRequired) {
+                this.Invoke(mi);
+            }
+        }
     }
 }
