@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.waitPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.labelWin = new System.Windows.Forms.Label();
             this.waitPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,12 +49,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "WAIT";
             // 
+            // labelWin
+            // 
+            this.labelWin.BackColor = System.Drawing.Color.MediumBlue;
+            this.labelWin.CausesValidation = false;
+            this.labelWin.Enabled = false;
+            this.labelWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWin.ForeColor = System.Drawing.Color.Red;
+            this.labelWin.Location = new System.Drawing.Point(236, 130);
+            this.labelWin.Name = "labelWin";
+            this.labelWin.Size = new System.Drawing.Size(330, 136);
+            this.labelWin.TabIndex = 1;
+            this.labelWin.Visible = false;
+            // 
             // daGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.labelWin);
             this.Controls.Add(this.waitPanel);
             this.Name = "daGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -72,5 +87,6 @@
 
         private System.Windows.Forms.Panel waitPanel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelWin;
     }
 }

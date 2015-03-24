@@ -16,11 +16,13 @@ namespace BattlePirates_Group2 {
         private MainForm screen;
         private bool myTurn;
         private bool host;
+        private bool win = false;
 
         private GameBoard mine;
         private GameBoard opponent;
 
         private BaseShip[] opponentShips;
+        private BaseShip[] userShips;
         LocationState[,] _grid;
         LocationState[,] _grid2;
 
@@ -44,6 +46,7 @@ namespace BattlePirates_Group2 {
 
             mine = new GameBoard();
             mine.initiateShipPlacement(userShips);
+            this.userShips = userShips;
             //mine = new GameBoard();
 
             opponent = new GameBoard();
@@ -164,19 +167,49 @@ namespace BattlePirates_Group2 {
 
                     if (shotResult != LocationState.CLICKED)// check if square has been previously selected
                     {
+                        // check if a hit
+                        if (shotResult == LocationState.HIT)
+                        {
+                            BaseShip[] oppShips = opponent.getShips();
+                            for(int k = 0; k < oppShips.Length; ++k)
+                            {
+                                if (!oppShips[k].isSunk())
+                                {
+                                    win = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    win = true;
+                                }
+                            }
+                            if (win == true)
+                            {
+                                myTurn = false;
+                                labelWin.ForeColor = Color.Red;
+                                labelWin.Text = "You Win!!!";
+                                labelWin.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            myTurn = false;
+                        }
+                        /*
+                        myTurn = false;
+                        win = true;
+                        if (win == true)
+                        {
+                            labelWin.Text = "You Win!!!";
+                            labelWin.Visible = true;
+                        }
+                        */
                         // Send to opponent
                         TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
                         connection.sendGamePoint(msg1);
                         Console.WriteLine("Sent location: " + e.Location);
                         // update opponent grid in this GameBoard instance
                         _grid[r, c] = shotResult;
-
-                        // check if a hit
-                        if(shotResult != LocationState.HIT)
-                        {
-                            myTurn = false;
-                        }
-                        
                         CheckTurn();
                     }
                 }
@@ -238,12 +271,34 @@ namespace BattlePirates_Group2 {
                 shotResult = mine.strikeCoordinates(new Point(r, c));
                 _grid2[r, c] = shotResult;
                 Console.WriteLine("GetData shotResult: " + shotResult);
-                if(shotResult != LocationState.HIT)
+                if(shotResult == LocationState.HIT)
+                {
+                    BaseShip[] mineShips = mine.getShips();
+                    for(int i = 0; i < mineShips.Length; ++i)
+                    {
+                        if (!mineShips[i].isSunk())
+                        {
+                            win = false;
+                            break;
+                        }
+                        else
+                        {
+                            win = true;
+                        }
+                    }
+                    if (win == true)
+                    {
+                        myTurn = false;
+                        labelUpdate();
+                        //labelWin.Text = "You Lose!!";
+                        //labelWin.Visible = true;
+                    }
+                }
+                else
                 {
                     Console.WriteLine("LocationState.Hit");
                     myTurn = true;
                 }
-
                 CheckTurn();
             });
         }
@@ -257,5 +312,21 @@ namespace BattlePirates_Group2 {
             CheckTurn();
         }
 
+        /// <summary>
+        /// http://stackoverflow.com/questions/13411194/getting-error-system-invalidoperationexception-was-unhandled
+        /// </summary>
+        private void labelUpdate()
+        {
+            MethodInvoker mi = delegate
+            {
+                labelWin.ForeColor = Color.Red;
+                labelWin.Text = "You Lose!!";
+                labelWin.Visible = true;
+            };
+            if (InvokeRequired)
+            {
+                this.Invoke(mi);
+            }
+        }
     }
 }

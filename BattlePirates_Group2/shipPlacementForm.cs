@@ -23,6 +23,7 @@ namespace BattlePirates_Group2 {
         private Point[] tempShapePoints;// the dragging ship locations
         private bool tempOrientVert;// the dragging ship vertical orientation
         private int shipToMove;// the ship being moved
+        private bool collision = false;// if collision of ships occur
 
         private ConnectionManager connection;
         private MainForm screen;
@@ -180,19 +181,24 @@ namespace BattlePirates_Group2 {
         /// <param name="e"></param>
         private void shipPlacementForm_MouseUp(object sender, MouseEventArgs e) {
             dragging = false;
-            // Collison detection of ship placement
-            for (int i = 0; i < tempShapePoints.Length; ++i)
-            {
-                for (int j = 0; j < myShips.Length; ++j)
-                {
-                    if (myShips[j].checkForShip(tempShapePoints[i]))
-                    {
-                        return;
-                    }
-                }
-            }
             if (containsTrue && ClientRectangle.Contains(PointToClient(Control.MousePosition)))
             {
+                // Collison detection of ship placement
+                for (int i = 0; i < tempShapePoints.Length; ++i)
+                {
+                    for (int j = 0; j < myShips.Length; ++j)
+                    {
+                        if (myShips[j].checkForShip(tempShapePoints[i]))
+                        {
+                            collision = true;
+                            return;
+                        }
+                        else
+                        {
+                            collision = false;
+                        }
+                    }
+                }
                 myShips[shipToMove].setLocation(tempShapePoints, tempOrientVert);
             }
             
@@ -252,7 +258,10 @@ namespace BattlePirates_Group2 {
                     return;
                 }
             }
-
+            if(collision == true)
+            {
+                return;
+            }
             GameBoard myboard = new GameBoard();
             myboard.initiateShipPlacement(myShips);
 
