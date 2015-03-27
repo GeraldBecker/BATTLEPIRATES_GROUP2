@@ -14,6 +14,8 @@ namespace BattlePirates_Group2 {
     /// </summary>
     public partial class shipPlacementForm : Form {
         private const int BLOCKWIDTH = 25;// grid block size
+        private const int START_X = 3;
+        private const int START_Y = 12;
         private bool dragging;// if mouse down and ready to drag a ship
 
         // Array of ships
@@ -82,9 +84,9 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void shipPlacementForm_Paint(object sender, PaintEventArgs e) {
-            for(int r = 0; r < 10; r++) {
-                for(int c = 0; c < 10; c++) {
-                    e.Graphics.FillRectangle(new SolidBrush(Color.Aqua), r * BLOCKWIDTH, c * BLOCKWIDTH, BLOCKWIDTH - 5, BLOCKWIDTH - 5);
+            for(int r = START_X; r < (START_X + 10); r++) {
+                for(int c = START_Y; c < (START_Y + 10); c++) {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), r * BLOCKWIDTH, c * BLOCKWIDTH, BLOCKWIDTH - 5, BLOCKWIDTH - 5);
 
                 }
             }
@@ -184,12 +186,14 @@ namespace BattlePirates_Group2 {
                 // Collison detection of ship placement
                 for(int i = 0; i < tempShapePoints.Length; ++i) {
                     for(int j = 0; j < myShips.Length; ++j) {
-                        if(myShips[j].checkForShip(tempShapePoints[i])) {
-                            collision = true;
-                            this.Refresh();
-                            return;
-                        } else {
-                            collision = false;
+                        if(myShips[j] != myShips[shipToMove]) {
+                            if(myShips[j].checkForShip(tempShapePoints[i])) {
+                                collision = true;
+                                this.Refresh();
+                                return;
+                            } else {
+                                collision = false;
+                            }
                         }
                     }
                 }
@@ -210,8 +214,7 @@ namespace BattlePirates_Group2 {
         private void shipPlacementForm_KeyDown(object sender, KeyEventArgs e) {
             // Spacebar toggles orientation of temporary dragged ship
             if(e.KeyCode == Keys.Space && dragging) {
-                Console.WriteLine("HAHHA rotate");
-
+                Console.WriteLine("Rotate Selected.");
 
 
                 if(tempOrientVert) {
