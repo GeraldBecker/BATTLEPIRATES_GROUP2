@@ -17,6 +17,10 @@ namespace BattlePirates_Group2 {
         protected Point[] location;// the grids ship occupies
         protected bool isVert;// if vertically oriented
 
+        private const int BLOCKWIDTH = 25;// grid block size
+        private const int START_X = 3;// offset for grid from left
+        private const int START_Y = 12;// offset for grid from top
+
         /// <summary>
         /// Constructor - used by child class to instantiate
         /// </summary>
@@ -75,11 +79,11 @@ namespace BattlePirates_Group2 {
             {
                 Console.WriteLine("location[" + i + "].X: " + location[i].X);
                 Console.WriteLine("location[" + i + "].Y: " + location[i].Y);
-                if (location[i].X < 0 || location[i].X > 9)
+                if (location[i].X < START_Y || location[i].X > (START_Y + 9))
                 {
                     return true;
                 }
-                else if (location[i].Y < 0 || location[i].Y > 9)
+                else if (location[i].Y < START_X || location[i].Y > (START_X + 9))
                 {
                     return true;
                 }

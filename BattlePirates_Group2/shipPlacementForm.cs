@@ -14,12 +14,14 @@ namespace BattlePirates_Group2 {
     /// </summary>
     public partial class shipPlacementForm : Form {
         private const int BLOCKWIDTH = 25;// grid block size
-        private const int START_X = 3;
-        private const int START_Y = 12;
+        private const int START_X = 3;// offset for grid from left
+        private const int START_Y = 12;// offset for grid from top
         private bool dragging;// if mouse down and ready to drag a ship
 
         // Array of ships
         private BaseShip[] myShips = new BaseShip[6];
+        // Array of ships converted to (0,0) origin points
+        private BaseShip[] toSetShips = new BaseShip[6];
 
         private bool containsTrue;// if mouse down point contains a ship
         private Point[] tempShapePoints;// the dragging ship locations
@@ -50,25 +52,31 @@ namespace BattlePirates_Group2 {
 
             // Initial locations of ships for dragging into grid (lower right side of form)
             //5 square size
+            toSetShips[0] = new ManowarShip(); 
             myShips[0] = new ManowarShip();
             myShips[0].setLocation(new Point[] { new Point(5, 13), new Point(6, 13), new Point(7, 13), new Point(8, 13), new Point(9, 13) }, true);
 
             //4 square size
+            toSetShips[1] = new Galleon(); 
             myShips[1] = new Galleon();
             myShips[1].setLocation(new Point[] { new Point(5, 15), new Point(6, 15), new Point(7, 15), new Point(8, 15) }, true);
 
             //3 square size
+            toSetShips[2] = new BrigShip(); 
             myShips[2] = new BrigShip();
             myShips[2].setLocation(new Point[] { new Point(5, 17), new Point(6, 17), new Point(7, 17) }, true);
 
+            toSetShips[3] = new BrigShip(); 
             myShips[3] = new BrigShip();
             myShips[3].setLocation(new Point[] { new Point(5, 19), new Point(6, 19), new Point(7, 19) }, true);
 
 
             //2 square size
+            toSetShips[4] = new BarqueShip(); 
             myShips[4] = new BarqueShip();
             myShips[4].setLocation(new Point[] { new Point(5, 21), new Point(6, 21) }, true);
 
+            toSetShips[5] = new BarqueShip(); 
             myShips[5] = new BarqueShip();
             myShips[5].setLocation(new Point[] { new Point(5, 23), new Point(6, 23) }, true);
 
@@ -197,6 +205,16 @@ namespace BattlePirates_Group2 {
                         }
                     }
                 }
+                // convert tempShapePoints to reference (0,0) coordinates
+                Point[] setShapePoints = new Point[tempShapePoints.Length];
+                for (int i = 0; i < tempShapePoints.Length; i++)
+                {
+                    setShapePoints[i].X = tempShapePoints[i].X - START_Y;
+                    setShapePoints[i].Y = tempShapePoints[i].Y - START_X;
+                }
+                // ships to be set, converted to (0,0) origin
+                toSetShips[shipToMove].setLocation(setShapePoints, tempOrientVert);
+                // ships for this shipPlacementForm
                 myShips[shipToMove].setLocation(tempShapePoints, tempOrientVert);
             }
 
@@ -257,7 +275,7 @@ namespace BattlePirates_Group2 {
                 return;
             }
             GameBoard myboard = new GameBoard();
-            myboard.initiateShipPlacement(myShips);
+            myboard.initiateShipPlacement(toSetShips);
 
             GameBoard enemyBoard;
 
