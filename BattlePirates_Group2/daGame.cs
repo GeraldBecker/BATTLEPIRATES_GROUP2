@@ -11,7 +11,9 @@ using System.Windows.Forms;
 namespace BattlePirates_Group2 {
     public partial class daGame : Form {
 
-        private const int BLOCKWIDTH = 25;
+        private const int BLOCKWIDTH = 25;// grid block size
+        private const int START_X = 3;// offset for grid from left
+        private const int START_Y = 12;// offset for grid from top
         private ConnectionManager connection;
         private MainForm screen;
         private bool myTurn;
@@ -26,7 +28,7 @@ namespace BattlePirates_Group2 {
         LocationState[,] _grid;
         LocationState[,] _grid2;
 
-        private const int SPACER = 300;
+        private const int SPACER = 400;
 
         /// <summary>
         /// Currently depricated
@@ -77,7 +79,8 @@ namespace BattlePirates_Group2 {
 
             this.mine = mine;
             this.opponent = opponent;
-
+            if(!myTurn)
+                yourTurnLabel.Visible = false;
 
         }
 
@@ -114,15 +117,15 @@ namespace BattlePirates_Group2 {
         /// <param name="e"></param>
         private void daGame_Paint(object sender, PaintEventArgs e) {
             _grid = opponent.getBoardForDrawing();// Opponent's board update
-            for(int r = 0; r < 10; r++) {
-                for(int c = 0; c < 10; c++) {
-                    if(opponent.hasShip(new Point(r, c)))
+            for(int r = START_Y; r < (START_Y + 10); r++) {
+                for(int c = START_X; c < (START_X + 10); c++) {
+                    /*if(opponent.hasShip(new Point(r - START_Y, c - START_X))) { }
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25, r * 25, 20, 20);
-                    else if(_grid[r, c] == LocationState.EMPTY)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Aqua), c * 25, r * 25, 20, 20);
-                    else if(_grid[r, c] == LocationState.HIT)
+                    else*/ if(_grid[r - START_Y, c - START_X] == LocationState.EMPTY)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25, r * 25, 20, 20);
+                    else if(_grid[r - START_Y, c - START_X] == LocationState.HIT)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25, r * 25, 20, 20);
-                    else if(_grid[r, c] == LocationState.MISS)
+                    else if(_grid[r - START_Y, c - START_X] == LocationState.MISS)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25, r * 25, 20, 20);
 
                 }
@@ -132,15 +135,15 @@ namespace BattlePirates_Group2 {
 
             // Mine board update
             _grid2 = mine.getBoardForDrawing();
-            for(int r = 0; r < 10; r++) {
-                for(int c = 0; c < 10; c++) {
-                    if(mine.hasShip(new Point(r, c)))
+            for(int r = START_Y; r < (START_Y + 10); r++) {
+                for(int c = START_X; c < (START_X + 10); c++) {
+                    if(mine.hasShip(new Point(r - START_Y, c - START_X)))
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r, c] == LocationState.EMPTY)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Aqua), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r, c] == LocationState.HIT)
+                    else if(_grid2[r - START_Y, c - START_X] == LocationState.EMPTY)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25 + SPACER, r * 25, 20, 20);
+                    else if(_grid2[r - START_Y, c - START_X] == LocationState.HIT)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r, c] == LocationState.MISS)
+                    else if(_grid2[r - START_Y, c - START_X] == LocationState.MISS)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25 + SPACER, r * 25, 20, 20);
 
                 }
@@ -156,9 +159,13 @@ namespace BattlePirates_Group2 {
         private void daGame_MouseDown(object sender, MouseEventArgs e) {
             if(myTurn) {
                 // check to see if hit
-                if((e.X / BLOCKWIDTH) < 10 && (e.Y / BLOCKWIDTH) < 10) {
-                    int c = e.X / BLOCKWIDTH;
-                    int r = e.Y / BLOCKWIDTH;
+                int xStrike = (e.X / BLOCKWIDTH) - START_X;
+                int yStrike = (e.Y / BLOCKWIDTH) - START_Y;
+                Console.WriteLine("MOD STRIKE ["+xStrike+","+yStrike+"]");
+
+                if(0 <= xStrike && xStrike < 10 && 0 <= yStrike && yStrike < 10) {
+                    int c = xStrike;//e.X / BLOCKWIDTH;
+                    int r = yStrike;//e.Y / BLOCKWIDTH;
 
                     Point shot = new Point(r, c);
                     LocationState shotResult;
@@ -229,11 +236,15 @@ namespace BattlePirates_Group2 {
         private void CheckTurn() {
             if(!this.InvokeRequired) {
                 if(myTurn) {// Mine's turn
-                    waitPanel.Hide();
+                    //waitPanel.Hide();
+                    waitPanel.Visible = false;
+                    yourTurnLabel.Visible = true;
                     //SetEnabled(true);
                     this.Refresh();
                 } else {
-                    waitPanel.Show();
+                    //waitPanel.Show();
+                    waitPanel.Visible = true;
+                    yourTurnLabel.Visible = false;
                     //SetEnabled(false);
                     GetDataFromOthers();
                     this.Refresh();
@@ -257,8 +268,12 @@ namespace BattlePirates_Group2 {
 
                 // check and update mine gameBoard
                 LocationState shotResult;
-                int c = p.X / BLOCKWIDTH;
-                int r = p.Y / BLOCKWIDTH;
+
+                int xStrike = (p.X / BLOCKWIDTH) - START_X;
+                int yStrike = (p.Y / BLOCKWIDTH) - START_Y;
+
+                int c = xStrike;//p.X / BLOCKWIDTH;
+                int r = yStrike;//p.Y / BLOCKWIDTH;
                 shotResult = mine.strikeCoordinates(new Point(r, c));
                 _grid2[r, c] = shotResult;
                 Console.WriteLine("GetData shotResult: " + shotResult);

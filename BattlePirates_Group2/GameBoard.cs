@@ -62,6 +62,7 @@ namespace BattlePirates_Group2 {
             /*if(grid[p.X, p.Y] != LocationState.EMPTY) {
                 return LocationState.CLICKED;
             }*/
+            Console.WriteLine("YOU ARE SENDING: [" + p.X + "," + p.Y+"]");
             if (grid[p.X, p.Y] == LocationState.EMPTY)
             {
                 for (int i = 0; i < ships.Length; i++)

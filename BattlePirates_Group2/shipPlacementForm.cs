@@ -54,31 +54,31 @@ namespace BattlePirates_Group2 {
             //5 square size
             toSetShips[0] = new ManowarShip(); 
             myShips[0] = new ManowarShip();
-            myShips[0].setLocation(new Point[] { new Point(5, 13), new Point(6, 13), new Point(7, 13), new Point(8, 13), new Point(9, 13) }, true);
+            myShips[0].setLocation(new Point[] { new Point(8, 16), new Point(9, 16), new Point(10, 16), new Point(11, 16), new Point(12, 16) }, true);
 
             //4 square size
             toSetShips[1] = new Galleon(); 
             myShips[1] = new Galleon();
-            myShips[1].setLocation(new Point[] { new Point(5, 15), new Point(6, 15), new Point(7, 15), new Point(8, 15) }, true);
+            myShips[1].setLocation(new Point[] { new Point(8, 18), new Point(9, 18), new Point(10, 18), new Point(11, 18) }, true);
 
             //3 square size
             toSetShips[2] = new BrigShip(); 
             myShips[2] = new BrigShip();
-            myShips[2].setLocation(new Point[] { new Point(5, 17), new Point(6, 17), new Point(7, 17) }, true);
+            myShips[2].setLocation(new Point[] { new Point(8, 20), new Point(9, 20), new Point(10, 20) }, true);
 
             toSetShips[3] = new BrigShip(); 
             myShips[3] = new BrigShip();
-            myShips[3].setLocation(new Point[] { new Point(5, 19), new Point(6, 19), new Point(7, 19) }, true);
+            myShips[3].setLocation(new Point[] { new Point(8, 22), new Point(9, 22), new Point(10, 22) }, true);
 
 
             //2 square size
             toSetShips[4] = new BarqueShip(); 
             myShips[4] = new BarqueShip();
-            myShips[4].setLocation(new Point[] { new Point(5, 21), new Point(6, 21) }, true);
+            myShips[4].setLocation(new Point[] { new Point(8, 24), new Point(9, 24) }, true);
 
             toSetShips[5] = new BarqueShip(); 
             myShips[5] = new BarqueShip();
-            myShips[5].setLocation(new Point[] { new Point(5, 23), new Point(6, 23) }, true);
+            myShips[5].setLocation(new Point[] { new Point(8, 26), new Point(9, 26) }, true);
 
             dragging = false;
 
