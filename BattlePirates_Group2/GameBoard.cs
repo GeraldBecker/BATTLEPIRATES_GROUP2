@@ -39,8 +39,16 @@ namespace BattlePirates_Group2 {
             ships[2].setLocation(new Point[] { new Point(9, 0), new Point(9, 1), new Point(9, 2), new Point(9, 3), new Point(9, 4) }, false);
             ships[3].setLocation(new Point[] { new Point(5, 1), new Point(5, 2), new Point(5, 3), new Point(5, 4), new Point(5, 5) }, false);
             ships[4].setLocation(new Point[] { new Point(8, 2), new Point(8, 3), new Point(8, 4), new Point(8, 5), new Point(8, 6) }, false);*/
-
             this.ships = ships;
+
+            for(int r = 0; r < 10; r++) {
+                for(int c = 0; c < 10; c++) {
+                    if(hasShip(new Point(r, c))) {
+                        grid[r, c] = LocationState.SHIP;
+                    }
+                }
+            }
+            
         }
 
         public LocationState[,] getBoardForDrawing() {
@@ -63,13 +71,26 @@ namespace BattlePirates_Group2 {
                 return LocationState.CLICKED;
             }*/
             Console.WriteLine("YOU ARE SENDING: [" + p.X + "," + p.Y+"]");
-            if (grid[p.X, p.Y] == LocationState.EMPTY)
+            if(grid[p.X, p.Y] == LocationState.EMPTY || grid[p.X, p.Y] == LocationState.SHIP)
             {
                 for (int i = 0; i < ships.Length; i++)
                 {
                     if (ships[i].checkForHit(p))
                     {
                         grid[p.X, p.Y] = LocationState.HIT;
+
+                        //If the ship is sunk, update each point to be sunk
+                        if(ships[i].isSunk()) {
+                            Point[] temp = ships[i].getLocation();
+                            for(int x = 0; x < temp.Length; x++) {
+                                //Console.WriteLine("SUNK: " + temp.ToString());
+                                Console.WriteLine("SUNK: " + temp[x].ToString());
+                                grid[temp[x].X, temp[x].Y] = LocationState.SUNK;
+                                
+                            }
+                            return LocationState.SUNK;
+                        }
+
                         return LocationState.HIT;
                     }
                 }

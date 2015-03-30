@@ -15,6 +15,7 @@ namespace BattlePirates_Group2 {
         protected int totalSize;// the size passed by the child
         protected int health;// totalSize minus hits
         protected Point[] location;// the grids ship occupies
+        protected Point[] hitLocations;
         protected bool isVert;// if vertically oriented
 
         private const int BLOCKWIDTH = 25;// grid block size
@@ -27,7 +28,11 @@ namespace BattlePirates_Group2 {
         /// <param name="size"></param>
         public BaseShip(int size) {
             totalSize = health = size;
-            location = new Point[size];
+            location = hitLocations = new Point[size];
+            for(int i = 0; i < hitLocations.Length; i++) {
+                hitLocations[i] = new Point(-1, -1);
+            }
+            
         }
 
         /// <summary>
@@ -62,7 +67,7 @@ namespace BattlePirates_Group2 {
         // depricated
         public bool containsPoint(Point p) {
             for(int i = 0; i < location.Length; i++) {
-                if(location[i] == p) {
+                if(location[i] == p && hitLocations[i] != p) {
                     return true;
                 }
             }
@@ -114,10 +119,10 @@ namespace BattlePirates_Group2 {
         {
             for (int i = 0; i < location.Length; i++)
             {
-                if (location[i] == p)
+                if(location[i] == p && hitLocations[i] != p)
                 {
                     Console.WriteLine("hit point: " + p.X + " Y: " + p.Y);
-                    location[i] = new Point(-1, -1);
+                    hitLocations[i] = new Point(-1, -1);//changed
                     health--;
                     return true;
                 }

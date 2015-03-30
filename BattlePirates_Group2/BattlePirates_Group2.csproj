@@ -72,7 +72,7 @@
     <Compile Include="ManowarShip.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerBoard.cs" />
-    <Compile Include="Ship.cs" />
+    <Compile Include="obsolete - Ship.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

@@ -106,13 +106,14 @@
             this.labelWin.BackColor = System.Drawing.Color.MediumBlue;
             this.labelWin.CausesValidation = false;
             this.labelWin.Enabled = false;
-            this.labelWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWin.ForeColor = System.Drawing.Color.Red;
-            this.labelWin.Location = new System.Drawing.Point(241, 288);
+            this.labelWin.Font = new System.Drawing.Font("Garamond", 21.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWin.ForeColor = System.Drawing.Color.White;
+            this.labelWin.Location = new System.Drawing.Point(255, 234);
             this.labelWin.Name = "labelWin";
             this.labelWin.Size = new System.Drawing.Size(330, 136);
             this.labelWin.TabIndex = 1;
-            this.labelWin.Visible = false;
+            this.labelWin.Text = "...";
+            this.labelWin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -676,6 +677,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.labelWin);
             this.Controls.Add(this.yourTurnLabel);
             this.Controls.Add(this.battlePiratesLabel);
             this.Controls.Add(this.label42);
@@ -684,7 +686,6 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.labelWin);
             this.Controls.Add(this.waitPanel);
             this.Name = "daGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

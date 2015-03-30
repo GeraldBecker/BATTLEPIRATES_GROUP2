@@ -85,6 +85,9 @@ namespace BattlePirates_Group2 {
             if(!myTurn)
                 yourTurnLabel.Visible = false;
 
+            labelWin.ForeColor = Color.White;
+            labelWin.Visible = false;
+
             //Fix the flicker problem by double buffering.
             DoubleBuffered = true;
         }
@@ -126,12 +129,17 @@ namespace BattlePirates_Group2 {
                 for(int c = START_X; c < (START_X + 10); c++) {
                     /*if(opponent.hasShip(new Point(r - START_Y, c - START_X))) { }
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25, r * 25, 20, 20);
-                    else*/ if(_grid[r - START_Y, c - START_X] == LocationState.EMPTY)
+                    else*/ 
+                    if(_grid[r - START_Y, c - START_X] == LocationState.EMPTY)
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25, r * 25, 20, 20);
                     else if(_grid[r - START_Y, c - START_X] == LocationState.HIT)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25, r * 25, 20, 20);
                     else if(_grid[r - START_Y, c - START_X] == LocationState.MISS)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25, r * 25, 20, 20);
+                    else if(_grid[r - START_Y, c - START_X] == LocationState.SUNK)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * 25, r * 25, 20, 20);
+                    else
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25, r * 25, 20, 20);
 
                 }
                 //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
@@ -142,7 +150,10 @@ namespace BattlePirates_Group2 {
             _grid2 = mine.getBoardForDrawing();
             for(int r = START_Y; r < (START_Y + 10); r++) {
                 for(int c = START_X; c < (START_X + 10); c++) {
-                    if(mine.hasShip(new Point(r - START_Y, c - START_X)))
+                    /*if(mine.hasShip(new Point(r - START_Y, c - START_X)))
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
+                    else*/
+                    if(_grid2[r - START_Y, c - START_X] == LocationState.SHIP)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
                     else if(_grid2[r - START_Y, c - START_X] == LocationState.EMPTY)
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25 + SPACER, r * 25, 20, 20);
@@ -150,6 +161,8 @@ namespace BattlePirates_Group2 {
                         e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25 + SPACER, r * 25, 20, 20);
                     else if(_grid2[r - START_Y, c - START_X] == LocationState.MISS)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25 + SPACER, r * 25, 20, 20);
+                    else if(_grid2[r - START_Y, c - START_X] == LocationState.SUNK)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * 25 + SPACER, r * 25, 20, 20);
 
                 }
                 //Console.WriteLine();
@@ -179,7 +192,7 @@ namespace BattlePirates_Group2 {
                     if(shotResult != LocationState.CLICKED)// check if square has been previously selected
                     {
                         // check if a hit
-                        if(shotResult == LocationState.HIT) {
+                        if(shotResult == LocationState.HIT || shotResult == LocationState.SUNK) {
                             BaseShip[] oppShips = opponent.getShips();
                             for(int k = 0; k < oppShips.Length; ++k) {
                                 if(!oppShips[k].isSunk()) {
@@ -191,7 +204,7 @@ namespace BattlePirates_Group2 {
                             }
                             if(win == true) {
                                 myTurn = false;
-                                labelWin.ForeColor = Color.Red;
+                                //labelWin.ForeColor = Color.Red;
                                 labelWin.Text = "You Win!!!";
                                 labelWin.Visible = true;
                             }
@@ -282,7 +295,7 @@ namespace BattlePirates_Group2 {
                 shotResult = mine.strikeCoordinates(new Point(r, c));
                 _grid2[r, c] = shotResult;
                 Console.WriteLine("GetData shotResult: " + shotResult);
-                if(shotResult == LocationState.HIT) {
+                if(shotResult == LocationState.HIT || shotResult == LocationState.SUNK) {
                     BaseShip[] mineShips = mine.getShips();
                     for(int i = 0; i < mineShips.Length; ++i) {
                         if(!mineShips[i].isSunk()) {
@@ -320,7 +333,7 @@ namespace BattlePirates_Group2 {
         /// </summary>
         private void labelUpdate() {
             MethodInvoker mi = delegate {
-                labelWin.ForeColor = Color.Red;
+                //labelWin.ForeColor = Color.Red;
                 labelWin.Text = "You Lose!!";
                 labelWin.Visible = true;
             };
