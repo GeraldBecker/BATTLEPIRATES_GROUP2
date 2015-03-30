@@ -56,6 +56,9 @@ namespace BattlePirates_Group2 {
             opponent.initiateShipPlacement(userShips);
 
             opponentShips = opponent.getShips();
+
+            //Fix the flicker problem by double buffering.
+            DoubleBuffered = true;
         }
 
         /// <summary>

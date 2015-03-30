@@ -84,6 +84,9 @@ namespace BattlePirates_Group2 {
 
             //Prevent the start game button from taking focus
             startGameButton.TabStop = false;
+
+            //Fix the flicker problem by double buffering.
+            DoubleBuffered = true;
         }
 
         /// <summary>
