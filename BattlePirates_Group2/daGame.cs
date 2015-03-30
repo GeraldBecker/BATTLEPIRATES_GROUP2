@@ -37,7 +37,7 @@ namespace BattlePirates_Group2 {
         /// <param name="connection"></param>
         /// <param name="whosTurn"></param>
         /// <param name="userShips"></param>
-        internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, BaseShip[] userShips) {
+        /*internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, BaseShip[] userShips) {
             InitializeComponent();
             this.connection = connection;
             this.screen = screen;
@@ -59,7 +59,7 @@ namespace BattlePirates_Group2 {
 
             //Fix the flicker problem by double buffering.
             DoubleBuffered = true;
-        }
+        }*/
 
         /// <summary>
         /// Constructor for the GameEngine
@@ -85,6 +85,8 @@ namespace BattlePirates_Group2 {
             if(!myTurn)
                 yourTurnLabel.Visible = false;
 
+            //Fix the flicker problem by double buffering.
+            DoubleBuffered = true;
         }
 
         /*private void taskGetData() {
