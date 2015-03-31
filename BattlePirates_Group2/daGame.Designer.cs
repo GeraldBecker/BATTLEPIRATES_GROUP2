@@ -75,6 +75,7 @@
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
+            this.mainMenuBtn = new System.Windows.Forms.Button();
             this.waitPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -683,12 +684,28 @@
             this.label41.TabIndex = 0;
             this.label41.Text = "A";
             // 
+            // mainMenuBtn
+            // 
+            this.mainMenuBtn.BackColor = System.Drawing.Color.Green;
+            this.mainMenuBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mainMenuBtn.Font = new System.Drawing.Font("Garamond", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.mainMenuBtn.ForeColor = System.Drawing.SystemColors.Window;
+            this.mainMenuBtn.Location = new System.Drawing.Point(610, 20);
+            this.mainMenuBtn.Name = "mainMenuBtn";
+            this.mainMenuBtn.Size = new System.Drawing.Size(172, 47);
+            this.mainMenuBtn.TabIndex = 20;
+            this.mainMenuBtn.Text = "Main Menu";
+            this.mainMenuBtn.UseVisualStyleBackColor = false;
+            this.mainMenuBtn.Visible = false;
+            this.mainMenuBtn.Click += new System.EventHandler(this.mainMenuBtn_Click);
+            // 
             // daGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.mainMenuBtn);
             this.Controls.Add(this.labelWinPanel);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -777,5 +794,6 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Button mainMenuBtn;
     }
 }
