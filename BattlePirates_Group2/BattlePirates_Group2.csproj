@@ -100,12 +100,6 @@
     <Compile Include="shipPlacementForm.Designer.cs">
       <DependentUpon>shipPlacementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="tempoClass.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="tempoClass.Designer.cs">
-      <DependentUpon>tempoClass.cs</DependentUpon>
-    </Compile>
     <Compile Include="TransmitMessage.cs" />
     <EmbeddedResource Include="ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
@@ -136,9 +130,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="shipPlacementForm.resx">
       <DependentUpon>shipPlacementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="tempoClass.resx">
-      <DependentUpon>tempoClass.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

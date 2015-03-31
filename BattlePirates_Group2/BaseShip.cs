@@ -10,7 +10,7 @@ namespace BattlePirates_Group2 {
     /// Parent class of ships
     /// </summary>
     [Serializable]
-    abstract class BaseShip {
+    public abstract class BaseShip {
 
         protected int totalSize;// the size passed by the child
         protected int health;// totalSize minus hits
