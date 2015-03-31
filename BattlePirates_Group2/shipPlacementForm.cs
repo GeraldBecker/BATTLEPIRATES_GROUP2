@@ -258,13 +258,19 @@ namespace BattlePirates_Group2 {
 
                 if(tempOrientVert) {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
-                        //tempShapePoints[i].Y = tempShapePoints[i].X; 
+                        Console.WriteLine("b4i . X : " + i + " , " + tempShapePoints[i].X);
+                        Console.WriteLine("b4i . Y : " + i + " , " + tempShapePoints[i].Y);
+
+                        tempShapePoints[i].Y = tempShapePoints[i].Y + i; 
                         tempShapePoints[i].X = tempShapePoints[0].X;
+                        Console.WriteLine("i . X : " + i + " , " + tempShapePoints[i].X);
+                        Console.WriteLine("i . Y : " + i + " , " + tempShapePoints[i].Y);
                     }
                 } else {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
-                        //tempShapePoints[i].X = tempShapePoints[i].Y;
+                        tempShapePoints[i].X = tempShapePoints[i].X + i;
                         tempShapePoints[i].Y = tempShapePoints[0].Y;
+                        Console.WriteLine("i . X : " + i + " , " + tempShapePoints[i].X);
                     }
                 }
 
