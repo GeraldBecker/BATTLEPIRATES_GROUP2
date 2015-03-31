@@ -224,7 +224,6 @@ namespace BattlePirates_Group2 {
             } catch(Exception ex) {
                 Console.WriteLine("We failed");
                 Console.WriteLine(ex.StackTrace);
-
             }
         }
 

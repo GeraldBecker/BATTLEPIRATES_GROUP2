@@ -11,12 +11,6 @@ namespace BattlePirates_Group2
     /// </summary>
     class PlayerBoard
     {
-        //
-        private int row;
-
-        //
-        private int col;
-
         // Array to hold the playerBoard SquareState
         private SquareState[,] _grid;
 
