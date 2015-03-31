@@ -249,6 +249,8 @@ namespace BattlePirates_Group2 {
                                 labelWin.Text = "You Win!!!";
                                 labelWinPanel.Visible = true;
                                 mainMenuBtn.Visible = true;
+                                //stop connection
+                                connection.stopNetwork();
                             }
                         } else {
                             myTurn = false;
@@ -323,7 +325,15 @@ namespace BattlePirates_Group2 {
             Task.Factory.StartNew(() => {
                 Console.WriteLine("TRYING TO GET A POINT");
                 TransmitMessage msg = connection.getGamePoint();
-                Point p = (Point)SerializationHelper.Deserialize(msg);
+                Point p;
+                try
+                {
+                    p = (Point)SerializationHelper.Deserialize(msg);
+                }
+                catch (NullReferenceException ex)
+                {
+                    return;
+                }
                 Console.WriteLine("Received location: " + p);
 
                 // check and update mine gameBoard
@@ -352,6 +362,9 @@ namespace BattlePirates_Group2 {
                     if(win == true) {
                         myTurn = false;
                         labelUpdate();
+                        //stop connection
+                        connection.stopNetwork();
+
                         //labelWin.Text = "You Lose!!";
                         //labelWin.Visible = true;
                     }
@@ -388,9 +401,12 @@ namespace BattlePirates_Group2 {
         }
 
         private void mainMenuBtn_Click(object sender, EventArgs e) {
-            Owner = new MainForm();
+            /*Owner = new MainForm();
             Owner.Show();
-            this.Hide();
+            this.Hide();*/
+
+            new shipPlacementForm(screen, connection, host).Show();
+            this.Close();
         }
     }
 }
