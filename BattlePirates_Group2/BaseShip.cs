@@ -25,7 +25,9 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Constructor - used by child class to instantiate
         /// </summary>
-        /// <param name="size"></param>
+        /// <param name="size">
+        /// The size of each child ship
+        /// </param>
         public BaseShip(int size) {
             totalSize = health = size;
             location = hitLocations = new Point[size];
@@ -38,11 +40,15 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Sets location of ship on grid
         /// </summary>
-        /// <param name="newLocation"></param>
+        /// <param name="newLocation">
+        /// Point representation of the square location on the GameBoard grid
+        /// that the ship is set to
+        /// </param>
         /// <param name="isVert"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// true when set
+        /// </returns>
         public bool setLocation(Point[] newLocation, bool isVert) {
-            //TODO   Run through loop to check if it is over other ships.
             location = newLocation;
             this.isVert = isVert;
             return true;
@@ -51,7 +57,9 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Property for isVert
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Bool representation of the verticalness of the ship
+        /// </returns>
         public bool isVertical() {
             return isVert;
         }
@@ -59,25 +67,20 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Property for location
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Array of Point representations of squares the ship is 
+        /// set to. (located)
+        /// </returns>
         public Point[] getLocation() {
             return location;
-        }
-
-        // depricated
-        public bool containsPoint(Point p) {
-            for(int i = 0; i < location.Length; i++) {
-                if(location[i] == p && hitLocations[i] != p) {
-                    return true;
-                }
-            }
-            return false;
         }
 
         /// <summary>
         /// Grid bounds checking
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// true if ship outside of GameBoard grid, false otherwise
+        /// </returns>
         public bool outsideGrid()
         {
             for (int i = 0; i < location.Length; i++)
@@ -99,8 +102,12 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Check if ship exists at Point
         /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
+        /// <param name="p">
+        /// Point representation of square of gameBoard grid
+        /// </param>
+        /// <returns>
+        /// true if exists, false otherwise
+        /// </returns>
         public bool checkForShip(Point p) {
             for(int i = 0; i < location.Length; i++) {
                 if(location[i] == p) {
@@ -113,8 +120,12 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Check if the strike is a hit
         /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
+        /// <param name="p">
+        /// Point representation of square of gameBoard grid
+        /// </param>
+        /// <returns>
+        /// True if ship is located in the Point representation square from gameBoard grid
+        /// </returns>
         public bool checkForHit(Point p)
         {
             for (int i = 0; i < location.Length; i++)
@@ -133,7 +144,9 @@ namespace BattlePirates_Group2 {
         /// <summary>
         /// Returns if the ship is sunk - 0 health
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// true if ship is sunk, false otherwise
+        /// </returns>
         public bool isSunk() {
             return health == 0;
         }

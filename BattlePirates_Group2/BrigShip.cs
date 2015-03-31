@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 namespace BattlePirates_Group2 {
     [Serializable]
     public class BrigShip : BaseShip {
+        //the size of this child class of ship
         const int SHIPSIZE = 3;
-        int x = 0;
 
-        //somecomments
+        /// <summary>
+        /// Constructor
+        /// sets the size of the ship
+        /// </summary>
         public BrigShip() : base(SHIPSIZE) {
             
         }

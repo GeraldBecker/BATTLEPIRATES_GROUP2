@@ -12,6 +12,12 @@ namespace BattlePirates_Group2 {
         private BaseShip[] ships;
         private LocationState[,] grid;
 
+        /// <summary>
+        /// Constructor
+        /// Logic Game Board for holding the game data
+        /// Holds the grid and data
+        /// Holds the ships array and data
+        /// </summary>
         public GameBoard() {
             ships = new BaseShip[5];
             ships[0] = new ManowarShip();
@@ -27,18 +33,16 @@ namespace BattlePirates_Group2 {
                     grid[i, j] = LocationState.EMPTY;
                 }
             }
-
-            //initiateShipPlacement();
         }
 
 
-
+        /// <summary>
+        /// Records the ship locations to grid locationState
+        /// </summary>
+        /// <param name="ships">
+        /// Array of BaseShip types
+        /// </param>
         public void initiateShipPlacement(BaseShip[] ships) {
-            /*ships[0].setLocation(new Point[] { new Point(1, 2), new Point(1, 3), new Point(1, 4), new Point(1, 5), new Point(1, 6) }, false);
-            ships[1].setLocation(new Point[] { new Point(3, 2), new Point(3, 3), new Point(3, 4), new Point(3, 5), new Point(3, 6) }, false);
-            ships[2].setLocation(new Point[] { new Point(9, 0), new Point(9, 1), new Point(9, 2), new Point(9, 3), new Point(9, 4) }, false);
-            ships[3].setLocation(new Point[] { new Point(5, 1), new Point(5, 2), new Point(5, 3), new Point(5, 4), new Point(5, 5) }, false);
-            ships[4].setLocation(new Point[] { new Point(8, 2), new Point(8, 3), new Point(8, 4), new Point(8, 5), new Point(8, 6) }, false);*/
             this.ships = ships;
 
             for(int r = 0; r < 10; r++) {
@@ -47,15 +51,28 @@ namespace BattlePirates_Group2 {
                         grid[r, c] = LocationState.SHIP;
                     }
                 }
-            }
-            
+            } 
         }
 
+        /// <summary>
+        /// Returns the locationsState of the GameBoard grid
+        /// </summary>
+        /// <returns>
+        /// LocationState enums of square states of GameBoard grid
+        /// </returns>
         public LocationState[,] getBoardForDrawing() {
             return grid;
         }
 
-        //temp class
+        /// <summary>
+        /// Tests if square(point) occupied by a ship
+        /// </summary>
+        /// <param name="p">
+        /// Point that is tested for a ship location
+        /// </param>
+        /// <returns>
+        /// True is ship has Point as location, false otherwise
+        /// </returns>
         public bool hasShip(Point p){
             for(int i = 0; i < ships.Length; i++) {
                 if(ships[i].checkForShip(p)) {
@@ -65,16 +82,24 @@ namespace BattlePirates_Group2 {
             return false;
         }
 
-
+        /// <summary>
+        /// Checks and updates player's shots with the chosen square
+        /// on the grid
+        /// </summary>
+        /// <param name="p">
+        /// Point representation of the square chosen by player to shoot at
+        /// </param>
+        /// <returns>
+        /// LocationState enum representing the state of the point
+        /// </returns>
         public LocationState strikeCoordinates(Point p) {
-            /*if(grid[p.X, p.Y] != LocationState.EMPTY) {
-                return LocationState.CLICKED;
-            }*/
             Console.WriteLine("YOU ARE SENDING: [" + p.X + "," + p.Y+"]");
+            //If the square has not been shot at before
             if(grid[p.X, p.Y] == LocationState.EMPTY || grid[p.X, p.Y] == LocationState.SHIP)
             {
                 for (int i = 0; i < ships.Length; i++)
                 {
+                    //if it's a hit
                     if (ships[i].checkForHit(p))
                     {
                         grid[p.X, p.Y] = LocationState.HIT;
@@ -83,23 +108,28 @@ namespace BattlePirates_Group2 {
                         if(ships[i].isSunk()) {
                             Point[] temp = ships[i].getLocation();
                             for(int x = 0; x < temp.Length; x++) {
-                                //Console.WriteLine("SUNK: " + temp.ToString());
                                 Console.WriteLine("SUNK: " + temp[x].ToString());
                                 grid[temp[x].X, temp[x].Y] = LocationState.SUNK;
-                                
                             }
                             return LocationState.SUNK;
                         }
-
                         return LocationState.HIT;
                     }
                 }
+                //if it's a miss
                 grid[p.X, p.Y] = LocationState.MISS;
                 return LocationState.MISS;
             }
+            //if square has already been clicked - do nothing
             return LocationState.CLICKED;
         }
 
+        /// <summary>
+        /// Getter for ships
+        /// </summary>
+        /// <returns>
+        /// The array of ships as BaseShip type objects
+        /// </returns>
         public BaseShip[] getShips()
         {
             return ships;
