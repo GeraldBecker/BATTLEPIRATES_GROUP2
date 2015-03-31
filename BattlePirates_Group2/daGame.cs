@@ -11,9 +11,10 @@ using System.Windows.Forms;
 namespace BattlePirates_Group2 {
     public partial class daGame : Form {
 
-        private const int BLOCKWIDTH = 25;// grid block size
-        private const int START_X = 3;// offset for grid from left
-        private const int START_Y = 12;// offset for grid from top
+        private const int BLOCKWIDTH = 33;// grid block size
+        private const int SQUARESIZE = (int)(0.96 * BLOCKWIDTH);
+        private const int START_X = 30;//3;// offset for grid from left
+        private const int START_Y = 220;//12;// offset for grid from top
         private ConnectionManager connection;
         private MainForm screen;
         private bool myTurn;
@@ -23,8 +24,6 @@ namespace BattlePirates_Group2 {
         private GameBoard mine;
         private GameBoard opponent;
 
-        private BaseShip[] opponentShips;
-        private BaseShip[] userShips;
         LocationState[,] _grid;
         LocationState[,] _grid2;
 
@@ -85,8 +84,8 @@ namespace BattlePirates_Group2 {
             if(!myTurn)
                 yourTurnLabel.Visible = false;
 
-            labelWin.ForeColor = Color.White;
-            labelWin.Visible = false;
+            
+            labelWinPanel.Visible = false;
 
             //Fix the flicker problem by double buffering.
             DoubleBuffered = true;
@@ -125,34 +124,52 @@ namespace BattlePirates_Group2 {
         /// <param name="e"></param>
         private void daGame_Paint(object sender, PaintEventArgs e) {
             _grid = opponent.getBoardForDrawing();// Opponent's board update
-            for(int r = START_Y; r < (START_Y + 10); r++) {
+            /*for(int r = START_Y; r < (START_Y + 10); r++) {
                 for(int c = START_X; c < (START_X + 10); c++) {
                     /*if(opponent.hasShip(new Point(r - START_Y, c - START_X))) { }
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25, r * 25, 20, 20);
-                    else*/ 
+                    else* / 
                     if(_grid[r - START_Y, c - START_X] == LocationState.EMPTY)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25, r * 25, 20, 20);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
                     else if(_grid[r - START_Y, c - START_X] == LocationState.HIT)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25, r * 25, 20, 20);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
                     else if(_grid[r - START_Y, c - START_X] == LocationState.MISS)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25, r * 25, 20, 20);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
                     else if(_grid[r - START_Y, c - START_X] == LocationState.SUNK)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * 25, r * 25, 20, 20);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
                     else
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25, r * 25, 20, 20);
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
 
                 }
                 //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
-            }
 
+            }*/
+            for(int r = 0; r < 10; r++) {
+                for(int c = 0; c < 10; c++) {
+                    if(_grid[r, c] == LocationState.EMPTY)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid[r, c] == LocationState.HIT)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid[r, c] == LocationState.MISS)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid[r, c] == LocationState.SUNK)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+
+                }
+                //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
+
+            }
+            
 
             // Mine board update
             _grid2 = mine.getBoardForDrawing();
-            for(int r = START_Y; r < (START_Y + 10); r++) {
+            /*for(int r = START_Y; r < (START_Y + 10); r++) {
                 for(int c = START_X; c < (START_X + 10); c++) {
                     /*if(mine.hasShip(new Point(r - START_Y, c - START_X)))
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
-                    else*/
+                    else* /
                     if(_grid2[r - START_Y, c - START_X] == LocationState.SHIP)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
                     else if(_grid2[r - START_Y, c - START_X] == LocationState.EMPTY)
@@ -163,6 +180,26 @@ namespace BattlePirates_Group2 {
                         e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25 + SPACER, r * 25, 20, 20);
                     else if(_grid2[r - START_Y, c - START_X] == LocationState.SUNK)
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * 25 + SPACER, r * 25, 20, 20);
+
+                }
+                //Console.WriteLine();
+            }*/
+
+            for(int r = 0; r < 10; r++) {
+                for(int c = 0; c < 10; c++) {
+                    /*if(mine.hasShip(new Point(r - START_Y, c - START_X)))
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
+                    else*/
+                    if(_grid2[r, c] == LocationState.SHIP)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid2[r, c] == LocationState.EMPTY)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid2[r, c] == LocationState.HIT)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid2[r, c] == LocationState.MISS)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                    else if(_grid2[r, c] == LocationState.SUNK)
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
 
                 }
                 //Console.WriteLine();
@@ -177,8 +214,12 @@ namespace BattlePirates_Group2 {
         private void daGame_MouseDown(object sender, MouseEventArgs e) {
             if(myTurn) {
                 // check to see if hit
-                int xStrike = (e.X / BLOCKWIDTH) - START_X;
-                int yStrike = (e.Y / BLOCKWIDTH) - START_Y;
+                //int xStrike = (e.X / BLOCKWIDTH) - START_X;
+                //int yStrike = (e.Y / BLOCKWIDTH) - START_Y;
+                int xStrike = ((e.X - START_X) / BLOCKWIDTH) ;
+                int yStrike = ((e.Y - START_Y) / BLOCKWIDTH) ;
+
+
                 Console.WriteLine("MOD STRIKE ["+xStrike+","+yStrike+"]");
 
                 if(0 <= xStrike && xStrike < 10 && 0 <= yStrike && yStrike < 10) {
@@ -206,7 +247,7 @@ namespace BattlePirates_Group2 {
                                 myTurn = false;
                                 //labelWin.ForeColor = Color.Red;
                                 labelWin.Text = "You Win!!!";
-                                labelWin.Visible = true;
+                                labelWinPanel.Visible = true;
                             }
                         } else {
                             myTurn = false;
@@ -287,8 +328,10 @@ namespace BattlePirates_Group2 {
                 // check and update mine gameBoard
                 LocationState shotResult;
 
-                int xStrike = (p.X / BLOCKWIDTH) - START_X;
-                int yStrike = (p.Y / BLOCKWIDTH) - START_Y;
+                //int xStrike = (p.X / BLOCKWIDTH) - START_X;
+                //int yStrike = (p.Y / BLOCKWIDTH) - START_Y;
+                int xStrike = ((p.X - START_X) / BLOCKWIDTH);
+                int yStrike = ((p.Y - START_Y) / BLOCKWIDTH);
 
                 int c = xStrike;//p.X / BLOCKWIDTH;
                 int r = yStrike;//p.Y / BLOCKWIDTH;
@@ -335,7 +378,7 @@ namespace BattlePirates_Group2 {
             MethodInvoker mi = delegate {
                 //labelWin.ForeColor = Color.Red;
                 labelWin.Text = "You Lose!!";
-                labelWin.Visible = true;
+                labelWinPanel.Visible = true;
             };
             if(InvokeRequired) {
                 this.Invoke(mi);

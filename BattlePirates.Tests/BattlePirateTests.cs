@@ -11,13 +11,11 @@ namespace BattlePirates.Tests {
         [TestMethod]
         public void CreateShip() {
             BaseShip board = new BrigShip();
-            Point ha = new Point(5, 5);
         }
 
         [TestMethod]
         public void checkForShipTest() {
             BaseShip ship = new BrigShip();
-            //Point testPoint = new Point(5,5);
 
             Point[] location = new Point[3];
             location[0] = new Point(5, 5);
@@ -35,7 +33,6 @@ namespace BattlePirates.Tests {
         [TestMethod]
         public void checkForHitTest() {
             BaseShip ship = new BrigShip();
-            //Point testPoint = new Point(5,5);
 
             Point[] location = new Point[3];
             location[0] = new Point(5, 5);
@@ -53,7 +50,6 @@ namespace BattlePirates.Tests {
         [TestMethod]
         public void checkForVertical() {
             BaseShip ship = new BrigShip();
-            //Point testPoint = new Point(5,5);
 
             Point[] location = new Point[3];
             location[0] = new Point(5, 5);
