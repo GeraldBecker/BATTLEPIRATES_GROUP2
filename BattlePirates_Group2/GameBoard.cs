@@ -26,7 +26,6 @@ namespace BattlePirates_Group2 {
             ships[3] = new ManowarShip();
             ships[4] = new ManowarShip();
             
-
             grid = new LocationState[10, 10];
             for(int i = 0; i < 10; i++) {
                 for(int j = 0; j < 10; j++) {
@@ -34,8 +33,7 @@ namespace BattlePirates_Group2 {
                 }
             }
         }
-
-
+        
         /// <summary>
         /// Records the ship locations to grid locationState
         /// </summary>

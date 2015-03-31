@@ -24,7 +24,6 @@ namespace BattlePirates_Group2 {
 
             connectionPanel.Visible = false;
             connection = new ConnectionManager();
-            button1.Visible = false;
         }
 
         private void button_click(object sender, EventArgs e) {
@@ -39,13 +38,7 @@ namespace BattlePirates_Group2 {
             } else if(sender.Equals(pressButton)) {
                 //Start the server connection once it has been configured.
                 startServer();
-            } else if(sender.Equals(button1)) {
-                new shipPlaceForm(screen, connection, true).Show();
-                userQuit = false;
-                this.Close();
-            }
-
-            
+            }             
         }
 
         /// <summary>

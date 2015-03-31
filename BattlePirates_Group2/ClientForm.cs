@@ -10,13 +10,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BattlePirates_Group2 {
+    /// <summary>
+    /// Client form for connecting to a game
+    /// </summary>
     public partial class ClientForm : Form {
+        //protocol for connection
         private ConnectionManager connection;
+
+        //the form to replace this form with
         private MainForm screen;
+
+        //if user clicks back button
         private bool userQuit;
         
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="screen">
+        /// The form that calls - initial splash screen
+        /// </param>
         public ClientForm(MainForm screen) {
+            //replaces the splash screen at it's location
             this.screen = screen;
             this.DesktopLocation = screen.Location;
 
@@ -25,9 +39,16 @@ namespace BattlePirates_Group2 {
             connection = new ConnectionManager();
         }
 
+        /// <summary>
+        /// botton click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonClick(object sender, EventArgs e) {
+            //if connect game button pressed
             if(sender.Equals(connectGameButton)) {
                 clientConnect();
+            //if back button pressed
             } else if(sender.Equals(backButton)) {
                 connection.stopServer();
                 screen.Show();
@@ -36,13 +57,14 @@ namespace BattlePirates_Group2 {
             } 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void clientConnect() {
             progressBar2.Maximum = 100;
             connectGameButton.Visible = false;
-            //connectGameButton.Text = "TRY AGAIN";
 
             setStatus("ATTEMPTING TO CREATE CONNECTION...");
-
             
             progressBar2.Value = 10;
 
@@ -65,12 +87,8 @@ namespace BattlePirates_Group2 {
                 setStatus("CONNECTION FAILED");
                 return;
             }
-
             
             //Start the ship placement screen.
-            //new shipPlaceForm(screen, connection, false).Show();
-            //new gameForm(screen, connection, false).Show();
-            //new daGame(screen, connection, false).Show();
             new shipPlacementForm(screen, connection, false).Show();
 
             //Get rid of the connection form.
@@ -78,11 +96,21 @@ namespace BattlePirates_Group2 {
             this.Close();
         }
 
-
+        /// <summary>
+        /// Sets the label output
+        /// </summary>
+        /// <param name="msg">
+        /// the message to display
+        /// </param>
         private void setStatus(string msg) {
             statusLabel.Text = msg;
         }
 
+        /// <summary>
+        /// Form closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClientForm_FormClosing(object sender, FormClosingEventArgs e) {
             if(userQuit) {
                 Application.Exit();
