@@ -223,6 +223,24 @@ namespace BattlePirates_Group2 {
 
             Console.WriteLine("Mouse UP Location: " + e.X + " " + e.Y);
             containsTrue = false;
+
+            // show start button if all ships on grid
+            // Check if ships on game board
+            for (int n = 0; n < myShips.Length; n++)
+            {
+                if (myShips[n].outsideGrid())
+                {
+                    Console.WriteLine("Ship: " + n);
+                    startGameButton.Visible = false;
+                    break;
+                }
+                // Check if ship collision
+                if (collision == false)
+                {
+                    startGameButton.Visible = true;
+                }
+            }
+
             this.Refresh();
         }
 
@@ -240,10 +258,12 @@ namespace BattlePirates_Group2 {
 
                 if(tempOrientVert) {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
+                        //tempShapePoints[i].Y = tempShapePoints[i].X; 
                         tempShapePoints[i].X = tempShapePoints[0].X;
                     }
                 } else {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
+                        //tempShapePoints[i].X = tempShapePoints[i].Y;
                         tempShapePoints[i].Y = tempShapePoints[0].Y;
                     }
                 }
@@ -268,15 +288,19 @@ namespace BattlePirates_Group2 {
         private void startGame_click(object sender, EventArgs e) {
 
             // Check if ships on game board
+            /*
             for(int n = 0; n < myShips.Length; n++) {
                 if(myShips[n].outsideGrid()) {
                     Console.WriteLine("Ship: " + n);
+                    startGameButton.Visible = false;
                     return;
                 }
             }
+            // Check if ship collision
             if(collision == true) {
+                startGameButton.Visible = false;
                 return;
-            }
+            }*/
             GameBoard myboard = new GameBoard();
             myboard.initiateShipPlacement(toSetShips);
 
