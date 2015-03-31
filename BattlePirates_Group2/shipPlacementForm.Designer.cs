@@ -65,6 +65,7 @@
             this.startGameButton.TabIndex = 0;
             this.startGameButton.Text = "Start Game";
             this.startGameButton.UseVisualStyleBackColor = false;
+            this.startGameButton.Visible = false;
             this.startGameButton.Click += new System.EventHandler(this.startGame_click);
             // 
             // battlePiratesLabel
