@@ -124,86 +124,85 @@ namespace BattlePirates_Group2 {
         /// <param name="e"></param>
         private void daGame_Paint(object sender, PaintEventArgs e) {
             _grid = opponent.getBoardForDrawing();// Opponent's board update
-            /*for(int r = START_Y; r < (START_Y + 10); r++) {
-                for(int c = START_X; c < (START_X + 10); c++) {
-                    /*if(opponent.hasShip(new Point(r - START_Y, c - START_X))) { }
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25, r * 25, 20, 20);
-                    else* / 
-                    if(_grid[r - START_Y, c - START_X] == LocationState.EMPTY)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
-                    else if(_grid[r - START_Y, c - START_X] == LocationState.HIT)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
-                    else if(_grid[r - START_Y, c - START_X] == LocationState.MISS)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
-                    else if(_grid[r - START_Y, c - START_X] == LocationState.SUNK)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
-                    else
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH, r * BLOCKWIDTH, 20, 20);
 
-                }
-                //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
-
-            }*/
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
                     if(_grid[r, c] == LocationState.EMPTY)
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else if(_grid[r, c] == LocationState.HIT)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else if(_grid[r, c] == LocationState.MISS)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else if(_grid[r, c] == LocationState.SUNK)
+                    else if(_grid[r, c] == LocationState.HIT) {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                        //Test drawing the X
+                        Pen myPen = new Pen(Color.Red, 8);
+                        e.Graphics.DrawPolygon(myPen, getXDrawing(c, r, 0));
+                    } else if(_grid[r, c] == LocationState.MISS) {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+
+                        Pen myPen = new Pen(Color.White, 8);
+                        e.Graphics.DrawPolygon(myPen, getXDrawing(c, r, 0));
+                    } else if(_grid[r, c] == LocationState.SUNK) {
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else
+                        Pen myPen = new Pen(Color.Red, 8);
+                        e.Graphics.DrawPolygon(myPen, getXDrawing(c, r, 0));
+                    } else
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
 
                 }
-                //Console.WriteLine("opponent: " + opponent.hasShip(new Point(0,0)));
 
             }
-            
+
 
             // Mine board update
             _grid2 = mine.getBoardForDrawing();
-            /*for(int r = START_Y; r < (START_Y + 10); r++) {
-                for(int c = START_X; c < (START_X + 10); c++) {
-                    /*if(mine.hasShip(new Point(r - START_Y, c - START_X)))
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
-                    else* /
-                    if(_grid2[r - START_Y, c - START_X] == LocationState.SHIP)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r - START_Y, c - START_X] == LocationState.EMPTY)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r - START_Y, c - START_X] == LocationState.HIT)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r - START_Y, c - START_X] == LocationState.MISS)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * 25 + SPACER, r * 25, 20, 20);
-                    else if(_grid2[r - START_Y, c - START_X] == LocationState.SUNK)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * 25 + SPACER, r * 25, 20, 20);
-
-                }
-                //Console.WriteLine();
-            }*/
 
             for(int r = 0; r < 10; r++) {
                 for(int c = 0; c < 10; c++) {
-                    /*if(mine.hasShip(new Point(r - START_Y, c - START_X)))
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * 25 + SPACER, r * 25, 20, 20);
-                    else*/
                     if(_grid2[r, c] == LocationState.SHIP)
                         e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
                     else if(_grid2[r, c] == LocationState.EMPTY)
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else if(_grid2[r, c] == LocationState.HIT)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Red), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else if(_grid2[r, c] == LocationState.MISS)
-                        e.Graphics.FillRectangle(new SolidBrush(Color.Purple), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
-                    else if(_grid2[r, c] == LocationState.SUNK)
+                    else if(_grid2[r, c] == LocationState.HIT) {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.Orange), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                        //Draw the X
+                        Pen myPen = new Pen(Color.Red, 8);
+                        e.Graphics.DrawPolygon(myPen, getXDrawing(c, r, SPACER));
+                    } else if(_grid2[r, c] == LocationState.MISS) {
+
+                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                        //Draw the X
+                        Pen myPen = new Pen(Color.White, 8);
+                        e.Graphics.DrawPolygon(myPen, getXDrawing(c, r, SPACER));
+                    } else if(_grid2[r, c] == LocationState.SUNK) {
                         e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(104, 49, 4)), c * BLOCKWIDTH + START_X + SPACER, r * BLOCKWIDTH + START_Y, SQUARESIZE, SQUARESIZE);
+                        //Draw the X
+                        Pen myPen = new Pen(Color.Red, 8);
+                        e.Graphics.DrawPolygon(myPen, getXDrawing(c, r, SPACER));
+                    }
 
                 }
-                //Console.WriteLine();
             }
+        }
+
+
+        public PointF[] getXDrawing(int c, int r, int spacer) {
+            return new PointF[] {
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.1)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.06)+ START_Y), //start point
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.16)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.28)+ START_Y),//5,9
+                new PointF ((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_Y), //MIDDLE 18,18 
+                new PointF ((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.67)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.73)+ START_Y), //22, 24
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.82)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.82)+ START_Y), //27,27
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.85)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.82)+ START_Y),//bottom right //28,27
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.82)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.82)+ START_Y), //27, 27
+                new PointF ((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.67)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.73)+ START_Y), //22, 24
+                new PointF ((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_Y), //MIDDLE 18,18
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.28)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.79)+ START_Y),//9,26
+                new PointF((c*BLOCKWIDTH)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.85)+ START_Y),//bottom left  0,28
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.28)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.79)+ START_Y),//9,26
+                new PointF ((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_Y), //MIDDLE 18,18
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.76)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.28)+ START_Y),//25,9
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.85)+ START_X + spacer, (r*BLOCKWIDTH)+ START_Y),//top right 28,0
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.76)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.28)+ START_Y),//25,9
+                new PointF ((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.55)+ START_Y), //MIDDLE 18,18
+                new PointF((c*BLOCKWIDTH)+(int)(BLOCKWIDTH*.16)+ START_X + spacer, (r*BLOCKWIDTH)+(int)(BLOCKWIDTH*.28)+ START_Y) };
         }
 
         /// <summary>
