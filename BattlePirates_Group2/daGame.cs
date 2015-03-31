@@ -248,6 +248,7 @@ namespace BattlePirates_Group2 {
                                 //labelWin.ForeColor = Color.Red;
                                 labelWin.Text = "You Win!!!";
                                 labelWinPanel.Visible = true;
+                                mainMenuBtn.Visible = true;
                             }
                         } else {
                             myTurn = false;
@@ -379,10 +380,17 @@ namespace BattlePirates_Group2 {
                 //labelWin.ForeColor = Color.Red;
                 labelWin.Text = "You Lose!!";
                 labelWinPanel.Visible = true;
+                mainMenuBtn.Visible = true;
             };
             if(InvokeRequired) {
                 this.Invoke(mi);
             }
+        }
+
+        private void mainMenuBtn_Click(object sender, EventArgs e) {
+            Owner = new MainForm();
+            Owner.Show();
+            this.Hide();
         }
     }
 }

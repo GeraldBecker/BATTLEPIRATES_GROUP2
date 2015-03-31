@@ -252,5 +252,12 @@ namespace BattlePirates_Group2 {
             }
             return msg;
         }
+
+        public void stopConnection() {
+            NETWORKSTREAM.Close();
+            SERVER.Stop();
+            CLIENT.Close();
+            
+        }
     }
 }
