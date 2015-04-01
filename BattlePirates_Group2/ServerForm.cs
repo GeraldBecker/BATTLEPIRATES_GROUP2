@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BattlePirates_Group2 {
     public partial class ServerForm : Form {
@@ -107,6 +108,12 @@ namespace BattlePirates_Group2 {
                 Application.Exit();
             }
             
+        }
+
+        private void backButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            SoundPlayer snd = new SoundPlayer(Properties.Resources.dontdo_converted);
+            snd.PlaySync();
         }
     }
 }

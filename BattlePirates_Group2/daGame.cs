@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BattlePirates_Group2 {
     public partial class daGame : Form {
@@ -385,6 +386,8 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void daGame_Load(object sender, EventArgs e) {
+            SoundPlayer snd = new SoundPlayer(Properties.Resources.mortalkombat_converted);
+            snd.PlaySync();
             CheckTurn();
         }
 

@@ -67,7 +67,7 @@
             this.ipAddressConnect.MaximumSize = new System.Drawing.Size(260, 50);
             this.ipAddressConnect.MinimumSize = new System.Drawing.Size(260, 50);
             this.ipAddressConnect.Name = "ipAddressConnect";
-            this.ipAddressConnect.Size = new System.Drawing.Size(260, 50);
+            this.ipAddressConnect.Size = new System.Drawing.Size(260, 47);
             this.ipAddressConnect.TabIndex = 8;
             this.ipAddressConnect.Text = "192.168.1.118";
             this.ipAddressConnect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -86,6 +86,7 @@
             this.connectGameButton.Text = "CONNECT";
             this.connectGameButton.UseVisualStyleBackColor = false;
             this.connectGameButton.Click += new System.EventHandler(this.buttonClick);
+            this.connectGameButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectGameButton_MouseClick);
             // 
             // progressBar2
             // 
@@ -108,6 +109,7 @@
             this.backButton.Text = "BACK";
             this.backButton.UseVisualStyleBackColor = false;
             this.backButton.Click += new System.EventHandler(this.buttonClick);
+            this.backButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.backButton_MouseClick);
             // 
             // ClientForm
             // 

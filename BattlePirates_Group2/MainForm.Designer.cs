@@ -40,7 +40,7 @@
             this.createButton.Text = "CREATE A GAME";
             this.createButton.UseVisualStyleBackColor = false;
             this.createButton.Click += new System.EventHandler(this.buttonClick);
-            this.createButton.MouseEnter += new System.EventHandler(this.createButton_MouseEnter);
+            this.createButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.createButton_MouseClick);
             // 
             // connectButton
             // 
@@ -55,7 +55,7 @@
             this.connectButton.Text = "CONNECT TO A GAME";
             this.connectButton.UseVisualStyleBackColor = false;
             this.connectButton.Click += new System.EventHandler(this.buttonClick);
-            this.connectButton.MouseEnter += new System.EventHandler(this.connectButton_MouseEnter);
+            this.connectButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectButton_MouseClick);
             // 
             // MainForm
             // 
@@ -68,6 +68,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.MouseEnter += new System.EventHandler(this.MainForm_MouseEnter);
             this.ResumeLayout(false);
 
         }

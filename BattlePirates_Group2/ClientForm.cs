@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BattlePirates_Group2 {
     /// <summary>
@@ -115,6 +116,17 @@ namespace BattlePirates_Group2 {
             if(userQuit) {
                 Application.Exit();
             }
+        }
+
+        private void backButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            SoundPlayer snd = new SoundPlayer(Properties.Resources.dontdo_converted);
+            snd.PlaySync();
+        }
+
+        private void connectGameButton_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

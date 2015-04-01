@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace BattlePirates_Group2 {
     /// <summary>
@@ -221,6 +222,8 @@ namespace BattlePirates_Group2 {
                 NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
                 //The below line of code delays the thread to allow the sending of the entire stream before the next form is loaded. 
                 //Fix this issue if possible. 
+                SoundPlayer snd = new SoundPlayer(Properties.Resources.avwait);
+                snd.PlaySync();
                 Thread.Sleep(5000);
             } catch(Exception ex) {
                 Console.WriteLine("We failed");

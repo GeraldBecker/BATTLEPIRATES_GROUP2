@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BattlePirates_Group2 {
     /// <summary>
@@ -42,6 +43,8 @@ namespace BattlePirates_Group2 {
         /// <param name="whoStarts"></param>
         public shipPlacementForm(MainForm screen, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
+            SoundPlayer snd = new SoundPlayer(Properties.Resources.alright2_converted);
+            snd.PlaySync();
 
             this.screen = screen;
             this.connection = connection;
