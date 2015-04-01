@@ -248,8 +248,6 @@ namespace BattlePirates_Group2 {
                                 labelWin.Text = "You Win!!!";
                                 labelWinPanel.Visible = true;
                                 mainMenuBtn.Visible = true;
-                                //stop connection
-                                connection.stopNetwork();
                             }
                         } else {
                             myTurn = false;
@@ -270,6 +268,12 @@ namespace BattlePirates_Group2 {
                         // update opponent grid in this GameBoard instance
                         _grid[r, c] = shotResult;
                         CheckTurn();
+                        if (win == true)
+                        {
+                            //stop connection
+                            
+                            connection.stopNetwork();
+                        }
                     }
                 }
 

@@ -40,6 +40,7 @@
             this.createButton.Text = "CREATE A GAME";
             this.createButton.UseVisualStyleBackColor = false;
             this.createButton.Click += new System.EventHandler(this.buttonClick);
+            this.createButton.MouseEnter += new System.EventHandler(this.createButton_MouseEnter);
             // 
             // connectButton
             // 
@@ -54,6 +55,7 @@
             this.connectButton.Text = "CONNECT TO A GAME";
             this.connectButton.UseVisualStyleBackColor = false;
             this.connectButton.Click += new System.EventHandler(this.buttonClick);
+            this.connectButton.MouseEnter += new System.EventHandler(this.connectButton_MouseEnter);
             // 
             // MainForm
             // 

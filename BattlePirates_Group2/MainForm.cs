@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BattlePirates_Group2 {
     /// <summary>
@@ -36,6 +37,18 @@ namespace BattlePirates_Group2 {
                 ClientForm client = new ClientForm(this);
                 client.Show();
             }
+        }
+
+        private void createButton_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer snd = new SoundPlayer(Properties.Resources.playgames);
+            snd.PlaySync();
+        }
+
+        private void connectButton_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer snd = new SoundPlayer(Properties.Resources.sidewant);
+            snd.PlaySync();
         }
     }
 }
