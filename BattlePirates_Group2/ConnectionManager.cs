@@ -188,8 +188,15 @@ namespace BattlePirates_Group2 {
         /// </returns>
         public TransmitMessage getGamePoint() {
             byte[] dataLength = new byte[4];
-
-            NETWORKSTREAM.Read(dataLength, 0, 4);
+            try
+            {
+                NETWORKSTREAM.Read(dataLength, 0, 4);
+            }
+            catch(System.ObjectDisposedException ex)
+            {
+                SoundPlayer snd2 = new SoundPlayer(Properties.Resources.disconnect_11_converted);
+                snd2.PlaySync();
+            }
             int dataLen = BitConverter.ToInt32(dataLength, 0);
             Console.WriteLine("Receiving length: " + dataLen);
             TransmitMessage msg = new TransmitMessage();

@@ -44,7 +44,7 @@ namespace BattlePirates_Group2 {
         public shipPlacementForm(MainForm screen, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
             SoundPlayer snd = new SoundPlayer(Properties.Resources.alright2_converted);
-            snd.PlaySync();
+            snd.Play();
 
             this.screen = screen;
             this.connection = connection;
@@ -392,7 +392,5 @@ namespace BattlePirates_Group2 {
                 Application.Exit();
             }
         }
-
-
     }
 }

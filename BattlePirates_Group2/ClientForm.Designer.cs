@@ -86,7 +86,6 @@
             this.connectGameButton.Text = "CONNECT";
             this.connectGameButton.UseVisualStyleBackColor = false;
             this.connectGameButton.Click += new System.EventHandler(this.buttonClick);
-            this.connectGameButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectGameButton_MouseClick);
             // 
             // progressBar2
             // 

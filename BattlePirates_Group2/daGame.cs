@@ -234,6 +234,16 @@ namespace BattlePirates_Group2 {
                     {
                         // check if a hit
                         if(shotResult == LocationState.HIT || shotResult == LocationState.SUNK) {
+                            if(shotResult == LocationState.HIT)
+                            {
+                                SoundPlayer snd = new SoundPlayer(Properties.Resources.bomb_x_converted);
+                                snd.Play();
+                            }
+                            else
+                            {
+                                SoundPlayer snd = new SoundPlayer(Properties.Resources.bubbling_converted);
+                                snd.Play();
+                            }
                             BaseShip[] oppShips = opponent.getShips();
                             for(int k = 0; k < oppShips.Length; ++k) {
                                 if(!oppShips[k].isSunk()) {
@@ -249,6 +259,8 @@ namespace BattlePirates_Group2 {
                                 labelWin.Text = "You Win!!!";
                                 labelWinPanel.Visible = true;
                                 mainMenuBtn.Visible = true;
+                                SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cheering_converted);
+                                snd2.PlaySync();
                             }
                         } else {
                             myTurn = false;
@@ -386,8 +398,8 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void daGame_Load(object sender, EventArgs e) {
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.mortalkombat_converted);
-            snd.PlaySync();
+            //SoundPlayer snd = new SoundPlayer(Properties.Resources.mortalkombat_converted);
+            //snd.Play();
             CheckTurn();
         }
 
@@ -400,6 +412,8 @@ namespace BattlePirates_Group2 {
                 labelWin.Text = "You Lose!!";
                 labelWinPanel.Visible = true;
                 mainMenuBtn.Visible = true;
+                SoundPlayer snd = new SoundPlayer(Properties.Resources.loserLoser_converted);
+                snd.PlaySync();
             };
             if(InvokeRequired) {
                 this.Invoke(mi);

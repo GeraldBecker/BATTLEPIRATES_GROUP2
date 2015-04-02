@@ -123,10 +123,5 @@ namespace BattlePirates_Group2 {
             SoundPlayer snd = new SoundPlayer(Properties.Resources.dontdo_converted);
             snd.PlaySync();
         }
-
-        private void connectGameButton_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
     }
 }

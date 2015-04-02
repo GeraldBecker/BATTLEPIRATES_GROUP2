@@ -81,6 +81,42 @@ namespace BattlePirates_Group2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream bomb_x_converted {
+            get {
+                return ResourceManager.GetStream("bomb_x_converted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream bubbling_converted {
+            get {
+                return ResourceManager.GetStream("bubbling_converted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream cheering_converted {
+            get {
+                return ResourceManager.GetStream("cheering_converted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream disconnect_11_converted {
+            get {
+                return ResourceManager.GetStream("disconnect_11_converted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream dontdo_converted {
             get {
                 return ResourceManager.GetStream("dontdo_converted", resourceCulture);
@@ -90,54 +126,9 @@ namespace BattlePirates_Group2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream excelent_converted {
+        internal static System.IO.UnmanagedMemoryStream loserLoser_converted {
             get {
-                return ResourceManager.GetStream("excelent_converted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream mortalkombat_converted {
-            get {
-                return ResourceManager.GetStream("mortalkombat_converted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream playgames {
-            get {
-                return ResourceManager.GetStream("playgames", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream prefchess_converted {
-            get {
-                return ResourceManager.GetStream("prefchess_converted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream sidewant {
-            get {
-                return ResourceManager.GetStream("sidewant", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream whathell_wg_converted {
-            get {
-                return ResourceManager.GetStream("whathell_wg_converted", resourceCulture);
+                return ResourceManager.GetStream("loserLoser_converted", resourceCulture);
             }
         }
     }

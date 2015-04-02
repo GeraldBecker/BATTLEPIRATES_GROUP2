@@ -16,8 +16,6 @@ namespace BattlePirates_Group2 {
     public partial class MainForm : Form {
         public MainForm() {
             InitializeComponent();
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.playgames);
-            snd.PlaySync();
         }
 
         /// <summary>
@@ -39,24 +37,6 @@ namespace BattlePirates_Group2 {
                 ClientForm client = new ClientForm(this);
                 client.Show();
             }
-        }
-
-        private void MainForm_MouseEnter(object sender, EventArgs e)
-        {
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.sidewant);
-            snd.PlaySync();
-        }
-
-        private void createButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.prefchess_converted);
-            snd.PlaySync();
-        }
-
-        private void connectButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.excelent_converted);
-            snd.PlaySync();
         }
     }
 }

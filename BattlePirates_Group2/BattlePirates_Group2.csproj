@@ -127,31 +127,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sidewant.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\playgames.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\avwait.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\prefchess_converted.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\excelent_converted.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dontdo_converted.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cheering_converted.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loserLoser_converted.wav" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\alright2_converted.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\whathell_wg_converted.wav" />
+    <None Include="Resources\disconnect_11_converted.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mortalkombat_converted.wav" />
+    <None Include="Resources\bubbling_converted.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bomb_x_converted.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
