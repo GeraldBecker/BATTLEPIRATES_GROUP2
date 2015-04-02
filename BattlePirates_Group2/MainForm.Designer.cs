@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.createButton = new System.Windows.Forms.Button();
             this.connectButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // createButton
@@ -55,18 +56,32 @@
             this.connectButton.UseVisualStyleBackColor = false;
             this.connectButton.Click += new System.EventHandler(this.buttonClick);
             // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Garamond", 48F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(122, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(547, 72);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "BATTLE PIRATES";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.createButton);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Battle Pirates";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -74,6 +89,7 @@
 
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.Button connectButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 
