@@ -69,7 +69,6 @@
             this.ipAddressConnect.Name = "ipAddressConnect";
             this.ipAddressConnect.Size = new System.Drawing.Size(260, 47);
             this.ipAddressConnect.TabIndex = 8;
-            this.ipAddressConnect.Text = "192.168.1.118";
             this.ipAddressConnect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // connectGameButton
@@ -124,7 +123,7 @@
             this.Controls.Add(this.label3);
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "ClientForm";
+            this.Text = "Battle Pirates";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

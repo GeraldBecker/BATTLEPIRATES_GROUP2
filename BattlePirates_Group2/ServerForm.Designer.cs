@@ -73,7 +73,7 @@
             this.createGameButton.Name = "createGameButton";
             this.createGameButton.Size = new System.Drawing.Size(131, 54);
             this.createGameButton.TabIndex = 2;
-            this.createGameButton.Text = "CREATE GAME";
+            this.createGameButton.Text = "START SERVER";
             this.createGameButton.UseVisualStyleBackColor = false;
             this.createGameButton.Click += new System.EventHandler(this.button_click);
             // 
@@ -97,11 +97,11 @@
             this.pressButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pressButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pressButton.ForeColor = System.Drawing.Color.White;
-            this.pressButton.Location = new System.Drawing.Point(517, 49);
+            this.pressButton.Location = new System.Drawing.Point(458, 107);
             this.pressButton.Name = "pressButton";
-            this.pressButton.Size = new System.Drawing.Size(67, 49);
+            this.pressButton.Size = new System.Drawing.Size(125, 72);
             this.pressButton.TabIndex = 5;
-            this.pressButton.Text = "PRESS";
+            this.pressButton.Text = "CREATE GAME";
             this.pressButton.UseVisualStyleBackColor = false;
             this.pressButton.Click += new System.EventHandler(this.button_click);
             // 
@@ -164,7 +164,7 @@
             this.Controls.Add(this.connectionPanel);
             this.Name = "ServerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "ServerForm";
+            this.Text = "Battle Pirates";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServerForm_FormClosing);
             this.connectionPanel.ResumeLayout(false);
             this.connectionPanel.PerformLayout();
