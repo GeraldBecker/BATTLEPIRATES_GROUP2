@@ -196,7 +196,10 @@ namespace BattlePirates_Group2 {
             {
                 //SoundPlayer snd2 = new SoundPlayer(Properties.Resources.disconnect_11_converted);
                 //snd2.Play();
+            } catch (System.IO.IOException ex) {
+                return null;
             }
+            
             int dataLen = BitConverter.ToInt32(dataLength, 0);
             Console.WriteLine("Receiving length: " + dataLen);
             TransmitMessage msg = new TransmitMessage();
