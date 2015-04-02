@@ -718,7 +718,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "daGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "daGame";
+            this.Text = "Battle Pirates";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.daGame_FormClosing);
             this.Load += new System.EventHandler(this.daGame_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.daGame_Paint);
