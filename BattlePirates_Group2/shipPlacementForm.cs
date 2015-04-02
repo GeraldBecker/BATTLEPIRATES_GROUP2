@@ -43,8 +43,8 @@ namespace BattlePirates_Group2 {
         /// <param name="whoStarts"></param>
         public shipPlacementForm(MainForm screen, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.alright2_converted);
-            snd.Play();
+            //SoundPlayer snd = new SoundPlayer(Properties.Resources.alright2_converted);
+            //snd.Play();
 
             this.screen = screen;
             this.connection = connection;

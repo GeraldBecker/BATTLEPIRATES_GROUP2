@@ -236,7 +236,8 @@ namespace BattlePirates_Group2 {
                         if(shotResult == LocationState.HIT || shotResult == LocationState.SUNK) {
                             if(shotResult == LocationState.HIT)
                             {
-                                SoundPlayer snd = new SoundPlayer(Properties.Resources.bomb_x_converted);
+                                //SoundPlayer snd = new SoundPlayer(Properties.Resources.bomb_x_converted);
+                                SoundPlayer snd = new SoundPlayer(Properties.Resources.cannon);
                                 snd.Play();
                             }
                             else
@@ -259,10 +260,12 @@ namespace BattlePirates_Group2 {
                                 labelWin.Text = "You Win!!!";
                                 labelWinPanel.Visible = true;
                                 mainMenuBtn.Visible = true;
-                                SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cheering_converted);
-                                snd2.PlaySync();
+                               // SoundPlayer snd2 = new SoundPlayer(Properties.Resources.cheering_converted);
+                                //snd2.Play();
                             }
                         } else {
+                            SoundPlayer snd2 = new SoundPlayer(Properties.Resources.miss);
+                            snd2.Play();
                             myTurn = false;
                         }
                         /*
@@ -281,12 +284,7 @@ namespace BattlePirates_Group2 {
                         // update opponent grid in this GameBoard instance
                         _grid[r, c] = shotResult;
                         CheckTurn();
-                        if (win == true)
-                        {
-                            //stop connection
-                            
-                            connection.stopNetwork();
-                        }
+                        
                     }
                 }
 
@@ -378,8 +376,7 @@ namespace BattlePirates_Group2 {
                     if(win == true) {
                         myTurn = false;
                         labelUpdate();
-                        //stop connection
-                        connection.stopNetwork();
+                        
 
                         //labelWin.Text = "You Lose!!";
                         //labelWin.Visible = true;
@@ -412,8 +409,8 @@ namespace BattlePirates_Group2 {
                 labelWin.Text = "You Lose!!";
                 labelWinPanel.Visible = true;
                 mainMenuBtn.Visible = true;
-                SoundPlayer snd = new SoundPlayer(Properties.Resources.loserLoser_converted);
-                snd.PlaySync();
+                //SoundPlayer snd = new SoundPlayer(Properties.Resources.loserLoser_converted);
+                //snd.Play();
             };
             if(InvokeRequired) {
                 this.Invoke(mi);
@@ -424,6 +421,9 @@ namespace BattlePirates_Group2 {
             /*Owner = new MainForm();
             Owner.Show();
             this.Hide();*/
+
+            //stop connection
+            connection.stopNetwork();
 
             new shipPlacementForm(screen, connection, host).Show();
             this.Close();

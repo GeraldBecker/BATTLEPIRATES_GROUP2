@@ -126,7 +126,7 @@
         AAEAAAD/////AQAAAAAAAAAEAQAAABZTeXN0ZW0uSU8uTWVtb3J5U3RyZWFtCgAAAAdfYnVmZmVyB19v
         cmlnaW4JX3Bvc2l0aW9uB19sZW5ndGgJX2NhcGFjaXR5C19leHBhbmRhYmxlCV93cml0YWJsZQpfZXhw
         b3NhYmxlB19pc09wZW4dTWFyc2hhbEJ5UmVmT2JqZWN0K19faWRlbnRpdHkHAAAAAAAAAAACAggICAgB
-        AQEBCQIAAAAAAAAAAAAAABKsBAASrAQAAAEAAQoPAgAAABKsBAACUklGRgqsBABXQVZFZm10IBAAAAAB
+        AQEBCQIAAAAAAAAAEqwEABKsBAASrAQAAAEAAQoPAgAAABKsBAACUklGRgqsBABXQVZFZm10IBAAAAAB
         AAEARKwAAIhYAQACABAATElTVC4AAABJTkZPSUNSRAsAAAAxOTk3LTEwLTEzAABJU0ZUDgAAAExhdmY1
         Ni4xOS4xMDAAZGF0YbCrBAAAADwA1ACFAQACDAKgAd4AAAA+/7P+Vf4A/oz94fz/+wD7Bvot+YH4APie
         91P3HPcA9wn3PPeU9wD4a/i/+PH4APn4+Ov46vgA+S75b/m3+QD6RfqI+sf6APsr+zz7LPsA+8v6qPq1
@@ -5238,6 +5238,9 @@
   <data name="bubbling_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bubbling_converted.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cannon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cannon.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cheering_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cheering_converted.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -5249,7 +5252,7 @@
         AAEAAAD/////AQAAAAAAAAAEAQAAABZTeXN0ZW0uSU8uTWVtb3J5U3RyZWFtCgAAAAdfYnVmZmVyB19v
         cmlnaW4JX3Bvc2l0aW9uB19sZW5ndGgJX2NhcGFjaXR5C19leHBhbmRhYmxlCV93cml0YWJsZQpfZXhw
         b3NhYmxlB19pc09wZW4dTWFyc2hhbEJ5UmVmT2JqZWN0K19faWRlbnRpdHkHAAAAAAAAAAACAggICAgB
-        AQEBCQIAAAAAAAAAAAAAAE5GAQBORgEAAAEAAQoPAgAAAE5GAQACUklGRkZGAQBXQVZFZm10IBAAAAAB
+        AQEBCQIAAAAAAAAATkYBAE5GAQBORgEAAAEAAQoPAgAAAE5GAQACUklGRkZGAQBXQVZFZm10IBAAAAAB
         AAEARKwAAIhYAQACABAATElTVBoAAABJTkZPSVNGVA4AAABMYXZmNTYuMjMuMTA2AGRhdGEARgEAAA1N
         DAALQgoACogJAAkqCQAKhwoACpoIAAe+BQAFkAQABBADAAJIAQABtgAAAPz+AP7e/AD7YvgA9g31APaL
         +AD8Sv8AAU4AAP4Y/AD8X/0A/2sAAAKPAwAExwIAAUkAAAEyAgADQAMAAy0CAAFKAAABbwMAB7gKAA7R
@@ -6646,5 +6649,8 @@
   </data>
   <data name="loserLoser_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loserLoser_converted.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="miss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\miss.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

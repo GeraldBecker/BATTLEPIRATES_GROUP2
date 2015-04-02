@@ -194,8 +194,8 @@ namespace BattlePirates_Group2 {
             }
             catch(System.ObjectDisposedException ex)
             {
-                SoundPlayer snd2 = new SoundPlayer(Properties.Resources.disconnect_11_converted);
-                snd2.PlaySync();
+                //SoundPlayer snd2 = new SoundPlayer(Properties.Resources.disconnect_11_converted);
+                //snd2.Play();
             }
             int dataLen = BitConverter.ToInt32(dataLength, 0);
             Console.WriteLine("Receiving length: " + dataLen);
@@ -227,10 +227,12 @@ namespace BattlePirates_Group2 {
                 byte[] dataLength = BitConverter.GetBytes((Int32)length);
                 NETWORKSTREAM.Write(dataLength, 0, 4);
                 NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
+
+                //SoundPlayer snd = new SoundPlayer(Properties.Resources.avwait);
+                //snd.Play();
+
                 //The below line of code delays the thread to allow the sending of the entire stream before the next form is loaded. 
                 //Fix this issue if possible. 
-                SoundPlayer snd = new SoundPlayer(Properties.Resources.avwait);
-                snd.PlaySync();
                 Thread.Sleep(5000);
             } catch(Exception ex) {
                 Console.WriteLine("We failed");

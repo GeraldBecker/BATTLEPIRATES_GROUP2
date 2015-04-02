@@ -99,6 +99,15 @@ namespace BattlePirates_Group2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream cannon {
+            get {
+                return ResourceManager.GetStream("cannon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream cheering_converted {
             get {
                 return ResourceManager.GetStream("cheering_converted", resourceCulture);
@@ -129,6 +138,15 @@ namespace BattlePirates_Group2.Properties {
         internal static System.IO.UnmanagedMemoryStream loserLoser_converted {
             get {
                 return ResourceManager.GetStream("loserLoser_converted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream miss {
+            get {
+                return ResourceManager.GetStream("miss", resourceCulture);
             }
         }
     }
