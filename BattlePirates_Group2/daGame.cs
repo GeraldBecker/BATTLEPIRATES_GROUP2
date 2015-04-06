@@ -77,8 +77,8 @@ namespace BattlePirates_Group2 {
             this.screen = screen;
             this.DesktopLocation = screen.Location;
 
-
-            myTurn = host = whosTurn;
+            host = whosTurn;
+            myTurn = !host;
 
             this.mine = mine;
             this.opponent = opponent;

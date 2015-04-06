@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServerForm));
             this.label1 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
             this.createGameButton = new System.Windows.Forms.Button();
@@ -145,6 +146,7 @@
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.connectionPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ServerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Battle Pirates";

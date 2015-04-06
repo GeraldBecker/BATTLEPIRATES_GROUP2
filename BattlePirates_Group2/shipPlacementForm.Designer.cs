@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(shipPlacementForm));
             this.startGameButton = new System.Windows.Forms.Button();
             this.battlePiratesLabel = new System.Windows.Forms.Label();
             this.placeShipsLabel = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.readyButton = new System.Windows.Forms.Button();
             this.startServerButton = new System.Windows.Forms.Button();
-            this.tempStartButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +62,7 @@
             this.startGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startGameButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startGameButton.ForeColor = System.Drawing.Color.White;
-            this.startGameButton.Location = new System.Drawing.Point(626, 400);
+            this.startGameButton.Location = new System.Drawing.Point(645, 50);
             this.startGameButton.Name = "startGameButton";
             this.startGameButton.Size = new System.Drawing.Size(111, 71);
             this.startGameButton.TabIndex = 0;
@@ -379,33 +379,18 @@
             // 
             // startServerButton
             // 
-            this.startServerButton.BackColor = System.Drawing.Color.Red;
+            this.startServerButton.BackColor = System.Drawing.Color.Blue;
             this.startServerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startServerButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startServerButton.ForeColor = System.Drawing.Color.White;
-            this.startServerButton.Location = new System.Drawing.Point(626, 479);
+            this.startServerButton.Location = new System.Drawing.Point(626, 400);
             this.startServerButton.Name = "startServerButton";
             this.startServerButton.Size = new System.Drawing.Size(111, 71);
             this.startServerButton.TabIndex = 13;
-            this.startServerButton.Text = "SERVER START";
+            this.startServerButton.Text = "Start Game";
             this.startServerButton.UseVisualStyleBackColor = false;
             this.startServerButton.Visible = false;
             this.startServerButton.Click += new System.EventHandler(this.serverStart_Click);
-            // 
-            // tempStartButton
-            // 
-            this.tempStartButton.BackColor = System.Drawing.Color.Yellow;
-            this.tempStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tempStartButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tempStartButton.ForeColor = System.Drawing.Color.Black;
-            this.tempStartButton.Location = new System.Drawing.Point(499, 476);
-            this.tempStartButton.Name = "tempStartButton";
-            this.tempStartButton.Size = new System.Drawing.Size(111, 71);
-            this.tempStartButton.TabIndex = 14;
-            this.tempStartButton.Text = "Start Game";
-            this.tempStartButton.UseVisualStyleBackColor = false;
-            this.tempStartButton.Visible = false;
-            this.tempStartButton.Click += new System.EventHandler(this.tempSTARTClick);
             // 
             // shipPlacementForm
             // 
@@ -413,7 +398,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.tempStartButton);
             this.Controls.Add(this.startServerButton);
             this.Controls.Add(this.readyButton);
             this.Controls.Add(this.panel2);
@@ -422,6 +406,7 @@
             this.Controls.Add(this.placeShipsLabel);
             this.Controls.Add(this.battlePiratesLabel);
             this.Controls.Add(this.startGameButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "shipPlacementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Battle Pirates";
@@ -470,6 +455,5 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button readyButton;
         private System.Windows.Forms.Button startServerButton;
-        private System.Windows.Forms.Button tempStartButton;
     }
 }

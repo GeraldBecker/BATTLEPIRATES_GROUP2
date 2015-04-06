@@ -104,6 +104,7 @@ namespace BattlePirates_Group2 {
             //Fix the flicker problem by double buffering.
             DoubleBuffered = true;
 
+            //Start receiving the opponents board if you are the server
             if(whoStarts) {
                 readyButton.Visible = false;
                 Task.Factory.StartNew(() => {
@@ -347,6 +348,8 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void readyButton_Click(object sender, EventArgs e) {
+            readyButton.Enabled = false;
+
             myboard = new GameBoard();
             myboard.initiateShipPlacement(toSetShips);
 

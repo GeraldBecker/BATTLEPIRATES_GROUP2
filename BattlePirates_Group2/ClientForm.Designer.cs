@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
             this.label3 = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.ipAddressConnect = new System.Windows.Forms.TextBox();
@@ -121,6 +122,7 @@
             this.Controls.Add(this.ipAddressConnect);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.label3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Battle Pirates";
