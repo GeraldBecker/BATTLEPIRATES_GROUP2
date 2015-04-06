@@ -236,7 +236,7 @@ namespace BattlePirates_Group2 {
 
                 //The below line of code delays the thread to allow the sending of the entire stream before the next form is loaded. 
                 //Fix this issue if possible. 
-                Thread.Sleep(5000);
+                //Thread.Sleep(5000);
             } catch(Exception ex) {
                 Console.WriteLine("We failed");
                 Console.WriteLine(ex.StackTrace);
@@ -249,14 +249,24 @@ namespace BattlePirates_Group2 {
         /// <returns></returns>
         public TransmitMessage getGameBoard() {
             byte[] dataLength = new byte[4];
-            NETWORKSTREAM.Read(dataLength, 0, 4);
+            try {
+                Console.WriteLine("Trying to read the length");
+                NETWORKSTREAM.Read(dataLength, 0, 4);
+                Console.WriteLine("Read the length");
+            } catch(ObjectDisposedException) {
+                Console.WriteLine("Object disposed");
+            }
+            //Delay the thread to allow for the length to be received.
+            Thread.Sleep(2000);
             int dataLen = BitConverter.ToInt32(dataLength, 0);
             Console.WriteLine("Receiving length: " + dataLen);
             TransmitMessage msg = new TransmitMessage();
             msg.Data = new byte[dataLen];
             Console.WriteLine();
             try {
+                Console.WriteLine("Starting network read");
                 NETWORKSTREAM.Read(msg.Data, 0, dataLen);
+                Console.WriteLine("Ending the network read");
             } catch(System.ArgumentNullException ex) {
                 Console.WriteLine("arg null exception");
             } catch(System.ArgumentOutOfRangeException ex) {
@@ -266,6 +276,8 @@ namespace BattlePirates_Group2 {
             } catch(System.ObjectDisposedException) {
                 Console.WriteLine("object disposed");
             }
+
+            Console.WriteLine("returning the message");
             return msg;
         }
 

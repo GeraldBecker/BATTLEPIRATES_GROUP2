@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Threading;
 
 namespace BattlePirates_Group2 {
     /// <summary>
@@ -35,6 +36,15 @@ namespace BattlePirates_Group2 {
         private bool whoStarts;// if this player starts to play game first
         private bool userQuit;// if user quit shipPlacementForm
 
+        private bool clientReady;
+        private bool serverPlaced;
+
+        private GameBoard myboard;
+
+        private GameBoard enemyBoard;
+
+
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -52,6 +62,8 @@ namespace BattlePirates_Group2 {
             this.DesktopLocation = screen.Location;
 
             userQuit = true;
+            clientReady = false;
+            serverPlaced = false;
 
             // Initial locations of ships for dragging into grid (lower right side of form)
             //5 square size
@@ -87,9 +99,21 @@ namespace BattlePirates_Group2 {
 
             //Prevent the start game button from taking focus
             startGameButton.TabStop = false;
+            readyButton.TabStop = false;
 
             //Fix the flicker problem by double buffering.
             DoubleBuffered = true;
+
+            if(whoStarts) {
+                readyButton.Visible = false;
+                Task.Factory.StartNew(() => {
+                    TransmitMessage msg = connection.getGameBoard();
+                    enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg);
+                    receiveClientBoardSuccess();
+                });
+            }
+
+
         }
 
         /// <summary>
@@ -235,12 +259,24 @@ namespace BattlePirates_Group2 {
                 {
                     Console.WriteLine("Ship: " + n);
                     startGameButton.Visible = false;
+                    startServerButton.Visible = false;
+                    serverPlaced = false;
+
+                    if(!whoStarts)
+                        readyButton.Visible = false;
                     break;
                 }
                 // Check if ship collision
                 if (collision == false)
                 {
-                    startGameButton.Visible = true;
+                    serverPlaced = true;
+
+                    //startGameButton.Visible = true;
+                    if(!whoStarts)
+                        readyButton.Visible = true;
+
+                    if(clientReady)
+                        startServerButton.Visible = true;
                 }
             }
 
@@ -285,8 +321,113 @@ namespace BattlePirates_Group2 {
 
             }
 
-
+            this.Focus();
         }
+
+        private void receiveClientBoardSuccess() {
+            MethodInvoker mi = delegate {
+                if(serverPlaced)
+                    startServerButton.Visible = true;
+                clientReady = true;
+            };
+
+            if(InvokeRequired) {
+                try {
+                    this.Invoke(mi);
+                } catch(ObjectDisposedException e) {
+                    Console.WriteLine("Object Disposed.");
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// For the connecting user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void readyButton_Click(object sender, EventArgs e) {
+            myboard = new GameBoard();
+            myboard.initiateShipPlacement(toSetShips);
+
+            //enemyBoard;
+            TransmitMessage msg = SerializationHelper.Serialize(myboard);
+
+            connection.sendGameBoard(msg);
+
+            //make this a factory
+            Task.Factory.StartNew(() => {
+                TransmitMessage msg1 = connection.getGameBoard();
+                enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg1);
+                readyButtonFix();
+
+                Thread.Sleep(2000);
+                autoStartThread();
+            });
+            
+
+            
+        }
+
+        private void readyButtonFix() {
+            MethodInvoker mi = delegate {
+                readyButton.Visible = false;
+                //tempStartButton.Visible = true;
+            };
+
+            if(InvokeRequired) {
+                try {
+                    this.Invoke(mi);
+                } catch(ObjectDisposedException e) {
+                    Console.WriteLine("Object Disposed.");
+                }
+
+            }
+        }
+
+        private void serverStart_Click(object sender, EventArgs e) {
+            myboard = new GameBoard();
+            myboard.initiateShipPlacement(toSetShips);
+
+            TransmitMessage msg1 = SerializationHelper.Serialize(myboard);
+            connection.sendGameBoard(msg1);
+            //tempStartButton.Visible = true;
+            Thread.Sleep(2000);
+            autoStart();
+        }
+        private void tempSTARTClick(object sender, EventArgs e) {
+            autoStart();
+        }
+
+        private void autoStart() {
+            new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
+
+            //Get rid of the connection form.
+            userQuit = false;
+            this.Close();
+        }
+
+        private void autoStartThread() {
+
+            MethodInvoker mi = delegate {
+                new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
+
+                //Get rid of the connection form.
+                userQuit = false;
+                this.Close();
+            };
+
+            if(InvokeRequired) {
+                try {
+                    this.Invoke(mi);
+                } catch(ObjectDisposedException e) {
+                    Console.WriteLine("Object Disposed.");
+                }
+
+            }
+            
+        }
+
 
         /// <summary>
         /// Click of the start button event
@@ -392,5 +533,11 @@ namespace BattlePirates_Group2 {
                 Application.Exit();
             }
         }
+
+        
+
+        
+
+        
     }
 }

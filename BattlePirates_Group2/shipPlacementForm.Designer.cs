@@ -49,6 +49,9 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.readyButton = new System.Windows.Forms.Button();
+            this.startServerButton = new System.Windows.Forms.Button();
+            this.tempStartButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -358,12 +361,61 @@
             this.label20.TabIndex = 0;
             this.label20.Text = "A";
             // 
+            // readyButton
+            // 
+            this.readyButton.BackColor = System.Drawing.Color.LimeGreen;
+            this.readyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.readyButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.readyButton.ForeColor = System.Drawing.Color.White;
+            this.readyButton.Location = new System.Drawing.Point(626, 298);
+            this.readyButton.Name = "readyButton";
+            this.readyButton.Size = new System.Drawing.Size(111, 71);
+            this.readyButton.TabIndex = 12;
+            this.readyButton.TabStop = false;
+            this.readyButton.Text = "Ready";
+            this.readyButton.UseVisualStyleBackColor = false;
+            this.readyButton.Visible = false;
+            this.readyButton.Click += new System.EventHandler(this.readyButton_Click);
+            // 
+            // startServerButton
+            // 
+            this.startServerButton.BackColor = System.Drawing.Color.Red;
+            this.startServerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startServerButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startServerButton.ForeColor = System.Drawing.Color.White;
+            this.startServerButton.Location = new System.Drawing.Point(626, 479);
+            this.startServerButton.Name = "startServerButton";
+            this.startServerButton.Size = new System.Drawing.Size(111, 71);
+            this.startServerButton.TabIndex = 13;
+            this.startServerButton.Text = "SERVER START";
+            this.startServerButton.UseVisualStyleBackColor = false;
+            this.startServerButton.Visible = false;
+            this.startServerButton.Click += new System.EventHandler(this.serverStart_Click);
+            // 
+            // tempStartButton
+            // 
+            this.tempStartButton.BackColor = System.Drawing.Color.Yellow;
+            this.tempStartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tempStartButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tempStartButton.ForeColor = System.Drawing.Color.Black;
+            this.tempStartButton.Location = new System.Drawing.Point(499, 476);
+            this.tempStartButton.Name = "tempStartButton";
+            this.tempStartButton.Size = new System.Drawing.Size(111, 71);
+            this.tempStartButton.TabIndex = 14;
+            this.tempStartButton.Text = "Start Game";
+            this.tempStartButton.UseVisualStyleBackColor = false;
+            this.tempStartButton.Visible = false;
+            this.tempStartButton.Click += new System.EventHandler(this.tempSTARTClick);
+            // 
             // shipPlacementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.tempStartButton);
+            this.Controls.Add(this.startServerButton);
+            this.Controls.Add(this.readyButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.placeShipsSubLabel);
@@ -416,5 +468,8 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button readyButton;
+        private System.Windows.Forms.Button startServerButton;
+        private System.Windows.Forms.Button tempStartButton;
     }
 }

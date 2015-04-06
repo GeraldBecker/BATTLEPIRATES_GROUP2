@@ -120,8 +120,8 @@ namespace BattlePirates_Group2 {
 
         private void backButton_MouseClick(object sender, MouseEventArgs e)
         {
-            SoundPlayer snd = new SoundPlayer(Properties.Resources.dontdo_converted);
-            snd.PlaySync();
+            //SoundPlayer snd = new SoundPlayer(Properties.Resources.dontdo_converted);
+            //snd.PlaySync();
         }
     }
 }

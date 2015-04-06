@@ -29,10 +29,10 @@ namespace BattlePirates_Group2 {
                         Console.Write(b.ToString());
                     }
                     Console.WriteLine();
-                Haha:
+                //Haha:
                     if(!memoryStream.CanRead) {
                         Console.WriteLine("tried but failed");
-                        goto Haha;
+                        //goto Haha;
                     }
 
                     temp = (new BinaryFormatter()).Deserialize(memoryStream);
