@@ -27,7 +27,6 @@
             this.backButton = new System.Windows.Forms.Button();
             this.createGameButton = new System.Windows.Forms.Button();
             this.connectionPanel = new System.Windows.Forms.Panel();
-            this.pressButton = new System.Windows.Forms.Button();
             this.ipAddress = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -80,7 +79,6 @@
             // connectionPanel
             // 
             this.connectionPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.connectionPanel.Controls.Add(this.pressButton);
             this.connectionPanel.Controls.Add(this.ipAddress);
             this.connectionPanel.Controls.Add(this.statusLabel);
             this.connectionPanel.Controls.Add(this.label2);
@@ -89,21 +87,6 @@
             this.connectionPanel.Name = "connectionPanel";
             this.connectionPanel.Size = new System.Drawing.Size(600, 257);
             this.connectionPanel.TabIndex = 3;
-            // 
-            // pressButton
-            // 
-            this.pressButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pressButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(20)))), ((int)(((byte)(243)))));
-            this.pressButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.pressButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pressButton.ForeColor = System.Drawing.Color.White;
-            this.pressButton.Location = new System.Drawing.Point(458, 107);
-            this.pressButton.Name = "pressButton";
-            this.pressButton.Size = new System.Drawing.Size(125, 72);
-            this.pressButton.TabIndex = 5;
-            this.pressButton.Text = "CREATE GAME";
-            this.pressButton.UseVisualStyleBackColor = false;
-            this.pressButton.Click += new System.EventHandler(this.button_click);
             // 
             // ipAddress
             // 
@@ -183,6 +166,5 @@
         private System.Windows.Forms.Label ipAddress;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button pressButton;
     }
 }

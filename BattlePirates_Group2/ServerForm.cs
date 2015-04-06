@@ -36,10 +36,7 @@ namespace BattlePirates_Group2 {
                 screen.Show();
                 userQuit = false;
                 this.Close();
-            } else if(sender.Equals(pressButton)) {
-                //Start the server connection once it has been configured.
-                startServer();
-            }             
+            }            
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace BattlePirates_Group2 {
                 setStatus("FAILED TO START SERVER.");
                 return;
             }
-
+            startServer();
         }
 
         /// <summary>
@@ -84,19 +81,37 @@ namespace BattlePirates_Group2 {
         /// </summary>
         public void startServer() {
 
-            connection.waitForClient();
-            setStatus("CONNECTION SUCCESSFUL");
-            progressBar1.Value = 100;
+            Task.Factory.StartNew(() => {
+                connection.waitForClient();
+                startGamePlacement();
+            });
 
-            //Start the ship placement screen.
-            //new shipPlaceForm(screen, connection, true).Show();
-            //new gameForm(screen, connection, true).Show();
-            //new daGame(screen, connection, true).Show();
-            new shipPlacementForm(screen, connection, true).Show();
+            progressBar1.Value = 75;
+        }
 
-            //Get rid of the connection form.
-            userQuit = false;
-            this.Close();
+
+        private void startGamePlacement() {
+            MethodInvoker mi = delegate {
+                setStatus("CONNECTION SUCCESSFUL");
+                progressBar1.Value = 100;
+                //Start the ship placement screen.
+                new shipPlacementForm(screen, connection, true).Show();
+
+                //Get rid of the connection form.
+                userQuit = false;
+                this.Close();
+            };
+
+            if(InvokeRequired) {
+                try {
+                    this.Invoke(mi);
+                } catch(ObjectDisposedException e) {
+                    Console.WriteLine("Object Disposed.");
+                }
+                
+            }
+
+            
         }
 
         private void setStatus(string msg) {
