@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(shipPlacementForm));
-            this.startGameButton = new System.Windows.Forms.Button();
             this.battlePiratesLabel = new System.Windows.Forms.Label();
             this.placeShipsLabel = new System.Windows.Forms.Label();
             this.placeShipsSubLabel = new System.Windows.Forms.Label();
@@ -55,21 +54,6 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // startGameButton
-            // 
-            this.startGameButton.BackColor = System.Drawing.Color.Blue;
-            this.startGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.startGameButton.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startGameButton.ForeColor = System.Drawing.Color.White;
-            this.startGameButton.Location = new System.Drawing.Point(645, 50);
-            this.startGameButton.Name = "startGameButton";
-            this.startGameButton.Size = new System.Drawing.Size(111, 71);
-            this.startGameButton.TabIndex = 0;
-            this.startGameButton.Text = "Start Game";
-            this.startGameButton.UseVisualStyleBackColor = false;
-            this.startGameButton.Visible = false;
-            this.startGameButton.Click += new System.EventHandler(this.startGame_click);
             // 
             // battlePiratesLabel
             // 
@@ -405,7 +389,6 @@
             this.Controls.Add(this.placeShipsSubLabel);
             this.Controls.Add(this.placeShipsLabel);
             this.Controls.Add(this.battlePiratesLabel);
-            this.Controls.Add(this.startGameButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "shipPlacementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -427,7 +410,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button startGameButton;
         private System.Windows.Forms.Label battlePiratesLabel;
         private System.Windows.Forms.Label placeShipsLabel;
         private System.Windows.Forms.Label placeShipsSubLabel;

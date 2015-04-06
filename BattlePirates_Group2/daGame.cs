@@ -30,37 +30,7 @@ namespace BattlePirates_Group2 {
 
         private const int SPACER = 400;
 
-        /// <summary>
-        /// Currently depricated
-        /// </summary>
-        /// <param name="screen"></param>
-        /// <param name="connection"></param>
-        /// <param name="whosTurn"></param>
-        /// <param name="userShips"></param>
-        /*internal daGame(MainForm screen, ConnectionManager connection, bool whosTurn, BaseShip[] userShips) {
-            InitializeComponent();
-            this.connection = connection;
-            this.screen = screen;
-            this.DesktopLocation = screen.Location;
-
-
-            myTurn = host = whosTurn;
-
-            mine = new GameBoard();
-            mine.initiateShipPlacement(userShips);
-            this.userShips = userShips;
-            //mine = new GameBoard();
-
-            opponent = new GameBoard();
-            // TO-Delete just for testing game logic
-            opponent.initiateShipPlacement(userShips);
-
-            opponentShips = opponent.getShips();
-
-            //Fix the flicker problem by double buffering.
-            DoubleBuffered = true;
-        }*/
-
+        
         /// <summary>
         /// Constructor for the GameEngine
         /// Initializes Mine and Opponents game boards after connection
@@ -92,28 +62,7 @@ namespace BattlePirates_Group2 {
             DoubleBuffered = true;
         }
 
-        /*private void taskGetData() {
-            Task.Factory.StartNew(() => {
-                Console.WriteLine("TRYING TO GET THE BOARD");
-                opponent = connection.getData2();
-                Console.WriteLine("GOT THE BOARD");
-            });
-        }*/
-
-        /*private void checkTurn() {
-            if(!this.InvokeRequired) {
-                if(isTurn) {
-                } else {
-                    //If a move is made, call and create a task to wait to receive data.
-                    taskGetData();
-                }
-                this.Refresh();
-            } else
-                this.Invoke((MethodInvoker)delegate {
-                    checkTurn();
-                });
-        }*/
-
+        
         private void daGame_FormClosing(object sender, FormClosingEventArgs e) {
             Application.Exit();
         }
@@ -214,8 +163,6 @@ namespace BattlePirates_Group2 {
         private void daGame_MouseDown(object sender, MouseEventArgs e) {
             if(myTurn) {
                 // check to see if hit
-                //int xStrike = (e.X / BLOCKWIDTH) - START_X;
-                //int yStrike = (e.Y / BLOCKWIDTH) - START_Y;
                 int xStrike = ((e.X - START_X) / BLOCKWIDTH) ;
                 int yStrike = ((e.Y - START_Y) / BLOCKWIDTH) ;
 
@@ -223,8 +170,8 @@ namespace BattlePirates_Group2 {
                 Console.WriteLine("MOD STRIKE ["+xStrike+","+yStrike+"]");
 
                 if(0 <= xStrike && xStrike < 10 && 0 <= yStrike && yStrike < 10) {
-                    int c = xStrike;//e.X / BLOCKWIDTH;
-                    int r = yStrike;//e.Y / BLOCKWIDTH;
+                    int c = xStrike;
+                    int r = yStrike;
 
                     Point shot = new Point(r, c);
                     LocationState shotResult;
@@ -256,7 +203,6 @@ namespace BattlePirates_Group2 {
                             }
                             if(win == true) {
                                 myTurn = false;
-                                //labelWin.ForeColor = Color.Red;
                                 labelWin.Text = "You Win!!!";
                                 labelWinPanel.Visible = true;
                                 mainMenuBtn.Visible = true;
@@ -268,15 +214,7 @@ namespace BattlePirates_Group2 {
                             snd2.Play();
                             myTurn = false;
                         }
-                        /*
-                        myTurn = false;
-                        win = true;
-                        if (win == true)
-                        {
-                            labelWin.Text = "You Win!!!";
-                            labelWin.Visible = true;
-                        }
-                        */
+
                         // Send to opponent
                         TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
                         connection.sendGamePoint(msg1);
@@ -288,22 +226,9 @@ namespace BattlePirates_Group2 {
                     }
                 }
 
-                /*TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
-                connection.sendGamePoint(msg1);
-                Console.WriteLine("Sent location: " + e.Location);
-
-                TransmitMessage msg = connection.getGamePoint();
-                Point p = (Point)SerializationHelper.Deserialize(msg);
-                Console.WriteLine("Received location: " + p);*/
 
 
-            } else {
-                /*TransmitMessage msg = connection.getGamePoint();
-                Point p = (Point)SerializationHelper.Deserialize(msg);
-                Console.WriteLine("Received location: " + p);
-
-                myTurn = true;*/
-            }
+            } 
         }
 
         /// <summary>
@@ -353,13 +278,11 @@ namespace BattlePirates_Group2 {
                 // check and update mine gameBoard
                 LocationState shotResult;
 
-                //int xStrike = (p.X / BLOCKWIDTH) - START_X;
-                //int yStrike = (p.Y / BLOCKWIDTH) - START_Y;
                 int xStrike = ((p.X - START_X) / BLOCKWIDTH);
                 int yStrike = ((p.Y - START_Y) / BLOCKWIDTH);
 
-                int c = xStrike;//p.X / BLOCKWIDTH;
-                int r = yStrike;//p.Y / BLOCKWIDTH;
+                int c = xStrike;
+                int r = yStrike;
                 shotResult = mine.strikeCoordinates(new Point(r, c));
                 _grid2[r, c] = shotResult;
                 Console.WriteLine("GetData shotResult: " + shotResult);
@@ -377,9 +300,6 @@ namespace BattlePirates_Group2 {
                         myTurn = false;
                         labelUpdate();
                         
-
-                        //labelWin.Text = "You Lose!!";
-                        //labelWin.Visible = true;
                     }
                 } else {
                     Console.WriteLine("LocationState.Hit");

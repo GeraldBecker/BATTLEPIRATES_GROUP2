@@ -98,7 +98,6 @@ namespace BattlePirates_Group2 {
             dragging = false;
 
             //Prevent the start game button from taking focus
-            startGameButton.TabStop = false;
             readyButton.TabStop = false;
 
             //Fix the flicker problem by double buffering.
@@ -156,7 +155,6 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void shipPlacementForm_MouseDown(object sender, MouseEventArgs e) {
-
             Console.WriteLine("Mouse Down Location: " + e.X + " " + e.Y);
             int c = e.X / BLOCKWIDTH;
             int r = e.Y / BLOCKWIDTH;
@@ -259,7 +257,6 @@ namespace BattlePirates_Group2 {
                 if (myShips[n].outsideGrid())
                 {
                     Console.WriteLine("Ship: " + n);
-                    startGameButton.Visible = false;
                     startServerButton.Visible = false;
                     serverPlaced = false;
 
@@ -398,9 +395,7 @@ namespace BattlePirates_Group2 {
             Thread.Sleep(2000);
             autoStart();
         }
-        private void tempSTARTClick(object sender, EventArgs e) {
-            autoStart();
-        }
+
 
         private void autoStart() {
             new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
@@ -432,99 +427,7 @@ namespace BattlePirates_Group2 {
         }
 
 
-        /// <summary>
-        /// Click of the start button event
-        /// checks if the ships are all placed on grid.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void startGame_click(object sender, EventArgs e) {
-
-            // Check if ships on game board
-            /*
-            for(int n = 0; n < myShips.Length; n++) {
-                if(myShips[n].outsideGrid()) {
-                    Console.WriteLine("Ship: " + n);
-                    startGameButton.Visible = false;
-                    return;
-                }
-            }
-            // Check if ship collision
-            if(collision == true) {
-                startGameButton.Visible = false;
-                return;
-            }*/
-            GameBoard myboard = new GameBoard();
-            myboard.initiateShipPlacement(toSetShips);
-
-            GameBoard enemyBoard;
-
-            //This is the new code to get the other board
-
-
-
-            if(whoStarts) {
-                //Task.Factory.StartNew(() => {
-                //Get client board
-                Console.WriteLine("SERVER TRYING TO GET THE BOARD");
-                TransmitMessage msg = connection.getGameBoard();
-                enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg);
-                Console.WriteLine("SERVER GOT THE BOARD");
-
-                //Send server board
-                TransmitMessage msg1 = SerializationHelper.Serialize(myboard);
-                connection.sendGameBoard(msg1);
-
-
-                //Receive confirmation first
-                /*TransmitMessage msg2 = connection.getTransmission();
-                bool success = (bool)SerializationHelper.Deserialize(msg2);
-
-                if(success){
-                    Console.WriteLine("Sending of the board was successfully completed.");
-                } else {
-                    Console.WriteLine("Sending of the board failed.");
-                }*/
-                //});
-            } else {
-                //Send client board
-                TransmitMessage msg = SerializationHelper.Serialize(myboard);
-
-                connection.sendGameBoard(msg);
-
-                //Get server Board
-                //Task.Factory.StartNew(() => {
-                Console.WriteLine("TRYING TO GET THE BOARD");
-                TransmitMessage msg1 = connection.getGameBoard();
-                enemyBoard = (GameBoard)SerializationHelper.Deserialize(msg1);
-                Console.WriteLine("GOT THE BOARD");
-                //});
-                //Send confirmation message
-                //TransmitMessage msg2 = SerializationHelper.Serialize(true);
-                //connection.sendTransmission(msg2);
-            }
-
-
-
-
-
-
-
-            Console.WriteLine("PASSED ALL METHODS");
-
-
-
-
-            new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
-
-
-
-            //new daGame(screen, connection, whoStarts, myShips).Show();
-
-            //Get rid of the connection form.
-            userQuit = false;
-            this.Close();
-        }
+        
 
         /// <summary>
         /// Form closing event

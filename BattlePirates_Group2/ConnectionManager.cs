@@ -293,6 +293,6 @@ namespace BattlePirates_Group2 {
             NETWORKSTREAM.Close();
         }
 
-        //public void 
+        
     }
 }

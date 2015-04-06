@@ -23,16 +23,12 @@ namespace BattlePirates_Group2 {
                 object temp = null;
                 memoryStream.Position = 0;
                 try {
-                    //Console.WriteLine(message.Data.ToArray().ToString());
-                    //Console.WriteLine(Encoding.UTF8.GetString(message.Data));
                     foreach(byte b in message.Data) {
                         Console.Write(b.ToString());
                     }
                     Console.WriteLine();
-                //Haha:
                     if(!memoryStream.CanRead) {
                         Console.WriteLine("tried but failed");
-                        //goto Haha;
                     }
 
                     temp = (new BinaryFormatter()).Deserialize(memoryStream);
