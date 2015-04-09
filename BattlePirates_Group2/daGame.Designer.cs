@@ -708,15 +708,15 @@
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.mainMenuBtn);
             this.Controls.Add(this.labelWinPanel);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.yourTurnLabel);
             this.Controls.Add(this.battlePiratesLabel);
             this.Controls.Add(this.label42);
             this.Controls.Add(this.placeShipsSubLabel);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.waitPanel);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "daGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

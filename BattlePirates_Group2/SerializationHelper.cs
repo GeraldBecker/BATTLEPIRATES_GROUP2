@@ -24,18 +24,14 @@ namespace BattlePirates_Group2 {
                 memoryStream.Position = 0;
                 try {
                     foreach(byte b in message.Data) {
-                        Console.Write(b.ToString());
                     }
                     Console.WriteLine();
                     if(!memoryStream.CanRead) {
-                        Console.WriteLine("tried but failed");
                     }
 
                     temp = (new BinaryFormatter()).Deserialize(memoryStream);
                 } catch(System.ArgumentNullException) {
-                    Console.WriteLine("null exception in foo");
                 } catch(System.Runtime.Serialization.SerializationException ex) {
-                    Console.WriteLine(ex.StackTrace);
                 } finally {
                 }
                 return temp;

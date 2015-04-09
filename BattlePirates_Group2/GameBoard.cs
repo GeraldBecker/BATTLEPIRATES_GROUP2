@@ -91,7 +91,6 @@ namespace BattlePirates_Group2 {
         /// LocationState enum representing the state of the point
         /// </returns>
         public LocationState strikeCoordinates(Point p) {
-            Console.WriteLine("YOU ARE SENDING: [" + p.X + "," + p.Y+"]");
             //If the square has not been shot at before
             if(grid[p.X, p.Y] == LocationState.EMPTY || grid[p.X, p.Y] == LocationState.SHIP)
             {
@@ -106,7 +105,6 @@ namespace BattlePirates_Group2 {
                         if(ships[i].isSunk()) {
                             Point[] temp = ships[i].getLocation();
                             for(int x = 0; x < temp.Length; x++) {
-                                Console.WriteLine("SUNK: " + temp[x].ToString());
                                 grid[temp[x].X, temp[x].Y] = LocationState.SUNK;
                             }
                             return LocationState.SUNK;

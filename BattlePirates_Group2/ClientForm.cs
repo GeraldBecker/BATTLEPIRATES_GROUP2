@@ -59,7 +59,8 @@ namespace BattlePirates_Group2 {
         }
 
         /// <summary>
-        /// 
+        /// Connection for client
+        /// shows progress
         /// </summary>
         public void clientConnect() {
             progressBar2.Maximum = 100;
@@ -116,12 +117,6 @@ namespace BattlePirates_Group2 {
             if(userQuit) {
                 Application.Exit();
             }
-        }
-
-        private void backButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            //SoundPlayer snd = new SoundPlayer(Properties.Resources.dontdo_converted);
-            //snd.PlaySync();
         }
     }
 }

@@ -10,11 +10,18 @@ using System.Windows.Forms;
 using System.Media;
 
 namespace BattlePirates_Group2 {
+    /// <summary>
+    /// The form for creating a game by starting a connection
+    /// </summary>
     public partial class ServerForm : Form {
         private MainForm screen;
         private bool userQuit;
         private ConnectionManager connection;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="screen"></param>
         public ServerForm(MainForm screen) {
             
             this.screen = screen;
@@ -27,6 +34,12 @@ namespace BattlePirates_Group2 {
             connection = new ConnectionManager();
         }
 
+        /// <summary>
+        /// Event handle for button click
+        /// start server or go back
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_click(object sender, EventArgs e) {
             if(sender.Equals(createGameButton)) {
                 //Set up the server configuration.
@@ -40,7 +53,7 @@ namespace BattlePirates_Group2 {
         }
 
         /// <summary>
-        /// 
+        /// Setup the server
         /// </summary>
         private void serverSetup() {
             progressBar1.Maximum = 100;
@@ -77,7 +90,7 @@ namespace BattlePirates_Group2 {
         }
 
         /// <summary>
-        /// 
+        /// Starts the server
         /// </summary>
         public void startServer() {
 
@@ -89,7 +102,9 @@ namespace BattlePirates_Group2 {
             progressBar1.Value = 75;
         }
 
-
+        /// <summary>
+        /// Starts the ship placement screen in a seperate thread
+        /// </summary>
         private void startGamePlacement() {
             MethodInvoker mi = delegate {
                 setStatus("CONNECTION SUCCESSFUL");
@@ -106,18 +121,23 @@ namespace BattlePirates_Group2 {
                 try {
                     this.Invoke(mi);
                 } catch(ObjectDisposedException e) {
-                    Console.WriteLine("Object Disposed.");
                 }
-                
             }
-
-            
         }
 
+        /// <summary>
+        /// Sets the status string
+        /// </summary>
+        /// <param name="msg"></param>
         private void setStatus(string msg) {
             statusLabel.Text = msg;
         }
 
+        /// <summary>
+        /// Form closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ServerForm_FormClosing(object sender, FormClosingEventArgs e) {
             if(userQuit) {
                 Application.Exit();

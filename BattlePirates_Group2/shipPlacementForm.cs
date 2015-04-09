@@ -53,8 +53,6 @@ namespace BattlePirates_Group2 {
         /// <param name="whoStarts"></param>
         public shipPlacementForm(MainForm screen, ConnectionManager connection, bool whoStarts) {
             InitializeComponent();
-            //SoundPlayer snd = new SoundPlayer(Properties.Resources.alright2_converted);
-            //snd.Play();
 
             this.screen = screen;
             this.connection = connection;
@@ -125,7 +123,6 @@ namespace BattlePirates_Group2 {
             for(int r = START_X; r < (START_X + 10); r++) {
                 for(int c = START_Y; c < (START_Y + 10); c++) {
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(0, 76, 179)), r * BLOCKWIDTH, c * BLOCKWIDTH, BLOCKWIDTH - 5, BLOCKWIDTH - 5);
-
                 }
             }
 
@@ -155,16 +152,12 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void shipPlacementForm_MouseDown(object sender, MouseEventArgs e) {
-            Console.WriteLine("Mouse Down Location: " + e.X + " " + e.Y);
             int c = e.X / BLOCKWIDTH;
             int r = e.Y / BLOCKWIDTH;
-            Console.WriteLine("Point: " + r + " " + c);
-
 
             //Loop through the array of ships to find a ship that is at the point.
             for(int n = 0; n < myShips.Length; n++) {
                 if(myShips[n].checkForShip(new Point(r, c))) {
-                    Console.WriteLine("YOU HIT A SHIP");
 
                     containsTrue = true;
 
@@ -185,8 +178,6 @@ namespace BattlePirates_Group2 {
         /// <param name="e"></param>
         private void shipPlacementForm_MouseMove(object sender, MouseEventArgs e) {
             if(dragging && containsTrue) {
-                Console.WriteLine("Mouse UP Location: " + e.Y / BLOCKWIDTH + " " + e.X / BLOCKWIDTH);
-
 
                 // checks the orientation and sets the points accordingly
                 if(tempOrientVert) {
@@ -247,7 +238,6 @@ namespace BattlePirates_Group2 {
                 myShips[shipToMove].setLocation(tempShapePoints, tempOrientVert);
             }
 
-            Console.WriteLine("Mouse UP Location: " + e.X + " " + e.Y);
             containsTrue = false;
 
             // show start button if all ships on grid
@@ -256,7 +246,6 @@ namespace BattlePirates_Group2 {
             {
                 if (myShips[n].outsideGrid())
                 {
-                    Console.WriteLine("Ship: " + n);
                     startServerButton.Visible = false;
                     serverPlaced = false;
 
@@ -290,33 +279,23 @@ namespace BattlePirates_Group2 {
         private void shipPlacementForm_KeyDown(object sender, KeyEventArgs e) {
             // Spacebar toggles orientation of temporary dragged ship
             if(e.KeyCode == Keys.Space && dragging) {
-                Console.WriteLine("Rotate Selected.");
-
 
                 if(tempOrientVert) {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
-                        Console.WriteLine("b4i . X : " + i + " , " + tempShapePoints[i].X);
-                        Console.WriteLine("b4i . Y : " + i + " , " + tempShapePoints[i].Y);
-
                         tempShapePoints[i].Y = tempShapePoints[i].Y + i; 
                         tempShapePoints[i].X = tempShapePoints[0].X;
-                        Console.WriteLine("i . X : " + i + " , " + tempShapePoints[i].X);
-                        Console.WriteLine("i . Y : " + i + " , " + tempShapePoints[i].Y);
                     }
                 } else {
                     for(int i = 0; i < tempShapePoints.Length; i++) {
                         tempShapePoints[i].X = tempShapePoints[i].X + i;
                         tempShapePoints[i].Y = tempShapePoints[0].Y;
-                        Console.WriteLine("i . X : " + i + " , " + tempShapePoints[i].X);
                     }
                 }
-
 
                 if(tempOrientVert)
                     tempOrientVert = false;
                 else
                     tempOrientVert = true;
-
             }
 
             this.Focus();
@@ -333,7 +312,6 @@ namespace BattlePirates_Group2 {
                 try {
                     this.Invoke(mi);
                 } catch(ObjectDisposedException e) {
-                    Console.WriteLine("Object Disposed.");
                 }
 
             }
@@ -364,11 +342,11 @@ namespace BattlePirates_Group2 {
                 Thread.Sleep(2000);
                 autoStartThread();
             });
-            
-
-            
         }
 
+        /// <summary>
+        /// Seperate thread for ready button function
+        /// </summary>
         private void readyButtonFix() {
             MethodInvoker mi = delegate {
                 readyButton.Visible = false;
@@ -379,12 +357,16 @@ namespace BattlePirates_Group2 {
                 try {
                     this.Invoke(mi);
                 } catch(ObjectDisposedException e) {
-                    Console.WriteLine("Object Disposed.");
                 }
 
             }
         }
 
+        /// <summary>
+        /// Starts the server
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void serverStart_Click(object sender, EventArgs e) {
             myboard = new GameBoard();
             myboard.initiateShipPlacement(toSetShips);
@@ -396,7 +378,9 @@ namespace BattlePirates_Group2 {
             autoStart();
         }
 
-
+        /// <summary>
+        /// Starts the game
+        /// </summary>
         private void autoStart() {
             new daGame(screen, connection, whoStarts, myboard, enemyBoard).Show();
 
@@ -405,6 +389,9 @@ namespace BattlePirates_Group2 {
             this.Close();
         }
 
+        /// <summary>
+        /// Thread to run auto start
+        /// </summary>
         private void autoStartThread() {
 
             MethodInvoker mi = delegate {
@@ -419,15 +406,11 @@ namespace BattlePirates_Group2 {
                 try {
                     this.Invoke(mi);
                 } catch(ObjectDisposedException e) {
-                    Console.WriteLine("Object Disposed.");
                 }
 
             }
             
         }
-
-
-        
 
         /// <summary>
         /// Form closing event
@@ -439,11 +422,5 @@ namespace BattlePirates_Group2 {
                 Application.Exit();
             }
         }
-
-        
-
-        
-
-        
     }
 }

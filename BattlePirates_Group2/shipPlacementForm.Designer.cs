@@ -384,11 +384,11 @@
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.startServerButton);
             this.Controls.Add(this.readyButton);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.placeShipsSubLabel);
             this.Controls.Add(this.placeShipsLabel);
             this.Controls.Add(this.battlePiratesLabel);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "shipPlacementForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

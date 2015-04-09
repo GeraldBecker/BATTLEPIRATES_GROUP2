@@ -34,14 +34,11 @@ namespace BattlePirates_Group2 {
         /// </returns>
         public bool initiateServer() {
             string hostName = Dns.GetHostName();
-            Console.WriteLine("Host name: " + hostName.ToString());
             IPHostEntry ipEntries = Dns.GetHostEntry(hostName);
             IPAddress[] ipAddresses = ipEntries.AddressList;
 
             //Cycle through available address and find the local IP Address
             for(int i = 0; i < ipAddresses.Length; i++) {
-                Console.WriteLine("IP Address {0}: {1} : {2}", i, ipAddresses[i].ToString(), ipAddresses[i].AddressFamily);
-                Console.WriteLine(ipAddresses[i].AddressFamily);
                 if(ipAddresses[i].AddressFamily.ToString() == ProtocolFamily.InterNetwork.ToString()) {
                     IP = ipAddresses[i];
                     return true;
@@ -166,17 +163,11 @@ namespace BattlePirates_Group2 {
         /// <param name="msg"></param>
         public void sendGamePoint(TransmitMessage msg) {
             int length = msg.Data.Length;
-            Console.WriteLine("Sending length: " + length);
             try {
                 byte[] dataLength = BitConverter.GetBytes((Int32)length);
                 NETWORKSTREAM.Write(dataLength, 0, 4);
                 NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
-                //The below line of code delays the thread to allow the sending of the entire stream before the next form is loaded. 
-                //Fix this issue if possible. 
-                //Thread.Sleep(10000);
             } catch(Exception ex) {
-                Console.WriteLine("We failed");
-                Console.WriteLine(ex.StackTrace);
             }
         }
 
@@ -194,27 +185,20 @@ namespace BattlePirates_Group2 {
             }
             catch(System.ObjectDisposedException ex)
             {
-                //SoundPlayer snd2 = new SoundPlayer(Properties.Resources.disconnect_11_converted);
-                //snd2.Play();
             } catch (System.IO.IOException ex) {
                 return null;
             }
             
             int dataLen = BitConverter.ToInt32(dataLength, 0);
-            Console.WriteLine("Receiving length: " + dataLen);
             TransmitMessage msg = new TransmitMessage();
             msg.Data = new byte[dataLen];
             Console.WriteLine();
             try {
                 NETWORKSTREAM.Read(msg.Data, 0, dataLen);
             } catch(System.ArgumentNullException ex) {
-                Console.WriteLine("arg null exception");
             } catch(System.ArgumentOutOfRangeException ex) {
-                Console.WriteLine("arg out of range");
             } catch(System.IO.IOException) {
-                Console.WriteLine("io excp");
             } catch(System.ObjectDisposedException) {
-                Console.WriteLine("object disposed");
             }
             return msg;
         }
@@ -225,21 +209,11 @@ namespace BattlePirates_Group2 {
         /// <param name="msg"></param>
         public void sendGameBoard(TransmitMessage msg) {
             int length = msg.Data.Length;
-            Console.WriteLine("Sending length: " + length);
             try {
                 byte[] dataLength = BitConverter.GetBytes((Int32)length);
                 NETWORKSTREAM.Write(dataLength, 0, 4);
                 NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
-
-                //SoundPlayer snd = new SoundPlayer(Properties.Resources.avwait);
-                //snd.Play();
-
-                //The below line of code delays the thread to allow the sending of the entire stream before the next form is loaded. 
-                //Fix this issue if possible. 
-                //Thread.Sleep(5000);
             } catch(Exception ex) {
-                Console.WriteLine("We failed");
-                Console.WriteLine(ex.StackTrace);
             }
         }
 
@@ -250,34 +224,22 @@ namespace BattlePirates_Group2 {
         public TransmitMessage getGameBoard() {
             byte[] dataLength = new byte[4];
             try {
-                Console.WriteLine("Trying to read the length");
                 NETWORKSTREAM.Read(dataLength, 0, 4);
-                Console.WriteLine("Read the length");
             } catch(ObjectDisposedException) {
-                Console.WriteLine("Object disposed");
             }
             //Delay the thread to allow for the length to be received.
             Thread.Sleep(2000);
             int dataLen = BitConverter.ToInt32(dataLength, 0);
-            Console.WriteLine("Receiving length: " + dataLen);
             TransmitMessage msg = new TransmitMessage();
             msg.Data = new byte[dataLen];
             Console.WriteLine();
             try {
-                Console.WriteLine("Starting network read");
                 NETWORKSTREAM.Read(msg.Data, 0, dataLen);
-                Console.WriteLine("Ending the network read");
             } catch(System.ArgumentNullException ex) {
-                Console.WriteLine("arg null exception");
             } catch(System.ArgumentOutOfRangeException ex) {
-                Console.WriteLine("arg out of range");
             } catch(System.IO.IOException) {
-                Console.WriteLine("io excp");
             } catch(System.ObjectDisposedException) {
-                Console.WriteLine("object disposed");
             }
-
-            Console.WriteLine("returning the message");
             return msg;
         }
 

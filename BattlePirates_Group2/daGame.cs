@@ -315,13 +315,11 @@ namespace BattlePirates_Group2 {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void daGame_Load(object sender, EventArgs e) {
-            //SoundPlayer snd = new SoundPlayer(Properties.Resources.mortalkombat_converted);
-            //snd.Play();
             CheckTurn();
         }
 
         /// <summary>
-        /// http://stackoverflow.com/questions/13411194/getting-error-system-invalidoperationexception-was-unhandled
+        /// Displays winner loser label with different thread
         /// </summary>
         private void labelUpdate() {
             MethodInvoker mi = delegate {
@@ -329,8 +327,6 @@ namespace BattlePirates_Group2 {
                 labelWin.Text = "You Lose!!";
                 labelWinPanel.Visible = true;
                 mainMenuBtn.Visible = true;
-                //SoundPlayer snd = new SoundPlayer(Properties.Resources.loserLoser_converted);
-                //snd.Play();
             };
             if(InvokeRequired) {
                 this.Invoke(mi);
