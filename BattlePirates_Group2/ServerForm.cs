@@ -77,7 +77,6 @@ namespace BattlePirates_Group2 {
             }
             
             //Starts the server connection and waits for a client to connect.
-            //Note: ***This currently causes the screen to freeze until a connection is made***
             if(connection.startServer()) {
                 createGameButton.Visible = false;
                 setStatus("WAITING FOR OPPONENT TO CONNECT...");

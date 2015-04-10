@@ -168,6 +168,7 @@ namespace BattlePirates_Group2 {
                 NETWORKSTREAM.Write(dataLength, 0, 4);
                 NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
             } catch(Exception ex) {
+                Console.WriteLine("Caught send Game error");
             }
         }
 
@@ -185,6 +186,7 @@ namespace BattlePirates_Group2 {
             }
             catch(System.ObjectDisposedException ex)
             {
+                Console.WriteLine("Caught send Game error");
             } catch (System.IO.IOException ex) {
                 return null;
             }
@@ -195,10 +197,14 @@ namespace BattlePirates_Group2 {
             Console.WriteLine();
             try {
                 NETWORKSTREAM.Read(msg.Data, 0, dataLen);
-            } catch(System.ArgumentNullException ex) {
-            } catch(System.ArgumentOutOfRangeException ex) {
+            } catch(System.ArgumentNullException) {
+                Console.WriteLine("Caught send Game error");
+            } catch(System.ArgumentOutOfRangeException) {
+                Console.WriteLine("Out of range");
             } catch(System.IO.IOException) {
+                Console.WriteLine("Input Output Exception");
             } catch(System.ObjectDisposedException) {
+                Console.WriteLine("Object Disposed");
             }
             return msg;
         }
@@ -213,7 +219,8 @@ namespace BattlePirates_Group2 {
                 byte[] dataLength = BitConverter.GetBytes((Int32)length);
                 NETWORKSTREAM.Write(dataLength, 0, 4);
                 NETWORKSTREAM.Write(msg.Data, 0, msg.Data.Length);
-            } catch(Exception ex) {
+            } catch(Exception) {
+                Console.WriteLine("Caught send Gameboard error");
             }
         }
 
@@ -235,10 +242,14 @@ namespace BattlePirates_Group2 {
             Console.WriteLine();
             try {
                 NETWORKSTREAM.Read(msg.Data, 0, dataLen);
-            } catch(System.ArgumentNullException ex) {
-            } catch(System.ArgumentOutOfRangeException ex) {
+            } catch(System.ArgumentNullException) {
+                Console.WriteLine("Caught send Game error");
+            } catch(System.ArgumentOutOfRangeException) {
+                Console.WriteLine("Out of range");
             } catch(System.IO.IOException) {
+                Console.WriteLine("Input Output Exception");
             } catch(System.ObjectDisposedException) {
+                Console.WriteLine("Object Disposed");
             }
             return msg;
         }
