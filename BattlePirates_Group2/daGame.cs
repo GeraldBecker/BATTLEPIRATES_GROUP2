@@ -166,9 +166,6 @@ namespace BattlePirates_Group2 {
                 int xStrike = ((e.X - START_X) / BLOCKWIDTH) ;
                 int yStrike = ((e.Y - START_Y) / BLOCKWIDTH) ;
 
-
-                Console.WriteLine("MOD STRIKE ["+xStrike+","+yStrike+"]");
-
                 if(0 <= xStrike && xStrike < 10 && 0 <= yStrike && yStrike < 10) {
                     int c = xStrike;
                     int r = yStrike;
@@ -218,7 +215,6 @@ namespace BattlePirates_Group2 {
                         // Send to opponent
                         TransmitMessage msg1 = SerializationHelper.Serialize(e.Location);
                         connection.sendGamePoint(msg1);
-                        Console.WriteLine("Sent location: " + e.Location);
                         // update opponent grid in this GameBoard instance
                         _grid[r, c] = shotResult;
                         CheckTurn();
@@ -262,7 +258,6 @@ namespace BattlePirates_Group2 {
         /// </summary>
         private void GetDataFromOthers() {
             Task.Factory.StartNew(() => {
-                Console.WriteLine("TRYING TO GET A POINT");
                 TransmitMessage msg = connection.getGamePoint();
                 Point p;
                 try
@@ -273,7 +268,6 @@ namespace BattlePirates_Group2 {
                 {
                     return;
                 }
-                Console.WriteLine("Received location: " + p);
 
                 // check and update mine gameBoard
                 LocationState shotResult;
@@ -285,7 +279,6 @@ namespace BattlePirates_Group2 {
                 int r = yStrike;
                 shotResult = mine.strikeCoordinates(new Point(r, c));
                 _grid2[r, c] = shotResult;
-                Console.WriteLine("GetData shotResult: " + shotResult);
                 if(shotResult == LocationState.HIT || shotResult == LocationState.SUNK) {
                     BaseShip[] mineShips = mine.getShips();
                     for(int i = 0; i < mineShips.Length; ++i) {
@@ -302,7 +295,6 @@ namespace BattlePirates_Group2 {
                         
                     }
                 } else {
-                    Console.WriteLine("LocationState.Hit");
                     myTurn = true;
                 }
                 CheckTurn();
