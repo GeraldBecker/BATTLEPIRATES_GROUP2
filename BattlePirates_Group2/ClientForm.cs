@@ -63,6 +63,10 @@ namespace BattlePirates_Group2 {
         /// shows progress
         /// </summary>
         public void clientConnect() {
+            //If no IP address is entred, return
+            if(ipAddressConnect.Text == "") {
+                return;
+            }
             progressBar2.Maximum = 100;
             connectGameButton.Visible = false;
 
@@ -77,6 +81,7 @@ namespace BattlePirates_Group2 {
             } else {
                 progressBar2.Value = 100;
                 setStatus("FAILED");
+                connectGameButton.Visible = true;
                 return;
             }
 
@@ -87,6 +92,7 @@ namespace BattlePirates_Group2 {
             } else {
                 progressBar2.Value = 100;
                 setStatus("CONNECTION FAILED");
+                connectGameButton.Visible = true;
                 return;
             }
             
