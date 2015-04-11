@@ -105,8 +105,15 @@ namespace BattlePirates_Group2 {
         /// <param name="ip"></param>
         /// <returns></returns>
         public bool initiateClient(string ip) {
-            IP = IPAddress.Parse(ip);
-            CLIENT = new TcpClient();
+            try {
+                IP = IPAddress.Parse(ip);
+                CLIENT = new TcpClient();
+            } catch(FormatException) {
+                return false;
+            } catch(ArgumentNullException) {
+                return false;
+            }
+            
             return true;
         }
 
