@@ -695,7 +695,7 @@
             this.mainMenuBtn.Name = "mainMenuBtn";
             this.mainMenuBtn.Size = new System.Drawing.Size(172, 47);
             this.mainMenuBtn.TabIndex = 20;
-            this.mainMenuBtn.Text = "Main Menu";
+            this.mainMenuBtn.Text = "Quit Game";
             this.mainMenuBtn.UseVisualStyleBackColor = false;
             this.mainMenuBtn.Visible = false;
             this.mainMenuBtn.Click += new System.EventHandler(this.mainMenuBtn_Click);
@@ -717,7 +717,9 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "daGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Battle Pirates";
